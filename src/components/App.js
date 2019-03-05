@@ -1,13 +1,9 @@
 import React, { Component } from "react";
-import Sample1 from "./components/Sample1";
+import "./App.css";
 
 class App extends Component {
   render() {
-    return (
-      <div>
-        <Sample1 />
-      </div>
-    );
+    return <div className="main">"to be replaced"</div>;
   }
 }
 
