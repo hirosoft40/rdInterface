@@ -6,41 +6,40 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import "./Graph.css";
 import { Grid, Row, Col } from "react-flexbox-grid";
-import Gouge from "./Gouge";
+import Gauge from "./Gauge";
 
 function Graph(props) {
   return (
-    <Row>
-      <Col>
-        <Row>
+    <Grid fluid className="grid">
+      <Row className="gridRow">
+        <Col xs={12} sm={12} md={6} lg={5}>
           <Card className="mainCard">
-            <CardContent>Graph Comes here</CardContent>
-            <CardActions>Graph Captions</CardActions>
+              <CardContent>Graph Comes here</CardContent>
+              <CardActions>Graph Captions</CardActions>
           </Card>
+        </Col>
+        <Col xs={12} sm={12} md={6} lg={5}>
+           <Card className="mainCard">
+              <CardContent>Graph Comes here</CardContent>
+              <CardActions>Graph Captions</CardActions>
+            </Card>
+        </Col>
+      </Row>
+      <Row className="gridRow">
+        <Col xs={12} sm={12} md={6} lg={5}>
           <Card className="mainCard">
-            <CardContent>Graph Comes here</CardContent>
-            <CardActions>Graph Captions</CardActions>
+              <CardContent>Graph Comes here</CardContent>
+              <CardActions>Graph Captions</CardActions>
           </Card>
-        </Row>
-        <Row>
-          <Card className="mainCard">
-            <CardContent>Graph Comes here</CardContent>
-            <CardActions>Graph Captions</CardActions>
-          </Card>
-          <Card className="mainCard">
-            <CardContent>Graph Comes here</CardContent>
-            <CardActions>Graph Captions</CardActions>
-          </Card>
-        </Row>
-      </Col>
-      <Col>
-        <Card className="colCard">
-          <Gouge />
-          {/* <CardContent>Graph Comes here</CardContent>
-          <CardActions>Graph Captions</CardActions> */}
-        </Card>
-      </Col>
-    </Row>
+        </Col>
+        <Col xs={12} sm={12} md={6} lg={5}>
+           <Card className="mainCard">
+              <CardContent>Graph Comes here</CardContent>
+              <CardActions>Graph Captions</CardActions>
+            </Card>
+        </Col>
+      </Row>
+    </Grid>
   );
 }
 

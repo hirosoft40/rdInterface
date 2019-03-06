@@ -4,7 +4,7 @@ import Plot from "react-plotly.js";
 // test data to display graph
 let data = 480;
 
-class Gouge extends React.Component {
+class Gauge extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -95,4 +95,4 @@ class Gouge extends React.Component {
  
 }
 
-export default Gouge;
+export default Gauge;

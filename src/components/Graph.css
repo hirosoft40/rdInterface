@@ -5,17 +5,29 @@
   --secondary-color: #f4cd00;
 }
 
-.mainCard {
-  background-color: var(--main-color) !important;
-  /* background-color: #184787 !important; */
-  margin: 10px !important;
-  height: 400px;
-  width: 600px;
-}
-
 .colCard {
   display: flex;
   justify-content: flex-start;
   align-content: center;
   margin: 10px !important;
+}
+
+.grid{
+  max-width: 1335px;
+  margin: 0 auto;
+}
+
+.gridRow{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+}
+
+.mainCard {
+  background-color: var(--main-color) !important;
+  /* background-color: #184787 !important; */
+  margin: 10px !important;
+  height: 400px;
+  /* width: 500px; */
+  
 }
