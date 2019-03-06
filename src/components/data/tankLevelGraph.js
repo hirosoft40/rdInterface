@@ -1,4 +1,6 @@
 // Tank Level over time
+
+// Data Traces
 var trace1 = {
     name: "Water Tank Level",
     x: [1, 2, 3],
@@ -37,4 +39,23 @@ var trace4 = {
 
 var tankLevelTrace = [trace1, trace2, trace3, trace4]
 
-export { tankLevelTrace }
+// Layout Properties
+var tankLevelProperties= { 
+    xaxis: {title: 'Time', autorange: 'true'}, 
+    yaxis: {title: 'Tank Level(bbl)'},
+    width: 675, 
+    height: 506, 
+    title: 'Pressure based on Choke Size',
+    legend: {
+        traceorder: 'normal',
+        font: {
+            family: 'sans-serif',
+            size: 12,
+            color: '#000'},
+        bgcolor: '#E2E2E2',
+        bordercolor: '#FFFFFF',
+        borderwidth: 2,
+        orientation: 'h',
+        y: -0.2}} 
+
+export {tankLevelTrace, tankLevelProperties }

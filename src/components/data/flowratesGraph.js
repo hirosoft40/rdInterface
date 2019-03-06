@@ -1,5 +1,6 @@
 // Flow rates over time
 
+// Data Traces
 var trace1 = {
     name: "Gas Rate",
     x: [1, 2, 3],
@@ -47,4 +48,27 @@ var trace5 = {
 
 var flowrateTrace = [trace1, trace2, trace3, trace4, trace5]
 
-export { flowrateTrace }
+// Layout Properties
+
+var flowrateProperties = {
+    xaxis: {title: 'Time', autorange: 'true'}, 
+    yaxis: {title: 'Rates (mcfd, bpd)'},
+    width: 675,
+    height: 506, 
+    title: 'Flow Rates over Time',
+    legend: {
+        traceorder: 'normal',
+        font: {
+            family: 'sans-serif',
+            size: 12,
+            color: '#000'},
+        bgcolor: '#E2E2E2',
+        bordercolor: '#FFFFFF',
+        borderwidth: 2,
+        orientation: 'h',
+        y: -0.2}
+} 
+
+
+
+export { flowrateTrace, flowrateProperties }
