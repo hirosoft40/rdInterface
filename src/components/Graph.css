@@ -1,0 +1,14 @@
+.mainCard {
+  background-color: #184787 !important;
+  margin: 10px !important;
+  height: 400px;
+  width: 600px;
+}
+
+.colCard {
+  display: flex;
+  justify-content: flex-start;
+  align-content: center;
+  margin: 10px !important;
+
+}
