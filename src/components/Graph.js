@@ -37,6 +37,9 @@ function Graph(props) {
               <CardContent>Graph Comes here</CardContent>
               <CardActions>Graph Captions</CardActions>
             </Card>
+        </Col >
+        <Col xs={12} sm={12} lg={2}>
+          <Gauge />
         </Col>
       </Row>
     </Grid>
