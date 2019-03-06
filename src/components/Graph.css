@@ -1,5 +1,13 @@
+:root {
+  --main-color: #979797;
+  --card-color: #eeeeee;
+  --primary-color: #184787;
+  --secondary-color: #f4cd00;
+}
+
 .mainCard {
-  background-color: #184787 !important;
+  background-color: var(--main-color) !important;
+  /* background-color: #184787 !important; */
   margin: 10px !important;
   height: 400px;
   width: 600px;
@@ -10,5 +18,4 @@
   justify-content: flex-start;
   align-content: center;
   margin: 10px !important;
-
 }

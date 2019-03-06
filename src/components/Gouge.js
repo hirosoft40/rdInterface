@@ -56,8 +56,8 @@ class Gouge extends React.Component {
         data={data}
         layout={{
           autosize: true,
-          paper_bgcolor: "#184787",
-          plot_bgcolor: "#184787",
+          paper_bgcolor: "#979797",
+          plot_bgcolor: "#979797",
           width: 120,
           height: 400,
           yaxis: {
@@ -68,8 +68,8 @@ class Gouge extends React.Component {
             ticklen: 500,
             tickwidth: 1,
             // tickcolor: "#fff",
-            titlefont: { color: "#fff" },
-            tickfont: { color: "#fff" },
+            titlefont: { color: "#184787" },
+            tickfont: { color: "#184787" },
             gridwidth: 0.3
           },
           yaxis2: {
@@ -92,22 +92,7 @@ class Gouge extends React.Component {
       />
     );
   }
-  // constructor(props) {
-  //     super(props);
-  //     this.state = { data: [], layout: {}, frames: [], config: {} };
-  // }
-  // render() {
-  //     return (
-  //         <Plot
-  //             data={this.state.data}
-  //             layout={this.state.layout}
-  //             frames={this.state.frames}
-  //             config={this.state.config}
-  //             onInitialized={(figure) => this.setState(figure)}
-  //             onUpdate={(figure) => this.setState(figure)}
-  //         />
-  //     );
-  // }
+ 
 }
 
 export default Gouge;

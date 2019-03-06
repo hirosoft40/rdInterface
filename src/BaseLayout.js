@@ -1,11 +1,11 @@
 import React from "react";
-import AppBar from "./components/AppBar";
+import AppBarTab from "./components/AppBarTab";
 
 class BaseLayout extends React.Component {
   render() {
     return (
       <div>
-        <AppBar />
+        <AppBarTab />
         {this.props.children}
       </div>
     );
