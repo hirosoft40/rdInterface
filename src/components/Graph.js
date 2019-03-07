@@ -22,7 +22,7 @@ function Graph(props) {
         </Col>
         <Col xs={12} sm={12} md={5} lg={5}>
            <Card className="mainCard">
-              <CardContent>Graph Comes here</CardContent>
+              <CardContent><PlotSample/></CardContent>
               <CardActions>Graph Captions</CardActions>
             </Card>
         </Col>
@@ -30,13 +30,13 @@ function Graph(props) {
       <Row className="gridRow">
         <Col xs={12} sm={12} md={5} lg={5}>
           <Card className="mainCard">
-              <CardContent>Graph Comes here</CardContent>
+              <CardContent><PlotSample/></CardContent>
               <CardActions>Graph Captions</CardActions>
           </Card>
         </Col>
         <Col xs={12} sm={12} md={5} lg={5}>
            <Card className="mainCard">
-              <CardContent>Graph Comes here</CardContent>
+              <CardContent><PlotSample/></CardContent>
               <CardActions>Graph Captions</CardActions>
             </Card>
         </Col >

@@ -7,7 +7,7 @@ import LiquidFillGauge from 'react-liquid-gauge';
 
 class LiquidGauge extends Component {
     state = {
-        value: 50
+        value: 75
     };
     startColor = '#6495ed'; // cornflowerblue
     endColor = '#dc143c'; // crimson

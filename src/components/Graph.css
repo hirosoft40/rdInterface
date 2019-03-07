@@ -24,10 +24,10 @@
 }
 
 .mainCard {
-  background-color: var(--main-color) !important;
-  /* background-color: #184787 !important; */
+  /* background-color: var(--main-color) !important; */
+  background-color: #212121 !important;
   margin: 10px !important;
-  height: 400px;
+  height: 480px;
   /* width: 500px; */
   
 }
