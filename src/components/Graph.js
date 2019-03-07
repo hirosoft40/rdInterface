@@ -6,9 +6,10 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import "./Graph.css";
 import { Grid, Row, Col } from "react-flexbox-grid";
-import Gouge from "./Gouge";
+import Gauge from "./Gauge";
 
 function Graph(props) {
+  // const { level_w, level_o, vol_w, vol_o } = this.props;
   return (
     <Row>
       <Col>
@@ -35,7 +36,12 @@ function Graph(props) {
       </Col>
       <Col>
         <Card className="colCard">
-          <Gouge />
+          <Gauge
+            // level_o={level_o}
+            // level_w={level_w}
+            // vol_w={vol_w}
+            // vol_o={vol_o}
+          />
           {/* <CardContent>Graph Comes here</CardContent>
           <CardActions>Graph Captions</CardActions> */}
         </Card>
