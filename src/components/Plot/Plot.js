@@ -10,40 +10,42 @@ class PlotCore extends React.Component {
                 data={[
                 {
                     name: this.props.plotparam1,
-                    x: [1, 2, 3],
-                    y: [2, 4, 3],
+                    x: this.props.plotvalue1x,
+                    y: this.props.plotvalue1y,
                     type: 'scatter',
                     mode: 'lines',
                     marker: {color: 'blue'}
                 },{
                     name: this.props.plotparam2,
-                    x: [1, 2, 3],
-                    y: [1, 2, 5],
+                    x: this.props.plotvalue2x,
+                    y: this.props.plotvalue2y,
                     type: 'scatter',
                     mode: 'lines',
-                    line: {color: 'red'}
+                    line: {color: 'red'},
+                    yaxis: this.props.yaxis
                 },{
                     name: this.props.plotparam3,
-                    x: [1, 2, 3],
-                    y: [2.2, 1.3, 1.5],
+                    x: this.props.plotvalue3x,
+                    y: this.props.plotvalue3y,
                     type: 'scatter',
                     mode: 'lines',
-                    line: {color: 'green'}
+                    line: {color: 'green'},
+                    yaxis: this.props.yaxis
                 },{
                     name: this.props.plotparam4,
-                    x: [1, 2, 3],
-                    y: [2, 4, 2],
+                    x: this.props.plotvalue4x,
+                    y: this.props.plotvalue4y,
                     type: 'scatter',
                     mode: 'lines',
                     line: {color: 'lightblue'},
-                    yaxis: 'y2'
+                    yaxis: this.props.yaxis
                 },{
                     name: this.props.plotparam5,
-                    x: [],
-                    y: [],
+                    x: this.props.plotvalue5x,
+                    y: this.props.plotvalue5y,
                     type: 'scatter',
                     mode: 'lines',
-                    yaxis: 'y2'
+                    yaxis: this.props.yaxis
                 }
 
                 ]}
@@ -72,7 +74,7 @@ class PlotCore extends React.Component {
                         traceorder: 'normal',
                         font: {
                             family: 'sans-serif',
-                            size: 12,
+                            size: 15,
                             color: '#fff'},
                         bgcolor: 'rgba(0,0,0,0)',
                         bordercolor: 'rgba(0,0,0,0)',

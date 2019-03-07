@@ -12,7 +12,10 @@ import PlotCore from './Plot/Plot'
 
 function Graph(props) {
   return (
+    // FLEXBOX GRID
     <Grid fluid className="grid">
+      
+      {/* FIRST ROW */}
       <Row className="gridRow">
         
         {/* PRESSURE VS CHOKE PLOT */}
@@ -22,11 +25,17 @@ function Graph(props) {
                   <PlotCore
                   yaxis1 ='Pressure (PSI)'
                   yaxis2 ='Choke Size (64ths)'
-                  plotparam1 = 'Annular Pressure'
-                  plotparam2 = 'Wellhead Pressure'
-                  plotparam3 = 'DS of Choke Pressure'
-                  plotparam4 = 'Separator Pressure'
-                  plotparam5 
+                  plotparam1 = 'Annular Pressure'         plotvalue1x = {[1,2,3,4,5]}
+                                                          plotvalue1y = {[2,4,5,6,7]}
+                  plotparam2 = 'Wellhead Pressure'        plotvalue2x = {[1,2,3]}
+                                                          plotvalue2y = {[1,2,5]}
+                  plotparam3 = 'DS of Choke Pressure'     plotvalue3x = {[1,2,3]}
+                                                          plotvalue3y = {[2.2,1.3,1.5]}
+                                                          yaxis = 'y2' // This is to display choke values along the right y axis
+                  plotparam4 = 'Separator Pressure'       plotvalue4x = {[1,2,3]}
+                                                          plotvalue4y = {[2,4,2]}
+                  plotparam5                              plotvalue5x
+                                                          plotvalue5y
                   />
               </CardContent>
               <CardActions>Graph Captions</CardActions>
@@ -40,11 +49,16 @@ function Graph(props) {
                   <PlotCore
                   yaxis1 = 'Gas mfcd / Oil bpd / Water bpd '
                   yaxis2 = ''
-                  plotparam1 = 'Gas Rate'
-                  plotparam2 = 'Oil Rate'
-                  plotparam3 = 'Water Rate'
-                  plotparam4 
-                  plotparam5
+                  plotparam1 = 'Gas Rate'                 plotvalue1x = {[1,2,3]}
+                                                          plotvalue1y = {[2,5,7]}
+                  plotparam2 = 'Oil Rate'                 plotvalue2x = {[1,2,3]}
+                                                          plotvalue2y = {[3,8,3]}
+                  plotparam3 = 'Water Rate'               plotvalue3x = {[1,2,3]}
+                                                          plotvalue3y = {[2,5,3]}
+                  plotparam4                              plotvalue4x
+                                                          plotvalue4y
+                  plotparam5                              plotvalue5x
+                                                          plotvalue5y
                   />
               </CardContent>
               <CardActions>Graph Captions</CardActions>
@@ -52,7 +66,7 @@ function Graph(props) {
         </Col>
       </Row>
       
-      {/* ROW */}
+      {/* SECOND ROW */}
       <Row className="gridRow">
         
         {/* SEPARATOR PRESSURE VS DIFFERENTIAL PRESSURE IN H20 & GAS TEMPERATURE */}
@@ -62,11 +76,17 @@ function Graph(props) {
               <PlotCore
                   yaxis1 = 'Seperator Pressure (PSI'
                   yaxis2 = 'Diff Pres in H20 / Gas Temp (F)'
-                  plotparam1 = 'Separator Pressure'
-                  plotparam2 = 'Differential Pressure'
-                  plotparam3 = 'Gas Pressure'
-                  plotparam4 = ''
-                  plotparam5 = ''
+                  plotparam1 = 'Separator Pressure'       plotvalue1x = {[1,2,3]}
+                                                          plotvalue1y = {[2,5,6]}
+                  plotparam2 = 'Differential Pressure'    plotvalue2x = {[1,2,3]}
+                                                          plotvalue2y = {[3,5,6]}
+                  plotparam3 = 'Gas Temperature'          plotvalue3x = {[1,2,3]}
+                                                          plotvalue3y = {[6,3,1]}
+                                                          yaxis = 'y2' // To display information along the right y axis
+                  plotparam4                              plotvalue4x
+                                                          plotvalue4y
+                  plotparam5                              plotvalue5x
+                                                          plotvalue5y
                   />
                 </CardContent>
               <CardActions>Graph Captions</CardActions>
@@ -80,11 +100,16 @@ function Graph(props) {
               <PlotCore
                   yaxis1 = 'Oil Level (in) / Water Level (in) '
                   yaxis2 = ''
-                  plotparam1 = 'Water Tank Level'
-                  plotparam2 = 'Oil Tank Level'
-                  plotparam3 = ''
-                  plotparam4 = ''
-                  plotparam5 = ''
+                  plotparam1 = 'Water Tank Level'         plotvalue1x = {[1,2,3]}
+                                                          plotvalue1y = {[3,7,6]}
+                  plotparam2 = 'Oil Tank Level'           plotvalue2x = {[1,2,3]}
+                                                          plotvalue2y = {[2,4,5]}
+                  plotparam3                              plotvalue3x
+                                                          plotvalue3y
+                  plotparam4                              plotvalue4x
+                                                          plotvalue4y
+                  plotparam5                              plotvalue5x
+                                                          plotvalue5y
                   />
                 </CardContent>
               <CardActions>Graph Captions</CardActions>
