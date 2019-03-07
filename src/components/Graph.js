@@ -8,7 +8,7 @@ import "./Graph.css";
 import { Grid, Row, Col } from "react-flexbox-grid";
 import Gauge from "./Gauge";
 import LiquidGauge from "./LiquidGauge";
-import PlotSample from './Plot/Plot'
+import PlotCore from './Plot/Plot'
 
 function Graph(props) {
   return (
@@ -16,13 +16,13 @@ function Graph(props) {
       <Row className="gridRow">
         <Col xs={12} sm={12} md={5} lg={5}>
           <Card className="mainCard">
-              <CardContent><PlotSample/></CardContent>
+              <CardContent><PlotCore/></CardContent>
               <CardActions>Graph Captions</CardActions>
           </Card>
         </Col>
         <Col xs={12} sm={12} md={5} lg={5}>
            <Card className="mainCard">
-              <CardContent><PlotSample/></CardContent>
+              <CardContent><PlotCore/></CardContent>
               <CardActions>Graph Captions</CardActions>
             </Card>
         </Col>
@@ -30,13 +30,13 @@ function Graph(props) {
       <Row className="gridRow">
         <Col xs={12} sm={12} md={5} lg={5}>
           <Card className="mainCard">
-              <CardContent><PlotSample/></CardContent>
+              <CardContent><PlotCore/></CardContent>
               <CardActions>Graph Captions</CardActions>
           </Card>
         </Col>
         <Col xs={12} sm={12} md={5} lg={5}>
            <Card className="mainCard">
-              <CardContent><PlotSample/></CardContent>
+              <CardContent><PlotCore/></CardContent>
               <CardActions>Graph Captions</CardActions>
             </Card>
         </Col >

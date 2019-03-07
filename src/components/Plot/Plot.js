@@ -1,7 +1,7 @@
 import React from 'react';
 import Plot from 'react-plotly.js';
 
-class PlotSample extends React.Component {
+class PlotCore extends React.Component {
     render() {
         return (
             <Plot
@@ -88,4 +88,4 @@ class PlotSample extends React.Component {
     }
 }
 
-export default PlotSample
+export default PlotCore
