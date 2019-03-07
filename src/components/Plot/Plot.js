@@ -3,32 +3,34 @@ import Plot from 'react-plotly.js';
 
 class PlotCore extends React.Component {
     render() {
+
+
         return (
             <Plot
                 data={[
                 {
-                    name: 'Annular Pressure',
+                    name: this.props.plotparam1,
                     x: [1, 2, 3],
                     y: [2, 4, 3],
                     type: 'scatter',
                     mode: 'lines',
                     marker: {color: 'blue'}
                 },{
-                    name: 'Wellhead Pressure',
+                    name: this.props.plotparam2,
                     x: [1, 2, 3],
                     y: [1, 2, 5],
                     type: 'scatter',
                     mode: 'lines',
                     line: {color: 'red'}
                 },{
-                    name: "DS of Choke Pressure",
+                    name: this.props.plotparam3,
                     x: [1, 2, 3],
                     y: [2.2, 1.3, 1.5],
                     type: 'scatter',
                     mode: 'lines',
                     line: {color: 'green'}
                 },{
-                    name: "Separator Pressure",
+                    name: this.props.plotparam4,
                     x: [1, 2, 3],
                     y: [2, 4, 2],
                     type: 'scatter',
@@ -36,7 +38,7 @@ class PlotCore extends React.Component {
                     line: {color: 'lightblue'},
                     yaxis: 'y2'
                 },{
-                    name: "Choke 64ths",
+                    name: this.props.plotparam5,
                     x: [],
                     y: [],
                     type: 'scatter',
@@ -52,9 +54,9 @@ class PlotCore extends React.Component {
                     plot_bgcolor: 'rgba(0,0,0,0)', 
                     autosize:true,
                     //Margins Titles
-                    xaxis: {title: 'Time', autorange: 'true', color: 'white'},
-                    yaxis: {title: 'Pressure (PSI)', side: 'left', color: 'white'},
-                    yaxis2: {title: 'Choke Size (64ths)', overlaying: 'y', side:'right', color: 'white'}, 
+                    xaxis: {title: '', autorange: 'true', color: 'white'},
+                    yaxis: {title: this.props.yaxis1, side: 'left', color: 'white'},
+                    yaxis2: {title: this.props.yaxis2, overlaying: 'y', side:'right', color: 'white'}, 
                     //Margin Values
                     margin: {
                             l: 45,
@@ -75,8 +77,9 @@ class PlotCore extends React.Component {
                         bgcolor: 'rgba(0,0,0,0)',
                         bordercolor: 'rgba(0,0,0,0)',
                         borderwidth: 2,
-                        orientation: 'h',
-                        y: -0.2,
+                        orientation: 'v',
+                        x: 0.1,
+                        y: -0.4,
                             }
                         } 
                 }
