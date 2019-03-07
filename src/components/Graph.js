@@ -32,13 +32,13 @@ componentDidMount(){
         var pDS = []; // ds of choke pressure (2)
         var pSep = []; // separator pressure (3)
         var pDiff = []; // differential pressure (4)
-        var tG = []; //
+        var tG = []; // tg (5)
         var gasRate = []; // gas rate (6)
         var waterRate = []; // water rate (7)
         var oilRate = []; // oil rate (8)
         var cumWater= []; // cumulative water (9)
         var cumOil = []; // cumalative oil (10)
-        var gasPrevint = []; // 
+        var gasPrevint = []; // gasPrevint (11)
         var waterLevel = []; // water level (12)
         var oilLevel = []; // oil level (13)
         var waterVol = []; // water volume (14)
@@ -52,6 +52,8 @@ componentDidMount(){
         for (var i = 0; i < output.length; i++){
             xPoints.push(output[i]["time"])
 
+
+            // Calculate processing time
             if(output[i].vals.length === 21){
                 pAnn.push(output[i].vals[0])
                 pWH.push(output[i].vals[1])
@@ -61,7 +63,7 @@ componentDidMount(){
                 tG.push(output[i].vals[5])
                 gasRate.push(output[i].vals[6])
                 waterRate.push(output[i].vals[7])
-                waterRate.push(output[i].vals[8])
+                oilRate.push(output[i].vals[8])
                 cumWater.push(output[i].vals[9])
                 cumOil.push(output[i].vals[10])
                 gasPrevint.push(output[i].vals[11])
@@ -75,7 +77,9 @@ componentDidMount(){
                 shrinkage.push(output[i].vals[19])
                 chlorides.push(output[i].vals[20])
             }
-            else(console.log("not 21"))
+            else{
+              return false
+            }
         }
     })
 
@@ -87,7 +91,7 @@ render() {
 
     return (
         <div>
-        <Plot 
+        <Plot
         data={pressureChokeTrace} 
         layout={pressureChokeProperties}
         />
