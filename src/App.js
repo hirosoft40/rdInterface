@@ -4,13 +4,15 @@ import "./App.css";
 class App extends Component {
   constructor(props) {
     super(props);
+    
     this.state = {
       header: [],
       figures: []
     };
-    this.connectToApi = this.connectToApi.bind(this);
+    this.connectToApi = this.connectToApi.bind(this); 
   }
 
+  //=== API CALL =====
   connectToApi() {
     var exampleSocket = new WebSocket("ws://rdsfastrack.com/backend/", [
       "com.campbellsci.webdata"
@@ -28,23 +30,26 @@ class App extends Component {
       const results = await JSON.parse(mEvent.data);
       console.log("results", results);
       if (results.message === "RequestRecords") {
+        // setting data information
         this.setState({
           figures: results.records.data
         });
       } else {
+        // setting header info
         this.setState({
           header: results.head.fields
         });
       }
     });
   }
+  // ====  END ===
 
   componentDidMount() {
     this.connectToApi();
   }
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     return <div>test</div>;
   }
 }
