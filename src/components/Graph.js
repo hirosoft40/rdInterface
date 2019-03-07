@@ -7,18 +7,20 @@ import CardContent from "@material-ui/core/CardContent";
 import "./Graph.css";
 import { Grid, Row, Col } from "react-flexbox-grid";
 import Gauge from "./Gauge";
+import LiquidGauge from "./LiquidGauge";
+import PlotSample from './Plot/Plot'
 
 function Graph(props) {
   return (
     <Grid fluid className="grid">
       <Row className="gridRow">
-        <Col xs={12} sm={12} md={6} lg={5}>
+        <Col xs={12} sm={12} md={5} lg={5}>
           <Card className="mainCard">
-              <CardContent>Graph Comes here</CardContent>
+              <CardContent><PlotSample/></CardContent>
               <CardActions>Graph Captions</CardActions>
           </Card>
         </Col>
-        <Col xs={12} sm={12} md={6} lg={5}>
+        <Col xs={12} sm={12} md={5} lg={5}>
            <Card className="mainCard">
               <CardContent>Graph Comes here</CardContent>
               <CardActions>Graph Captions</CardActions>
@@ -26,20 +28,22 @@ function Graph(props) {
         </Col>
       </Row>
       <Row className="gridRow">
-        <Col xs={12} sm={12} md={6} lg={5}>
+        <Col xs={12} sm={12} md={5} lg={5}>
           <Card className="mainCard">
               <CardContent>Graph Comes here</CardContent>
               <CardActions>Graph Captions</CardActions>
           </Card>
         </Col>
-        <Col xs={12} sm={12} md={6} lg={5}>
+        <Col xs={12} sm={12} md={5} lg={5}>
            <Card className="mainCard">
               <CardContent>Graph Comes here</CardContent>
               <CardActions>Graph Captions</CardActions>
             </Card>
         </Col >
-        <Col xs={12} sm={12} lg={2}>
-          <Gauge />
+        <Col xs={12} sm={12} md={2} lg={2}>
+          {/* <Gauge /> */}
+          <LiquidGauge/>
+          <LiquidGauge/>
         </Col>
       </Row>
     </Grid>

@@ -9,6 +9,7 @@
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-flexbox-grid": "^2.1.2",
+    "react-liquid-gauge": "^1.2.4",
     "react-plotly.js": "^2.3.0",
     "react-scripts": "2.1.5"
   },
