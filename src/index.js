@@ -6,6 +6,9 @@ import { createMuiTheme } from "@material-ui/core/styles";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 
 const theme = createMuiTheme({
+  typography: {
+    useNextVariants: true,
+  },
   palette: {
     primary: { main: "#184787" },
     secondary: { main:"#f4cd00"}
@@ -18,3 +21,5 @@ ReactDOM.render(
   </MuiThemeProvider>,
   document.getElementById("root")
 );
+
+
