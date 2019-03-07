@@ -5,7 +5,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      results1: []
+      header: [],
+      figures: []
     };
     this.connectToApi = this.connectToApi.bind(this);
   }
@@ -24,12 +25,15 @@ class App extends Component {
 
     // ***SIMPLE CALL***
     exampleSocket.addEventListener("message", async mEvent => {
-   
-
       const results = await JSON.parse(mEvent.data);
+      console.log("results", results);
       if (results.message === "RequestRecords") {
         this.setState({
-          results1: results.records.data
+          figures: results.records.data
+        });
+      } else {
+        this.setState({
+          header: results.head.fields
         });
       }
     });
@@ -40,7 +44,7 @@ class App extends Component {
   }
 
   render() {
-    // console.log(this.state.results1);
+    console.log(this.state);
     return <div>test</div>;
   }
 }
