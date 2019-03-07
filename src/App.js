@@ -2,23 +2,12 @@ import React, { Component } from "react";
 import "./App.css";
 import TopButtons from "./components/TopButtons";
 import Graph from "./components/Graph";
-
-const apiDataHeader = "head";
-const apiDataBody = "records";
-let data1 = [],
-  data2 = [];
+let header = [],
+  figures = [];
+let results;
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      // data: [],
-      // header: []
-    };
-    this.getDataFromApi = this.getDataFromApi.bind(this);
-  }
-
-  getDataFromApi() {
+  connectToApi() {
     var exampleSocket = new WebSocket("ws://rdsfastrack.com/backend/", [
       "com.campbellsci.webdata"
     ]);
@@ -30,44 +19,44 @@ class App extends Component {
       );
     });
 
-    let count = 0;
-    // ***SIMPLE CALL***
-    exampleSocket.addEventListener("message", mEvent => {
-      count++;
-      let res = JSON.parse(mEvent.data);
-      var res1 = res.head;
-      var res2 = res.records;
-      this.setValue(res1, res2);
+    exampleSocket.addEventListener("message", function(mEvent) {
+      results = JSON.parse(mEvent.data);
+      // header = mEvent.data[0];
+      // figures = mEvent.records.data;
     });
-    // console.log(res1, res2);
+    return results;
   }
 
-  setValue(res1, res2) {
-    this.setState({
-      head: res1,
-      body: res2
-    });
+  componentDidMount() {
+    const data = this.connectToApi();
+    console.log(data);
   }
-
-  // componentDidMount() {
-  //   this.getDataFromApi();
-  //   this.setState({
-  //     head: res1,
-  //     body: res2
-  //   });
-  //}
 
   render() {
-    console.log("state", this.state);
-    // console.log("stresponseate", response);
-
+    console.log(results);
     return (
       <div>
-        <Graph data={this.getDataFromApi()} />
-        {/* <TableData data={data} /> */}
+        <Graph />
       </div>
     );
   }
 }
 
 export default App;
+
+// setValue(res1, res2) {
+//   this.setState({
+//     head: res1,
+//     body: res2
+//   });
+// }
+
+// componentDidMount() {
+//   this.getDataFromApi();
+//   this.setState({
+//     head: res1,
+//     body: res2
+//   });
+//}
+
+// export default App;

@@ -11,15 +11,6 @@ class AppBarTab extends React.Component {
   handleChange = (event, value) => {
     this.setState({ value });
   };
-
-  // renderList() {
-  //   const tick = ["24 Hours", "2 Hours", "10 Minutes", "Hourly"];
-
-  //   tick.map((item, idx) => {
-  //     // console.log(item);
-  //     return <Tab label={item} className="eachTab" />;
-  //   });
-  // }
   
   render() {
     return (
