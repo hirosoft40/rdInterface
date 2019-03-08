@@ -6,8 +6,8 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import "./MainGraph.css";
 import { Grid, Row, Col } from "react-flexbox-grid";
-import Gauge from "../Gauge";
-import LiquidGauge from "../LiquidGauge";
+import Gauge from "../Gauge/Gauge";
+import LiquidGauge from "../Gauge/LiquidGauge";
 import PlotCore from '../Plot/Plot'
 import Adjusters from '../Adjusters/Adjusters'
 

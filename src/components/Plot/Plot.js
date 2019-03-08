@@ -4,8 +4,6 @@ import Plot from 'react-plotly.js';
 class PlotCore extends React.Component {
     render() {
 
-
-
         return (
             <Plot
                 data={[
