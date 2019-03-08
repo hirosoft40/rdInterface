@@ -4,12 +4,12 @@ import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import "./Graph.css";
+import "./MainGraph.css";
 import { Grid, Row, Col } from "react-flexbox-grid";
-import Gauge from "./Gauge";
-import LiquidGauge from "./LiquidGauge";
-import PlotCore from './Plot/Plot'
-import Adjusters from './Adjusters/Adjusters'
+import Gauge from "../Gauge";
+import LiquidGauge from "../LiquidGauge";
+import PlotCore from '../Plot/Plot'
+import Adjusters from '../Adjusters/Adjusters'
 
 function Graph(props) {
   return (
