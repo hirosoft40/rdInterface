@@ -4,38 +4,48 @@ import "./App.css";
 var finaldata=[]
 
 class App extends Component {
-  
-  render() {
-    var exampleSocket = new WebSocket('ws://rdsfastrack.com/backend/', ['com.campbellsci.webdata'])
+  constructor(props){
+    super(props);
+    this.state={
+      header:[],
+      finalData:[]
+    };
+    this.connectToApi=this.connectToApi.bind(this)
+  }
 
-      exampleSocket.addEventListener('open', function (event) {
+  componentDidMount(){
+    this.connectToApi();
+  }
+  connectToApi(){
+  var exampleSocket = new WebSocket('ws://rdsfastrack.com/backend/', ['com.campbellsci.webdata'])
+
+      exampleSocket.addEventListener('open',  (event)=> {
       console.log('Hello Server!')
      exampleSocket.send('{"message":"AddRequests","requests":[{"uri":"LNDB:8782_Hour_Table","mode":"since-record","p1":"1","transaction":1,"order":"collected"}]}')
   })
-
+  
 // ***SIMPLE CALL***
-  // var headerarr=[]
-  // var newresults=[]
-    exampleSocket.addEventListener('message', async function (mEvent) {  
-     console.log(JSON.parse(mEvent.data));
-    //  var tabledata=await JSON.parse(mEvent.data).records.data
-    
-
-    //  console.log(tabledata)
-    //  finaldata=[...tabledata]
-    //  console.log("hi",finaldata)
-  //     var columns=JSON.parse(mEvent.data).head.fields
-  //     const result= columns.map((item)=>{
-  //         return item.name;
-  //    })
-  //    console.log(result)
-  //    headerarr=[...result]
-  //    console.log(headerarr)
+  
+    exampleSocket.addEventListener('message', async  (mEvent)=> {  
+    // const results= await JSON.parse(mEvent.data).records.data
+    const results =await JSON.parse(mEvent.data);
+    if(results.message==="RequestRecords"){
+      this.setState({
+         finalData:results.records.data
+      })
+    }
+    else{
+      //seting header info
+      this.setState({
+        header:results.head.fields
+      });
+    }
     })
-    // console.log("end",finaldata)
+  }
+  render() {
+  
     return <div className="main">
-    <EnhancedTable finaldata={finaldata}/>
-    <p>{console.log("hihi",finaldata)}</p>
+    <EnhancedTable finalData={this.state.finalData} header={this.state.header}/>
     </div>
   } 
 }
