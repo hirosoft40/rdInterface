@@ -28,12 +28,12 @@ function Graph(props) {
                   yaxis2 ='Choke Size (64ths)'            yaxis2range = {[0,64]}  //Sets parameters for range to display on yaxis (right)
                   plotparam1 = 'Annular Pressure'         plotvalue1x = {['2018-11-15T09:26:20','2018-11-15T09:26:25','2018-11-15T09:26:30','2018-11-15T09:26:35']}
                                                           plotvalue1y = {[2,4,5,6]}
-                  plotparam2 = 'Wellhead Pressure'        plotvalue2x = {[1,2,3]}
+                  plotparam2 = 'Wellhead Pressure'        plotvalue2x = {['2018-11-15T09:26:20','2018-11-15T09:26:25','2018-11-15T09:26:30','2018-11-15T09:26:35']}
                                                           plotvalue2y = {[1,2,5]}
-                  plotparam3 = 'DS of Choke Pressure'     plotvalue3x = {[1,2,3]}
+                  plotparam3 = 'DS of Choke Pressure'     plotvalue3x = {['2018-11-15T09:26:20','2018-11-15T09:26:25','2018-11-15T09:26:30','2018-11-15T09:26:35']}
                                                           plotvalue3y = {[2.2,1.3,1.5]}
                                                           yaxis = 'y2' // This is to display choke values along the right y axis
-                  plotparam4 = 'Separator Pressure'       plotvalue4x = {[1,2,3]}
+                  plotparam4 = 'Separator Pressure'       plotvalue4x = {['2018-11-15T09:26:20','2018-11-15T09:26:25','2018-11-15T09:26:30','2018-11-15T09:26:35']}
                                                           plotvalue4y = {[2,4,2]}
                   plotparam5                              plotvalue5x
                                                           plotvalue5y
@@ -81,7 +81,7 @@ function Graph(props) {
               <PlotCore
                   yaxis1 = 'Seperator Pressure (PSI'          yaxis1range = {[0,2000]}
                   yaxis2 = 'Diff Pres in H20 / Gas Temp (F)'  yaxis2range = {[0,400]}
-                  plotparam1 = 'Separator Pressure'           plotvalue1x = {['2018-11-15T09:26:20','2018-11-15T09:26:25','2018-11-15T09:26:30','2018-11-15T09:26:35']}
+                  plotparam1 = 'Separator Pressure'           plotvalue1x = {[1,2,3,4]}
                                                               plotvalue1y = {[2,5,6,7]}
                   plotparam2 = 'Differential Pressure'        plotvalue2x = {[1,2,3]}
                                                               plotvalue2y = {[3,5,6]}

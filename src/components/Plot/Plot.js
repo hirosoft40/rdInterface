@@ -63,7 +63,7 @@ class PlotCore extends React.Component {
                             showgrid: true,
                             gridcolor: '#555555',
                             color: 'white',
-                            type: 'time'
+                            type: 'time',
                         },
                             // You need to set this axis type to time
                             // Read https://plot.ly/javascript/reference/#layout-xaxis-tick0
