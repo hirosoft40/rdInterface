@@ -1,58 +1,85 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Plot from "react-plotly.js";
 
 // test data to display graph
-let data = 480;
+//let data = 480;
 
-class Gauge extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      color: ""
-    };
+function Gauge(props) {
+  const {level_w, level_o, vol_w, vol_o} = props;
+  //hooks
+  const [color, setColor] = useState(props);
+
+  // === creating bars start ===
+  var lvl_o = {
+    x: [1],
+    y: level_o,
+    type: "bar",
+    width: 0.3,
+    //   marker: { color: this.state.color }
+    marker: { color: "#fff" }
+  };
+
+  var lvl_w = {
+    x: [1],
+    y: level_w,
+    yaxis: "y2",
+    type: "bar",
+    width: 0.3,
+    //   marker: { color: this.state.color }
+    marker: { color: "#f4cd00" }
+  };
+
+  var vlm_o = {
+    x: [1],
+    y: vol_o,
+    type: "bar",
+    width: 0.3,
+    //   marker: { color: this.state.color }
+    marker: { color: "#fff" }
+  };
+
+  var vlm_w = {
+    x: [1],
+    y: vol_w,
+    yaxis: "y2",
+    type: "bar",
+    width: 0.3,
+    //   marker: { color: this.state.color }
+    marker: { color: "#f4cd00" }
+  };
+
+  var oilData = [vlm_o, lvl_o];
+  var waterData = [vlm_w, lvl_w];
+ 
+
+useEffect(()=>{
+  if(props.lvl_o>60){
+    return setColor({color:"red"})
+  } else if(props.lvl_o>40){
+    return setColor({color:"yellow"})
+  } else{
+    return setColor({color:"blue"})
   }
+},[props]);
 
-  componentDidUpdate() {
-    if (data > 200 && data < 400) {
-      return this.setState({
-        color: "yellow"
-      });
-    } else if (data > 400) {
-      return this.setState({
-        color: "red"
-      });
-    } else if (data < 200) {
-      return this.setState({
-        color: "blue"
-      });
-    }
-  }
+// ==== how to use hook
+// function LoginComponent() {
+//   const [loginDetails, setLoginDetails] = useState({username: '', password: ''})
+//   return (
+//           <div>
+//               <form>
+//                   <input id='username' onInput={()=>setLoginDetails({username: this.value})} />
+//                   <input id='password' onInput={()=>setLoginDetails({password: this.value})} />
+//                   <button onClick={()=>handleLogin(loginDetails)}>Login</button>
+//               </form>
+//           </div>        
+//   );
+// }
 
-  render() {
-    var trace1 = {
-      x: [1],
-      //   y: [data],
-      y: [480],
-      type: "bar",
-      width: 0.3,
-      //   marker: { color: this.state.color }
-      marker: { color: "#fff" }
-    };
 
-    var trace2 = {
-      x: [1],
-      y: this.props.level_o,
-      yaxis: "y2",
-      type: "bar",
-      width: 0.3,
-      //   marker: { color: this.state.color }
-      marker: { color: "#f4cd00" }
-    };
-
-    var data = [trace1, trace2];
-
-    return (
-      <Plot
+  const renderList= (data)=> {
+    return(
+    <Plot
         data={data}
         layout={{
           autosize: true,
@@ -90,8 +117,13 @@ class Gauge extends React.Component {
           bargroupgap: 0.1
         }}
       />
+      )
+  }
+    
+
+    return (
+      {renderList(oilData)}
     );
   }
-}
 
 export default Gauge;
