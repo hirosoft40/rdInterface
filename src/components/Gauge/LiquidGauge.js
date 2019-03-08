@@ -12,6 +12,8 @@ class LiquidGauge extends Component {
     startColor = '#6495ed'; // cornflowerblue
     endColor = '#dc143c'; // crimson
 
+    
+
     render() {
         const radius = 68;
         const interpolate = interpolateRgb(this.startColor, this.endColor);
@@ -43,7 +45,8 @@ class LiquidGauge extends Component {
                     style={{ margin: '0 auto' }}
                     width={radius * 2}
                     height={radius * 2}
-                    value={this.state.value}
+                    value={this.props.val}
+                    name={this.props.name}
                     percent="%"
                     textSize={1}
                     textOffsetX={0}
