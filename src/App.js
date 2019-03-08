@@ -103,12 +103,12 @@ class App extends Component {
       <div>
         <h1>{this.state.errorMessage}</h1>
         <MainGraph />
-        <Gauge
+        {/* <Gauge
           level_w={level_w}
           level_o={level_o}
           vol_w={vol_w}
           vol_o={vol_o}
-        />
+        /> */}
       </div>
     );
   }
