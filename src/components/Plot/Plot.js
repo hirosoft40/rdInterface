@@ -5,6 +5,7 @@ class PlotCore extends React.Component {
     render() {
 
 
+
         return (
             <Plot
                 data={[
@@ -55,16 +56,73 @@ class PlotCore extends React.Component {
                     paper_bgcolor: 'rgba(0,0,0,0)',
                     plot_bgcolor: 'rgba(0,0,0,0)', 
                     autosize:true,
+
                     //Margins Titles
-                    xaxis: {title: '', autorange: 'true', color: 'white'},
-                    yaxis: {title: this.props.yaxis1, side: 'left', color: 'white'},
-                    yaxis2: {title: this.props.yaxis2, overlaying: 'y', side:'right', color: 'white'}, 
+                    xaxis: {title: '', //This holds the time label which we don't need
+                            autorange: true,
+                            showgrid: true,
+                            gridcolor: '#555555',
+                            color: 'white',
+                            type: 'time'
+                        },
+                            // You need to set this axis type to time
+                            // Read https://plot.ly/javascript/reference/#layout-xaxis-tick0
+
+                    yaxis: {title: this.props.yaxis1,
+                            titlefont: {
+                                family: 'Arial, sans-serif',
+                                size: 15,
+                                color: 'white'
+                            },
+                            range: this.props.yaxis1range,
+                            gridcolor: '#555555',
+                            side: 'left', 
+                            color: 'white',
+                            //TICK FORMATTING
+                            autotick: true,
+                            ticks: 'inside',
+                            tick0:1,
+                            dtick: 25,
+                            tickwidth: 3,
+                            ticklen: 3,
+                            tickfont: {
+                                family: 'Arial, serif',
+                                size: 10.5,
+                                color: 'white'
+                            }
+                            },
+
+                    yaxis2: {title: this.props.yaxis2,
+                            titlefont: {
+                                family: 'Arial, sans-serif',
+                                size: 15,
+                                color: 'white'
+                            }, 
+                            overlaying: 'y',
+                            showgrid: false,
+                            range: this.props.yaxis2range,
+                            side:'right', 
+                            color: 'white',
+                            //TICK FORMATTING
+                            autotick: true,
+                            ticks: 'inside',
+                            tick0:0,
+                            dtick: 0.25,
+                            tickwidth: 3,
+                            ticklen: 3,
+                            tickfont: {
+                                family: 'Arial, serif',
+                                size: 10.5,
+                                color: 'white'
+                            }
+                        }, 
+
                     //Margin Values
                     margin: {
                             l: 45,
-                            r: 55,
-                            b: 5,
-                            t: 20,
+                            r: 40,
+                            b: 0,
+                            t: 10,
                             pad: 0
                         },
                     // automargin:true,
@@ -73,15 +131,15 @@ class PlotCore extends React.Component {
                     legend: {
                         traceorder: 'normal',
                         font: {
-                            family: 'sans-serif',
+                            family: 'Arial, sans-serif',
                             size: 15,
                             color: '#fff'},
                         bgcolor: 'rgba(0,0,0,0)',
                         bordercolor: 'rgba(0,0,0,0)',
                         borderwidth: 2,
-                        orientation: 'v',
+                        orientation: 'h',
                         x: 0.1,
-                        y: -0.4,
+                        y: -0.1,
                             }
                         } 
                 }
