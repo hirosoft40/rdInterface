@@ -6,7 +6,6 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import "./MainGraph.css";
 import { Grid, Row, Col } from "react-flexbox-grid";
-import Gauge from "../Gauge/Gauge";
 import LiquidGauge from "../Gauge/LiquidGauge";
 import PlotCore from '../Plot/Plot'
 import Adjusters from '../Modal/Adjusters'
@@ -123,9 +122,14 @@ function MainGraph(props) {
 
         {/* GAUGES LIVE HERE */}
         <Col xs={12} sm={12} md={2} lg={2}>
-          {/* <Gauge /> */}
-          <LiquidGauge/>
-          <LiquidGauge/>
+          <LiquidGauge  val = {this.props.level_w}
+                        name = {'Water Level'}/>
+          <LiquidGauge  val = {this.props.level_o}
+                        name = {'Oil Level'}/>
+          <LiquidGauge  val = {this.props.vol_w}
+                        name = {'Water Volume'}/>
+          <LiquidGauge  val = {this.props.vol_o}
+                        name = {'Water Level'}/>
         </Col>
       </Row>
     </Grid>
