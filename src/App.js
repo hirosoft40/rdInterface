@@ -2,6 +2,7 @@ import React, { Component } from "react";
 // import Graph from "./components/Graph/Graph";
 import "./App.css";
 import Gauge from "./components/Gauge/Gauge";
+import MainGraph from "./components/Graph/MainGraph";
 let dtime = [],
   level_w = [],
   level_o = [],
@@ -101,6 +102,7 @@ class App extends Component {
     return (
       <div>
         <h1>{this.state.errorMessage}</h1>
+        <MainGraph />
         <Gauge
           level_w={level_w}
           level_o={level_o}
