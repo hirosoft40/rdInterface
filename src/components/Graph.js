@@ -50,12 +50,12 @@ function Graph(props) {
                   <PlotCore
                   yaxis1 = 'Gas mfcd / Oil bpd / Water bpd '  yaxis1range = {[0,10000]}
                   yaxis2 = ''                                 // Doesn't need 2nd one
-                  plotparam1 = 'Gas Rate'                     plotvalue1x = {[1,2,3]}
-                                                              plotvalue1y = {[2,5,7]}
-                  plotparam2 = 'Oil Rate'                     plotvalue2x = {[1,2,3]}
-                                                              plotvalue2y = {[3,8,3]}
-                  plotparam3 = 'Water Rate'                   plotvalue3x = {[1,2,3]}
-                                                              plotvalue3y = {[2,5,3]}
+                  plotparam1 = 'Gas Rate'                     plotvalue1x = {['2018-11-15T09:26:20','2018-11-15T09:26:25','2018-11-15T09:26:30','2018-11-15T09:26:35']}
+                                                              plotvalue1y = {[2000,5000,7000,9000]}
+                  plotparam2 = 'Oil Rate'                     plotvalue2x = {['2018-11-15T09:26:20','2018-11-15T09:26:25','2018-11-15T09:26:30','2018-11-15T09:26:35']}
+                                                              plotvalue2y = {[3000,8000,3000,1000]}
+                  plotparam3 = 'Water Rate'                   plotvalue3x = {['2018-11-15T09:26:20','2018-11-15T09:26:25','2018-11-15T09:26:30','2018-11-15T09:26:35']}
+                                                              plotvalue3y = {[2000,5000,3000,9500]}
                   plotparam4                                  plotvalue4x
                                                               plotvalue4y
                   plotparam5                                  plotvalue5x
