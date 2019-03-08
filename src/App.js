@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import Graph from './components/Graph';
+// import Graph from "./components/Graph/Graph";
 import "./App.css";
-import Gauge from "./components/Gauge";
-let dtm = [],
+import Gauge from "./components/Gauge/Gauge";
+let dtime = [],
   level_w = [],
   level_o = [],
   vol_w = [],
@@ -44,7 +44,7 @@ class App extends Component {
         });
         return;
       }
-      // console.log("results", results);
+      console.log("results", results);
       if (results.message === "RequestRecords") {
         // setting data information
         this.setState({
@@ -56,6 +56,7 @@ class App extends Component {
           header: results.head.fields
         });
       }
+      this.createArray();
     });
   }
   // ====  END ===
@@ -65,51 +66,47 @@ class App extends Component {
       .slice(0, 10)
       .split("-")
       .join("/");
-    const hour = parseInt(time.slice(11, 2)) - 12;
+    const hour = parseInt(time.slice(11, 13)) - 12;
     if (hour < 0) {
       return `${d}, ${time.slice(11)} AM`;
     } else if (hour < 10) {
-      return `${d}, 0${hour.toString}${time.slice(13)} PM`;
+      return `${d}, 0${hour}${time.slice(13)} PM`;
     } else {
-      return `${d}, ${hour.toString}${time.slice(13)} PM`;
+      return `${d}, ${hour}${time.slice(13)} PM`;
     }
   }
 
-  // createArray() {
-  //   let curArr = [...this.state.figures];
-
-  //   const gaugeData = curArr.forEach(item => {
-  //     const { time, vals } = item;
-  //     console.log("item", item);
-  //     dtm.push(this.getTimeFormat(time));
-  //     level_w.push(vals[13]);
-  //     level_o.push(vals[14]);
-  //     vol_w.push(vals[15]);
-  //     vol_o.push(vals[16]);
-  //   });
-  //   return gaugeData;
-  // }
+  //==== create Array for each data set ===
+  createArray() {
+    let curArr = [...this.state.figures];
+    // console.log(this.state.figures);
+    const gaugeData = curArr.forEach(item => {
+      const { time, vals } = item;
+      // console.log("item", item);
+      dtime.push(this.getTimeFormat(time));
+      level_w.push(vals[13]);
+      level_o.push(vals[14]);
+      vol_w.push(vals[15]);
+      vol_o.push(vals[16]);
+    });
+    // console.log("gaugeData", level_o);
+    return gaugeData;
+  }
 
   componentDidMount() {
     this.connectToApi();
-    // this.createArray();
   }
 
   render() {
-    // const Level_w = [...this.state.figures[13]];
-    // const Level_o = [...this.state.figures[14]];
-    // const Vol_w = [...this.state.figures[15]];
-    // const Vol_o = [...this.state.figures[16]];
-    console.log(level_w);
     return (
       <div>
         <h1>{this.state.errorMessage}</h1>
-        {/* <Gauge
+        <Gauge
           level_w={level_w}
           level_o={level_o}
           vol_w={vol_w}
           vol_o={vol_o}
-        /> */}
+        />
       </div>
     );
   }

@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import Plot from 'react-plotly.js';
-import { pressureChokeTrace, pressureChokeProperties }  from './data/pressureChokeGraph';
-import { pressureTempTrace , pressureTempProperties } from './data/pressureTempGraph';
-import { flowrateTrace, flowrateProperties } from './data/flowratesGraph';
-import { tankLevelTrace, tankLevelProperties } from './data/tankLevelGraph'
+import { pressureChokeTrace, pressureChokeProperties }  from '../data/pressureChokeGraph';
+import { pressureTempTrace , pressureTempProperties } from '../data/pressureTempGraph';
+import { flowrateTrace, flowrateProperties } from '../data/flowratesGraph';
+import { tankLevelTrace, tankLevelProperties } from '../data/tankLevelGraph'
 
   // X-Array
   var xPoints = []
