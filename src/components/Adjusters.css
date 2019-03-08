@@ -1,0 +1,10 @@
+.outer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  background-color: transparent !important;
+}
+.eachFigures {
+  padding: 2px !important;
+}

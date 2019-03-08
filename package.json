@@ -5,10 +5,12 @@
   "dependencies": {
     "@material-ui/core": "^3.9.2",
     "@material-ui/icons": "^3.0.2",
+    "moment": "^2.24.0",
     "plotly.js": "^1.45.1",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-flexbox-grid": "^2.1.2",
+    "react-moment": "^0.8.4",
     "react-plotly.js": "^2.3.0",
     "react-scripts": "2.1.5"
   },
