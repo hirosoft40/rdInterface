@@ -5,7 +5,7 @@ import Plot from "react-plotly.js";
 //let data = 480;
 
 function Gauge(props) {
-  const {level_w, level_o, vol_w, vol_o} = props;
+  const { level_w, level_o, vol_w, vol_o } = props;
   //hooks
   const [color, setColor] = useState(props);
 
@@ -50,36 +50,34 @@ function Gauge(props) {
 
   var oilData = [vlm_o, lvl_o];
   var waterData = [vlm_w, lvl_w];
- 
 
-useEffect(()=>{
-  if(props.lvl_o>60){
-    return setColor({color:"red"})
-  } else if(props.lvl_o>40){
-    return setColor({color:"yellow"})
-  } else{
-    return setColor({color:"blue"})
-  }
-},[props]);
+  useEffect(() => {
+    if (props.lvl_o > 60) {
+      return setColor({ color: "red" });
+    } else if (props.lvl_o > 40) {
+      return setColor({ color: "yellow" });
+    } else {
+      return setColor({ color: "blue" });
+    }
+  }, [props]);
 
-// ==== how to use hook
-// function LoginComponent() {
-//   const [loginDetails, setLoginDetails] = useState({username: '', password: ''})
-//   return (
-//           <div>
-//               <form>
-//                   <input id='username' onInput={()=>setLoginDetails({username: this.value})} />
-//                   <input id='password' onInput={()=>setLoginDetails({password: this.value})} />
-//                   <button onClick={()=>handleLogin(loginDetails)}>Login</button>
-//               </form>
-//           </div>        
-//   );
-// }
+  // ==== how to use hook
+  // function LoginComponent() {
+  //   const [loginDetails, setLoginDetails] = useState({username: '', password: ''})
+  //   return (
+  //           <div>
+  //               <form>
+  //                   <input id='username' onInput={()=>setLoginDetails({username: this.value})} />
+  //                   <input id='password' onInput={()=>setLoginDetails({password: this.value})} />
+  //                   <button onClick={()=>handleLogin(loginDetails)}>Login</button>
+  //               </form>
+  //           </div>
+  //   );
+  // }
 
-
-  const renderList= (data)=> {
-    return(
-    <Plot
+  const renderList = data => {
+    return (
+      <Plot
         data={data}
         layout={{
           autosize: true,
@@ -117,13 +115,10 @@ useEffect(()=>{
           bargroupgap: 0.1
         }}
       />
-      )
-  }
-    
-
-    return (
-      {renderList(oilData)}
     );
-  }
+
+    return <div>{renderList(oilData)}</div>;
+  };
+}
 
 export default Gauge;

@@ -13,7 +13,8 @@ class App extends Component {
 
     this.state = {
       header: [],
-      figures: []
+      figures: [],
+      errorMessage: ""
     };
     this.connectToApi = this.connectToApi.bind(this);
   }
@@ -34,6 +35,14 @@ class App extends Component {
     // ***SIMPLE CALL***
     exampleSocket.addEventListener("message", async mEvent => {
       const results = await JSON.parse(mEvent.data);
+      if (!results) {
+        console.log("Nothing returned from API. results:", results);
+        this.setState({
+          errorMessage:
+            "Unable to get the real time data. Please contact system team."
+        });
+        return;
+      }
       // console.log("results", results);
       if (results.message === "RequestRecords") {
         // setting data information
@@ -82,6 +91,7 @@ class App extends Component {
 
   componentDidMount() {
     this.connectToApi();
+    this.createArray();
   }
 
   render() {
@@ -92,12 +102,13 @@ class App extends Component {
     console.log(level_w);
     return (
       <div>
-        {/* <Gauge
-          Level_w={Level_w}
-          Level_o={Level_o}
-          Vol_w={Vol_w}
-          Vol_o={Vol_o}
-        /> */}
+        <h1>{this.state.errorMessage}</h1>
+        <Gauge
+          level_w={level_w}
+          level_o={level_o}
+          vol_w={vol_w}
+          vol_o={vol_o}
+        />
       </div>
     );
   }
