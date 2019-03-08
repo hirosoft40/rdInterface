@@ -102,13 +102,16 @@ class App extends Component {
     return (
       <div>
         <h1>{this.state.errorMessage}</h1>
-        <MainGraph />
-        <Gauge
+        <MainGraph level_w={level_w}
+          level_o={level_o}
+          vol_w={vol_w}
+          vol_o={vol_o}/>
+        {/* <Gauge
           level_w={level_w}
           level_o={level_o}
           vol_w={vol_w}
           vol_o={vol_o}
-        />
+        /> */}
       </div>
     );
   }

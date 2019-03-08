@@ -9,7 +9,7 @@ import { Grid, Row, Col } from "react-flexbox-grid";
 import Gauge from "../Gauge/Gauge";
 import LiquidGauge from "../Gauge/LiquidGauge";
 import PlotCore from '../Plot/Plot'
-import Adjusters from '../Adjusters/Adjusters'
+import Adjusters from '../Modal/Adjusters'
 
 function MainGraph(props) {
   return (
