@@ -11,7 +11,7 @@ import LiquidGauge from "../LiquidGauge";
 import PlotCore from '../Plot/Plot'
 import Adjusters from '../Adjusters/Adjusters'
 
-function Graph(props) {
+function MainGraph(props) {
   return (
     // FLEXBOX GRID
     <Grid fluid className="grid">
@@ -132,4 +132,4 @@ function Graph(props) {
   );
 }
 
-export default Graph;
+export default MainGraph;
