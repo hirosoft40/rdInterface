@@ -9,6 +9,7 @@ import { Grid, Row, Col } from "react-flexbox-grid";
 import Gauge from "./Gauge";
 import LiquidGauge from "./LiquidGauge";
 import PlotCore from './Plot/Plot'
+import Adjusters from './Adjusters/Adjusters'
 
 function Graph(props) {
   return (
@@ -63,6 +64,10 @@ function Graph(props) {
               </CardContent>
               <CardActions>Graph Captions</CardActions>
             </Card>
+        </Col>
+
+        <Col xs={12} sm={12} md={2} lg={2}>
+          <Adjusters/>
         </Col>
       </Row>
       

@@ -85,7 +85,7 @@ class PlotCore extends React.Component {
                             }
                         } 
                 }
-                useResizeHandler
+                useResizeHandler={true}
                 responsive={true}
                 style={{width: "100%", height: "100%"}}
             />
