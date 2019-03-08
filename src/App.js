@@ -74,24 +74,24 @@ class App extends Component {
     }
   }
 
-  createArray() {
-    let curArr = [...this.state.figures];
+  // createArray() {
+  //   let curArr = [...this.state.figures];
 
-    const gaugeData = curArr.forEach(item => {
-      const { time, vals } = item;
-      console.log("item", item);
-      dtm.push(this.getTimeFormat(time));
-      level_w.push(vals[13]);
-      level_o.push(vals[14]);
-      vol_w.push(vals[15]);
-      vol_o.push(vals[16]);
-    });
-    return gaugeData;
-  }
+  //   const gaugeData = curArr.forEach(item => {
+  //     const { time, vals } = item;
+  //     console.log("item", item);
+  //     dtm.push(this.getTimeFormat(time));
+  //     level_w.push(vals[13]);
+  //     level_o.push(vals[14]);
+  //     vol_w.push(vals[15]);
+  //     vol_o.push(vals[16]);
+  //   });
+  //   return gaugeData;
+  // }
 
   componentDidMount() {
     this.connectToApi();
-    this.createArray();
+    // this.createArray();
   }
 
   render() {
@@ -103,12 +103,12 @@ class App extends Component {
     return (
       <div>
         <h1>{this.state.errorMessage}</h1>
-        <Gauge
+        {/* <Gauge
           level_w={level_w}
           level_o={level_o}
           vol_w={vol_w}
           vol_o={vol_o}
-        />
+        /> */}
       </div>
     );
   }
