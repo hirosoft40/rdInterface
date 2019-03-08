@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import TopButtons from "./components/TopButtons";
-import Graph from "./components/Graph";
+import MainGraph from "./components/Graph/MainGraph";
 
 class App extends Component {
   // constructor(props) {
@@ -40,7 +40,7 @@ class App extends Component {
     return (
       <div>
         {/* {this.renderData} */}
-        <Graph />
+        <MainGraph />
       </div>
     );
   }
