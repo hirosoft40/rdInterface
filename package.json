@@ -5,13 +5,14 @@
   "dependencies": {
     "@material-ui/core": "^3.9.2",
     "@material-ui/icons": "^3.0.2",
-    "plotly.js": "^1.45.1",
+    "moment": "^2.24.0",
+    "plotly.js": "^1.45.2",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-flexbox-grid": "^2.1.2",
     "react-liquid-gauge": "^1.2.4",
     "react-plotly.js": "^2.3.0",
-    "react-scripts": "2.1.5"
+    "react-scripts": "^2.1.8"
   },
   "scripts": {
     "start": "react-scripts start",
