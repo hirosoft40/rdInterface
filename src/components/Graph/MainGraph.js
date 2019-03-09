@@ -6,7 +6,7 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import "./MainGraph.css";
 import { Grid, Row, Col } from "react-flexbox-grid";
-import LiquidGauge from "../Gauge/LiquidGauge";
+// import LiquidGauge from "../Gauge/LiquidGauge";
 import PlotCore from '../Plot/Plot'
 import Adjusters from '../Modal/Adjusters'
 
@@ -25,15 +25,15 @@ function MainGraph(props) {
                   <PlotCore
                   yaxis1 ='Pressure (PSI)'                yaxis1range = {[0,5000]} //Sets parameters from range to display on yaxis (left)
                   yaxis2 ='Choke Size (64ths)'            yaxis2range = {[0,64]}  //Sets parameters for range to display on yaxis (right)
-                  plotparam1 = 'Annular Pressure'         plotvalue1x = {['2018-11-15T09:26:20','2018-11-15T09:26:25','2018-11-15T09:26:30','2018-11-15T09:26:35']}
-                                                          plotvalue1y = {[2,4,5,6]}
-                  plotparam2 = 'Wellhead Pressure'        plotvalue2x = {['2018-11-15T09:26:20','2018-11-15T09:26:25','2018-11-15T09:26:30','2018-11-15T09:26:35']}
-                                                          plotvalue2y = {[1,2,5]}
-                  plotparam3 = 'DS of Choke Pressure'     plotvalue3x = {['2018-11-15T09:26:20','2018-11-15T09:26:25','2018-11-15T09:26:30','2018-11-15T09:26:35']}
-                                                          plotvalue3y = {[2.2,1.3,1.5]}
+                  plotparam1 = 'Annular Pressure'         plotvalue1x = {props.dtime}
+                                                          plotvalue1y = {props.pAnn}
+                  plotparam2 = 'Wellhead Pressure'        plotvalue2x = {props.dtime}
+                                                          plotvalue2y = {props.pWH}
+                  plotparam3 = 'DS of Choke Pressure'     plotvalue3x = {props.dtime}
+                                                          plotvalue3y = {props.pDS}
                                                           yaxis = 'y2' // This is to display choke values along the right y axis
-                  plotparam4 = 'Separator Pressure'       plotvalue4x = {['2018-11-15T09:26:20','2018-11-15T09:26:25','2018-11-15T09:26:30','2018-11-15T09:26:35']}
-                                                          plotvalue4y = {[2,4,2]}
+                  plotparam4 = 'Separator Pressure'       plotvalue4x = {props.dtime}
+                                                          plotvalue4y = {props.pSep}
                   plotparam5                              plotvalue5x
                                                           plotvalue5y
                   />
@@ -121,7 +121,7 @@ function MainGraph(props) {
         </Col >
 
         {/* GAUGES LIVE HERE */}
-        <Col xs={12} sm={12} md={2} lg={2}>
+        {/* <Col xs={12} sm={12} md={2} lg={2}>
           <LiquidGauge  val = {this.props.level_w}
                         name = {'Water Level'}/>
           <LiquidGauge  val = {this.props.level_o}
@@ -130,7 +130,7 @@ function MainGraph(props) {
                         name = {'Water Volume'}/>
           <LiquidGauge  val = {this.props.vol_o}
                         name = {'Water Level'}/>
-        </Col>
+        </Col> */}
       </Row>
     </Grid>
   );
