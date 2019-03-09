@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 // import Graph from "./components/Graph/Graph";
 import "./App.css";
-import Gauge from "./components/Gauge/Gauge";
 import MainGraph from "./components/Graph/MainGraph";
 let dtime = [],
   level_w = [],
@@ -16,9 +15,15 @@ class App extends Component {
     this.state = {
       header: [],
       figures: [],
-      errorMessage: ""
+      errorMessage: "",
+      level_w_val: 0,
+      level_o_val: 0,
+      vol_w_val: 0,
+      vol_o_val: 0
     };
     this.connectToApi = this.connectToApi.bind(this);
+    this.getTimeFormat = this.getTimeFormat.bind(this);
+    this.createArray = this.createArray.bind(this);
   }
 
   //=== API CALL =====
@@ -89,6 +94,12 @@ class App extends Component {
       level_o.push(vals[14]);
       vol_w.push(vals[15]);
       vol_o.push(vals[16]);
+      this.setState({
+        level_w_val: vals[13],
+        level_o_val: vals[14],
+        vol_w_val: vals[15],
+        vol_o_val: vals[16]
+      });
     });
     // console.log("gaugeData", level_o);
     return gaugeData;
@@ -102,16 +113,12 @@ class App extends Component {
     return (
       <div>
         <h1>{this.state.errorMessage}</h1>
-        <MainGraph level_w={level_w}
-          level_o={level_o}
-          vol_w={vol_w}
-          vol_o={vol_o}/>
-        {/* <Gauge
-          level_w={level_w}
-          level_o={level_o}
-          vol_w={vol_w}
-          vol_o={vol_o}
-        /> */}
+        <MainGraph
+          level_w={this.state.level_w_val}
+          level_o={this.state.level_o_val}
+          vol_w={this.state.vol_w_val}
+          vol_o={this.state.vol_o_val}
+        />
       </div>
     );
   }

@@ -4,7 +4,6 @@ import ReactDOM from "react-dom";
 
 import App from "./App";
 
-
 import { createMuiTheme } from "@material-ui/core/styles";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import BaseLayout from "./BaseLayout";

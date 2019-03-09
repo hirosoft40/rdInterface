@@ -8,7 +8,7 @@ import "./MainGraph.css";
 import { Grid, Row, Col } from "react-flexbox-grid";
 import LiquidGauge from "../Gauge/LiquidGauge";
 import PlotCore from '../Plot/Plot'
-import Adjusters from '../Modal/Adjusters'
+// import Adjusters from '../Modal/Adjusters'
 
 function MainGraph(props) {
   return (
@@ -66,7 +66,20 @@ function MainGraph(props) {
         </Col>
 
         <Col xs={12} sm={12} md={2} lg={2}>
-          <Adjusters/>
+        <h3>Water Tank 1</h3>
+          <LiquidGauge  val = {props.level_w}
+                        name = {'Water Level'}
+                        unit ={"in"}/>
+          <LiquidGauge  val = {props.vol_w}
+                        name = {'Water Volume'}
+                        unit ={"bbl"}/>
+          <h4>Oil Tank 1</h4>                        
+          <LiquidGauge  val = {props.level_o}
+                        name = {'Oil Level'}
+                        unit ={"in"}/>
+          <LiquidGauge  val = {props.vol_o}
+                        name = {'Oil Volume'}
+                        unit ={"bbl"}/>
         </Col>
       </Row>
       
@@ -122,14 +135,16 @@ function MainGraph(props) {
 
         {/* GAUGES LIVE HERE */}
         <Col xs={12} sm={12} md={2} lg={2}>
-          <LiquidGauge  val = {this.props.level_w}
+        {/* <h3>Water Tank 1</h3>
+          <LiquidGauge  val = {props.level_w}
                         name = {'Water Level'}/>
-          <LiquidGauge  val = {this.props.level_o}
-                        name = {'Oil Level'}/>
-          <LiquidGauge  val = {this.props.vol_w}
+          <LiquidGauge  val = {props.vol_w}
                         name = {'Water Volume'}/>
-          <LiquidGauge  val = {this.props.vol_o}
-                        name = {'Water Level'}/>
+          <h4>Oil Tank 1</h4>                        
+          <LiquidGauge  val = {props.level_o}
+                        name = {'Oil Level'}/>
+          <LiquidGauge  val = {props.vol_o}
+                        name = {'Oil Volume'}/> */}
         </Col>
       </Row>
     </Grid>
