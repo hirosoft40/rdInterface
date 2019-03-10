@@ -1,11 +1,16 @@
 // ==== REACT COMPONENT to download CSV file ====
-// === Libracy used: Material-ui, React-csv ===
-// === Data IN: data from Table component OUT: timestamp(string), everything else(numbers)
+// Libracy used: Material-ui, React-csv 
+// Data IN: props header and finalData from  (Array of Array)
+// Data OUT: timestamp(String), everything else(numbers)
+// 3/8 TODO: 
+//    (1) test with real data esp make header array of array. 
+//    (2) Timestamp format 
+//==============
 
 import React, { Component } from "react";
 import IconButton from '@material-ui/core/IconButton';
 import { CloudDownload } from "@material-ui/icons";
-import { CSVDownload, CSVLink } from "react-csv";
+import { CSVLink } from "react-csv";
 
 export const DownloadCSV =(props) => {
     const date = new Date().toISOString();
