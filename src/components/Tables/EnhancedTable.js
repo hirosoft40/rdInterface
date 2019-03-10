@@ -1,50 +1,3 @@
-// import React from "react";
-// import MUIDataTable from "mui-datatables";
-
-// class EnhancedTable extends React.Component {
-//   render(){
-//   const columns = [
-//     "Timestamp",
-//     "Choke",
-//     "TbgPress",
-//     "CsgPress",
-//     "Gasmcfh",
-//     "Gasmcfd",
-//     "boph",
-//     "bopd",
-//     "bwph",
-//     "bwpd",
-//     "Chlorides",
-//     "Protein (g)",
-//     "Plate-Size",
-//     "Gas-Gravity",
-//     "Static-Press",
-//     "Diff-Press",
-//     "Temp",
-//     "DS-of-Man-Press"
-//   ];
-
-//   const data = [
-//     [1.123, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,13,14,15,16,17,18]
-//     ,[1.123, 2.123, 3.123, 4.123, 5.123, 6.123, 7.123, 8.123, 9.123, 10.123, 11.123, 12.123,13.123,14.123,15.123,16.123,17.123,18]
-//     ,[1.123, 2.123, 3.123, 4.123, 5.123, 6.123, 7, 8, 9, 10, 11, 12,13,14,15,16,17,18]
-//     ,[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,13,14,15,16,17,18]
-//   ];
-
-//   const options = {
-//     downloadOptions: { filename: "data_20190307.csv", separator: "," }
-//   };
-//   return (
-//     <MUIDataTable
-//       title={"Employee List"}
-//       data={data}
-//       columns={columns}
-//       options={options}
-//     />
-//   );
-//   }
-// }
-
 import React from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
@@ -247,7 +200,7 @@ let EnhancedTableToolbar = props => {
       <div className={classes.spacer} />
       <div className={classes.actions}>
         <DownloadCSV />
-        {/* {numSelected > 0 ? (
+        {numSelected > 0 ? (
           <Tooltip title="Delete">
             <IconButton aria-label="Delete">
               <DeleteIcon />
@@ -259,7 +212,7 @@ let EnhancedTableToolbar = props => {
               <FilterListIcon />
             </IconButton>
           </Tooltip>
-        )} */}
+        )}
       </div>
     </Toolbar>
   );

@@ -7,15 +7,18 @@
 //    (2) Timestamp format 
 //==============
 
-import React, { Component } from "react";
+import React from "react";
 import IconButton from '@material-ui/core/IconButton';
 import { CloudDownload } from "@material-ui/icons";
 import { CSVLink } from "react-csv";
+import moment from 'moment';
 
 export const DownloadCSV =(props) => {
-    const date = new Date().toISOString();
+    const fileTimeStamp = moment().format('L_LTS');
     // const header = this.props.header;
     // const finalData = [...props.header, ...props.finalData]
+    
+    //===== TEST DATA START FROM HERE :
     const testheader = [[
       "Timestamp",
       "Choke",
@@ -36,7 +39,8 @@ export const DownloadCSV =(props) => {
       "Temp",
       "DS of Man Press"
     ]];
-    const testData = [["11/14/2018, 1:00:00 PM", 26, 1372, 163, 1, 29, 0.0, 0.0, 0.0, 0.0, 16000, 0.9099, 1.00, 1.000, 242, 0.000, 55, 443],
+    const testData = [
+    ["11/14/2018, 1:00:00 PM", 26, 1372, 163, 1, 29, 0.0, 0.0, 0.0, 0.0, 16000, 0.9099, 1.00, 1.000, 242, 0.000, 55, 443],
     ["11/14/2018, 2:00:00 PM", 26, 1700, 107, 0, 0, 1.4, 33.6, 0.0, 0.0, 16000, 0.9099, 1.00, 1.000, 2, 0.000, 66, 204],
     ["11/14/2018, 3:00:00 PM", 26, 1509, 140, 0, 0, 0.0, 0.0, 0.0, 0.0, 16000, 0.9099, 1.00, 1.000, 2, 0.000, 66, 478],
     ["11/14/2018, 4:00:00 PM", 26, 1511, 166, 0, 0, 0.0, 0.0, 0.0, 0.0, 16000, 0.9099, 1.00, 1.000, 2, 0.000, 63, 469],
@@ -61,19 +65,19 @@ export const DownloadCSV =(props) => {
     ["11/27/2018, 3:00:00 PM", 28, -3820, 2159, 0, 0, 0.0, 0.0, 0.0, 0.0, 16000, 0.9099, 0.00, 1.000, 0, 0.000, 0, -3858],
     ["11/27/2018, 4:00:00 PM", 28, -3820, -1, 0, 0, 0.0, 0.0, 0.0, 0.0, 16000, 0.9099, 0.00, 1.000, 0, 0.000, 0, -3858]]
     
-    const testdataMain =[...testheader, ...testData]
-    console.log(testdataMain)
+    const testdataMain =[...testheader, ...testData];
+      //===== end test data ===
+
     return (
-      // <CSVLink data={finalData} filename={`flowback_${date}.csv`}>
+      // <CSVLink data={finalData} filename={`flowback_${fileTimeStamp}.csv`}>
       <CSVLink
         data={testdataMain}
-        filename={`flowback_${date}.csv`}
+        // filename={`flowback_${fileTimeStamp}.csv`}
       >
         <IconButton>
           <CloudDownload />
         </IconButton>
       </CSVLink>
     );
-  
 }
 

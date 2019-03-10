@@ -1,7 +1,16 @@
+// ==== REACT COMPONENT to display LiquidGauge ====
+// Libracy used:
+// react-liquid-gauge : https://github.com/trendmicro-frontend/react-liquid-gauge
+// Data IN: props value of Water Level, Volume and Oil Level, Volume
+// Data OUT: n/a (display only)
+// 3/8 TODO:
+//    (1) Test with real data.
+//    (2) Check: data unit. What to display and decimal points?
+//==============
+
 import { color } from "d3-color";
 import { interpolateRgb } from "d3-interpolate";
 import React, { Component } from "react";
-// import ReactDOM from 'react-dom';
 import LiquidFillGauge from "react-liquid-gauge";
 
 class LiquidGauge extends Component {
@@ -102,9 +111,9 @@ class LiquidGauge extends Component {
             fill: color("#fff").toString(),
             fontFamily: "Arial"
           }}
-        //   onClick={() => {
-        //     this.setState({ value: this.props.val });
-        //   }}
+          //   onClick={() => {
+          //     this.setState({ value: this.props.val });
+          //   }}
         />
         {/* <div>
           {this.props.name}
