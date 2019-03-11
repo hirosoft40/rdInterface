@@ -19,7 +19,9 @@ let dtime = [], // time (x coordinates)
   cumOil = [], // cumalative oil (10)
   gasPrevint = [], // gasPrevint (11)
   level_w = [], // water level (12)
+  waterLevel = [], // water level(12)
   level_o = [], // oil level (13)
+  oilLevel = [], // oil level (13)
   vol_w = [], // water volume (14)
   vol_o = [], // oil volume (15)
   choke = [], // choke (16)
@@ -51,7 +53,9 @@ class App extends Component {
       cumOil: [],
       gasPrevint: [],
       level_w_val: 0,
+      waterLevel: [],
       level_o_val: 0,
+      oilLevel: [],
       vol_w_val: 0,
       vol_o_val: 0,
       choke: [],
@@ -71,64 +75,76 @@ class App extends Component {
       "com.campbellsci.webdata"
     ]);
 
-    exampleSocket.addEventListener("open", event => {
-      console.log("Hello Server!");
-      exampleSocket.send(
-        '{"message":"AddRequests","requests":[{"uri":"LNDB:8782_Flowback","mode":"most-recent","p1":"15","transaction":1,"order":"collected"}]}'
-      );
-    });
+    // Static Data
+    // exampleSocket.addEventListener("open", event => {
+    //   console.log("Hello Server!");
+    //   exampleSocket.send(
+    //     '{"message":"AddRequests","requests":[{"uri":"LNDB:8782_Flowback","mode":"most-recent","p1":"1000","transaction":1,"order":"collected"}]}'
+    //   );
+    // });
+
+    
+    // Real-time Data
+    exampleSocket.addEventListener('open', function (event) {
+      console.log('Hello Server!')
+      exampleSocket.send('{"message":"AddRequests","requests":[{"uri":"Server:9664_FBM_(A).Flowback","mode":"backfill","p1":"1000","transaction":1,"order":"collected"}]}')
+    })
 
     // ***SIMPLE CALL***
-    exampleSocket.addEventListener("message", async mEvent => {
-      const results = await JSON.parse(mEvent.data);
-      if (!results) {
-        console.log("Nothing returned from API. results:", results);
-        this.setState({
-          errorMessage:
-            "Unable to get the real time data. Please contact system team."
-        });
-        return;
-      }
-      console.log("results", results);
-      if (results.message === "RequestRecords") {
-        // setting data information
-        this.setState({
-          figures: results.records.data
-        });
-      } else {
-        // setting header info
-        this.setState({
-          header: results.head.fields
-        });
-      }
-      this.createArray();
-    });
+    setInterval(()=>{
+      exampleSocket.addEventListener("message", async mEvent => {
+        const results = await JSON.parse(mEvent.data);
+        if (!results) {
+          console.log("Nothing returned from API. results:", results);
+          this.setState({
+            errorMessage:
+              "Unable to get the real time data. Please contact system team."
+          });
+          return;
+        }
+        console.log("results", results);
+        if (results.message === "RequestRecords") {
+          // setting data information
+          this.setState({
+            figures: results.records.data
+          });
+        } else {
+          // setting header info
+          this.setState({
+            header: results.head.fields
+          });
+        }
+        this.createArray();
+      });
+    }, 10000)
   }
   // ====  END ===
 
-  getTimeFormat(time) {
-    const d = time
-      .slice(0, 10)
-      .split("-")
-      .join("/");
-    const hour = parseInt(time.slice(11, 13)) - 12;
-    if (hour < 0) {
-      return `${d}, ${time.slice(11)} AM`;
-    } else if (hour < 10) {
-      return `${d}, 0${hour}${time.slice(13)} PM`;
-    } else {
-      return `${d}, ${hour}${time.slice(13)} PM`;
-    }
-  }
+  // getTimeFormat(time) {
+  //   const d = time
+  //     .slice(0, 10)
+  //     .split("-")
+  //     .join("/");
+  //   const hour = parseInt(time.slice(11, 13)) - 12;
+  //   if (hour < 0) {
+  //     return `${d}, ${time.slice(11)} AM`;
+  //   } else if (hour < 10) {
+  //     return `${d}, 0${hour}${time.slice(13)} PM`;
+  //   } else {
+  //     return `${d}, ${hour}${time.slice(13)} PM`;
+  //   }
+  // }
 
   //==== create Array for each data set ===
   createArray() {
     let curArr = [...this.state.figures];
     // console.log(this.state.figures);
+
     const data = curArr.forEach(item => {
       const { time, vals } = item;
       // console.log("item", item);
-      dtime.push(this.getTimeFormat(time));
+      // dtime.push(this.getTimeFormat(time));
+      dtime.push(time);
       pAnn.push(vals[0]);
       pWH.push(vals[1]);
       pDS.push(vals[2]);
@@ -142,7 +158,9 @@ class App extends Component {
       cumOil.push(vals[10]);
       gasPrevint.push(vals[11]);
       level_w.push(vals[12]);
+      waterLevel.push(vals[12])
       level_o.push(vals[13]);
+      oilLevel.push(vals[13])
       vol_w.push(vals[14]);
       vol_o.push(vals[15]);
       choke.push(vals[16]);
@@ -167,7 +185,9 @@ class App extends Component {
         cumOil: cumOil,
         gasPrevint: gasPrevint,
         level_w_val: vals[12],
+        waterLevel: waterLevel,
         level_o_val: vals[13],
+        oilLevel: oilLevel,
         vol_w_val: vals[14],
         vol_o_val: vals[15],
         choke: choke,
@@ -201,14 +221,16 @@ class App extends Component {
           gasRate = {this.state.gasRate}
           waterRate = {this.state.waterRate}
           oilRate = {this.state.oilRate}
-          cumWater = {this.state.cumWater}
-          cumOil = {this.state.cumOil}
-          gasPrevint = {this.state.gasPrevint}
+          // cumWater = {this.state.cumWater}
+          // cumOil = {this.state.cumOil}
+          // gasPrevint = {this.state.gasPrevint}
+          waterLevel = {this.state.waterLevel}
+          oilLevel = {this.state.oilLevel}
           choke = {this.state.choke}
-          gasGravity = {this.state.gasGravity}
-          oilGravity = {this.state.oilGravity}
-          shrinkage = {this.state.shrinkage}
-          chlorides = {this.state.chlorides}
+          // gasGravity = {this.state.gasGravity}
+          // oilGravity = {this.state.oilGravity}
+          // shrinkage = {this.state.shrinkage}
+          // chlorides = {this.state.chlorides}
         />
         {/* <Gauge
           level_w={level_w}

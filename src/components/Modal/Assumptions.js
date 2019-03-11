@@ -69,6 +69,7 @@ export default class Assumptions extends React.Component {
             open={this.state.open}
             onClose={this.handleClose}
             aria-labelledby="form-dialog-title"
+          
         >
         <DialogTitle id="form-dialog-title">Assumptions</DialogTitle>
         <DialogContent>

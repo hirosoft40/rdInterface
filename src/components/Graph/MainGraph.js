@@ -10,6 +10,7 @@ import { Grid, Row, Col } from "react-flexbox-grid";
 import PlotCore from '../Plot/Plot'
 import Adjusters from '../Modal/Adjusters'
 import Assumptions from '../Modal/Assumptions'
+import moment from 'moment';
 
 function MainGraph(props) {
   return (
@@ -32,11 +33,12 @@ function MainGraph(props) {
                                                           plotvalue2y = {props.pWH}
                   plotparam3 = 'DS of Choke Pressure'     plotvalue3x = {props.dtime}
                                                           plotvalue3y = {props.pDS}
-                                                          yaxis = {props.choke} // This is to display choke values along the right y axis
                   plotparam4 = 'Separator Pressure'       plotvalue4x = {props.dtime}
                                                           plotvalue4y = {props.pSep}
-                  plotparam5                              plotvalue5x
-                                                          plotvalue5y
+                  plotparam5 = 'Choke Size'               plotvalue5x = {props.dtime}
+                                                          plotvalue5y = {props.choke}
+                                                          yaxis = 'y2' // This is to display choke values along the right y axis
+
                   />
               </CardContent>
               <CardActions>Graph Captions</CardActions>
@@ -44,7 +46,7 @@ function MainGraph(props) {
         </Col>
         
         {/* GAS, OIL & WATER RATE */}
-        {/* <Col xs={12} sm={12} md={5} lg={5}>
+        <Col xs={12} sm={12} md={5} lg={5}>
             <Card className="mainCard">
               <CardContent>
                   <PlotCore
@@ -64,7 +66,7 @@ function MainGraph(props) {
               </CardContent>
               <CardActions>Graph Captions</CardActions>
             </Card>
-        </Col> */}
+        </Col>
 
         <Col xs={12} sm={12} md={2} lg={2}>
           {/* <Adjusters/> */}
@@ -76,7 +78,7 @@ function MainGraph(props) {
       <Row className="gridRow">
         
         {/* SEPARATOR PRESSURE VS DIFFERENTIAL PRESSURE IN H20 & GAS TEMPERATURE */}
-        {/* <Col xs={12} sm={12} md={5} lg={5}>
+        <Col xs={12} sm={12} md={5} lg={5}>
           <Card className="mainCard">
               <CardContent>
               <PlotCore
@@ -97,19 +99,19 @@ function MainGraph(props) {
                 </CardContent>
               <CardActions>Graph Captions</CardActions>
           </Card>
-        </Col> */}
+        </Col>
 
         {/* OIL & WATER LEVEL */}
-        {/* <Col xs={12} sm={12} md={5} lg={5}>
+        <Col xs={12} sm={12} md={5} lg={5}>
             <Card className="mainCard">
               <CardContent>
               <PlotCore
                   yaxis1 = 'Oil Level (in) / Water Level (in)' yaxis1range = {[0,100]}
                   yaxis2 = ''                                  // Doesn't need 2nd one
                   plotparam1 = 'Water Tank Level'             plotvalue1x = {props.dtime}
-                                                              plotvalue1y = {[3,7,6]}
+                                                              plotvalue1y = {props.waterLevel}
                   plotparam2 = 'Oil Tank Level'               plotvalue2x = {props.dtime}
-                                                              plotvalue2y = {[2,4,5]}
+                                                              plotvalue2y = {props.oilLevel}
                   plotparam3                                  plotvalue3x
                                                               plotvalue3y
                   plotparam4                                  plotvalue4x
@@ -120,7 +122,7 @@ function MainGraph(props) {
                 </CardContent>
               <CardActions>Graph Captions</CardActions>
             </Card>
-        </Col > */}
+        </Col >
 
         {/* GAUGES LIVE HERE */}
         {/* <Col xs={12} sm={12} md={2} lg={2}>
