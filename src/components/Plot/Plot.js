@@ -137,14 +137,14 @@ class PlotCore extends React.Component {
                         traceorder: 'normal',
                         font: {
                             family: 'Arial, sans-serif',
-                            size: 15,
+                            size: 12.5,
                             color: '#fff'},
                         bgcolor: 'rgba(0,0,0,0)',
                         bordercolor: 'rgba(0,0,0,0)',
                         borderwidth: 2,
                         orientation: 'h',
-                        x: 0.1,
-                        y: -0.1,
+                        x: 0.0,
+                        y: -0.2 ,
                             }
                         } 
                 }

@@ -85,15 +85,11 @@ componentDidMount(){
       oilGravity.push(data[i].vals[18])
       shrinkage.push(data[i].vals[19])
       chlorides.push(data[i].vals[20])
-    }
+      }
 
-}
-
-
-})
-
-
-}
+    } // end of for loop
+  }) // end of webSocket call
+} // end of componentDidMount
 
 
 render() {
