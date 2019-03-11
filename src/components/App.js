@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import EnhancedTable from './EnhancedTable'
+import EnhancedTable from './tables/EnhancedTable'
 import "./App.css";
 // var finalData=[]
 

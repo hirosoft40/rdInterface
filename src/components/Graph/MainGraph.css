@@ -1,0 +1,33 @@
+:root {
+  --main-color: #979797;
+  --card-color: #eeeeee;
+  --primary-color: #184787;
+  --secondary-color: #f4cd00;
+}
+
+.colCard {
+  display: flex;
+  justify-content: flex-start;
+  align-content: center;
+  margin: 10px !important;
+}
+
+.grid{
+  max-width: 1335px;
+  margin: 0 auto;
+}
+
+.gridRow{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+}
+
+.mainCard {
+  /* background-color: var(--main-color) !important; */
+  background-color: #212121c1 !important; /* Jean */
+  margin: 10px !important;
+  height: 480px;
+  /* width: 500px; */
+  
+}
