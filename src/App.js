@@ -19,6 +19,7 @@ class App extends Component {
     };
     this.connectToApi = this.connectToApi.bind(this);
   }
+  
 
   //=== API CALL =====
   connectToApi() {
@@ -58,8 +59,8 @@ class App extends Component {
       }
     });
   }
-  // ====  END ===
-
+  // ====  END ==
+  
   getTimeFormat(time) {
     const d = time
       .slice(0, 10)

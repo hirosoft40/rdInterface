@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import EnhancedTable from './EnhancedTable'
 import "./App.css";
-var finaldata=[]
+// var finalData=[]
 
 class App extends Component {
   constructor(props){
@@ -43,7 +43,7 @@ class App extends Component {
     })
   }
   render() {
-  
+        console.log(this.state.finalData)
     return <div className="main">
     <EnhancedTable finalData={this.state.finalData} header={this.state.header}/>
     </div>
