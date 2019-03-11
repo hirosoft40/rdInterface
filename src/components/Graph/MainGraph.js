@@ -108,10 +108,10 @@ function MainGraph(props) {
               <PlotCore
                   yaxis1 = 'Oil Level (in) / Water Level (in)' yaxis1range = {[0,100]}
                   yaxis2 = ''                                  // Doesn't need 2nd one
-                  plotparam1 = 'Water Tank Level'             plotvalue1x = {props.dtime}
-                                                              plotvalue1y = {props.waterLevel}
-                  plotparam2 = 'Oil Tank Level'               plotvalue2x = {props.dtime}
-                                                              plotvalue2y = {props.oilLevel}
+                  plotparam1 = {'Water Tank Level: ' + props.waterLevel[props.waterLevel.length-1]}   plotvalue1x = {props.dtime}
+                                                                                                      plotvalue1y = {props.waterLevel}
+                  plotparam2 = {'Oil Tank Level: ' + props.oilLevel[props.pSep.oilLevel-1]}           plotvalue2x = {props.dtime}
+                                                                                                      plotvalue2y = {props.oilLevel}
                   plotparam3                                  plotvalue3x
                                                               plotvalue3y
                   plotparam4                                  plotvalue4x
