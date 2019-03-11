@@ -1,25 +1,22 @@
 // ==== REACT COMPONENT to download CSV file ====
-// Libracy used: Material-ui, React-csv 
+// Libracy used: Material-ui, React-csv
 // Data IN: props header and finalData from  (Array of Array)
 // Data OUT: timestamp(String), everything else(numbers)
-// 3/8 TODO: 
-//    (1) test with real data esp make header array of array. 
-//    (2) Timestamp format 
+// 3/8 TODO:
+//    (1) test with real data esp make header array of array.
+//    (2) Timestamp format
 //==============
 
 import React from "react";
-import IconButton from '@material-ui/core/IconButton';
+import IconButton from "@material-ui/core/IconButton";
 import { CloudDownload } from "@material-ui/icons";
 import { CSVLink } from "react-csv";
-import moment from 'moment';
+import moment from "moment";
 
-export const DownloadCSV =(props) => {
-    const fileTimeStamp = moment().format('L_LTS');
-    // const header = this.props.header;
-    // const finalData = [...props.header, ...props.finalData]
-    
-    //===== TEST DATA START FROM HERE :
-    const testheader = [[
+export const DownloadCSV = props => {
+  console.log("props", props);
+  const header = [
+    [
       "Timestamp",
       "Choke",
       "TbgPress",
@@ -38,46 +35,27 @@ export const DownloadCSV =(props) => {
       "Diff Press",
       "Temp",
       "DS of Man Press"
-    ]];
-    const testData = [
-    ["11/14/2018, 1:00:00 PM", 26, 1372, 163, 1, 29, 0.0, 0.0, 0.0, 0.0, 16000, 0.9099, 1.00, 1.000, 242, 0.000, 55, 443],
-    ["11/14/2018, 2:00:00 PM", 26, 1700, 107, 0, 0, 1.4, 33.6, 0.0, 0.0, 16000, 0.9099, 1.00, 1.000, 2, 0.000, 66, 204],
-    ["11/14/2018, 3:00:00 PM", 26, 1509, 140, 0, 0, 0.0, 0.0, 0.0, 0.0, 16000, 0.9099, 1.00, 1.000, 2, 0.000, 66, 478],
-    ["11/14/2018, 4:00:00 PM", 26, 1511, 166, 0, 0, 0.0, 0.0, 0.0, 0.0, 16000, 0.9099, 1.00, 1.000, 2, 0.000, 63, 469],
-    ["11/14/2018, 5:00:00 PM", 28, 1514, 176, 0, 0, 0.0, 0.0, 0.0, 0.0, 16000, 0.9099, 1.00, 1.000, 2, 0.000, 56, 454],
-    ["11/14/2018, 6:00:00 PM", 28, 1517, 179, 0, 0, 0.0, 0.0, 0.0, 0.0, 16000, 0.9099, 1.00, 1.000, 2, 0.000, 51, 448],
-    ["11/14/2018, 7:00:00 PM", 28, 1523, 179, 0, 0, 0.0, 0.0, 0.0, 0.0, 16000, 0.9099, 1.00, 1.000, 1, 0.000, 46, 441],
-    ["11/14/2018, 8:00:00 PM", 28, 1528, 178, 0, 0, 0.0, 0.0, 0.0, 0.0, 16000, 0.9099, 1.00, 1.000, 2, 0.000, 43, 442],
-    ["11/14/2018, 9:00:00 PM", 28, 1531, 179, 0, 0, 0.0, 0.0, 0.0, 0.0, 16000, 0.9099, 1.00, 1.000, 2, 0.000, 40, 443],
-    ["11/14/2018, 10:00:00 PM", 28, 1534, 176, 0, 0, 0.0, 0.0, 0.0, 0.0, 16000, 0.9099, 1.00, 1.000, 2, 0.000, 38, 446],
-    ["11/14/2018, 11:00:00 PM", 28, 1526, 174, 0, 0, 0.0, 0.0, 0.0, 0.0, 16000, 0.9099, 1.00, 1.000, 2, 0.000, 37, 451],
-    ["11/15/2018, 12:00:00 AM", 28, 1518, 174, 0, 0, 0.0, 0.0, 0.0, 0.0, 16000, 0.9099, 1.00, 1.000, 2, 0.000, 36, 450],
-    ["11/15/2018, 1:00:00 AM", 28, 1519, 170, 0, 0, 0.0, 0.0, 0.0, 0.0, 16000, 0.9099, 1.00, 1.000, 2, 0.000, 34, 446],
-    ["11/15/2018, 2:00:00 AM", 28, 1512, 168, 0, 0, 0.0, 0.0, 0.0, 0.0, 16000, 0.9099, 1.00, 1.000, 2, 0.000, 33, 446],
-    ["11/15/2018, 3:00:00 AM", 28, 1504, 166, 0, 0, 0.0, 0.0, 0.0, 0.0, 16000, 0.9099, 1.00, 1.000, 2, 0.000, 32, 448],
-    ["11/15/2018, 4:00:00 AM", 28, 1504, 166, 0, 0, 0.0, 0.0, 0.0, 0.0, 16000, 0.9099, 1.00, 1.000, 2, 0.000, 32, 441],
-    ["11/15/2018, 5:00:00 AM", 28, 1501, 165, 0, 0, 0.0, 0.0, 0.0, 0.0, 16000, 0.9099, 1.00, 1.000, 2, 0.000, 31, 451],
-    ["11/15/2018, 6:00:00 AM", 28, 1495, 166, 0, 0, 0.0, 0.0, 0.0, 0.0, 16000, 0.9099, 1.00, 1.000, 2, 0.000, 30, 452],
-    ["11/15/2018, 7:00:00 AM", 28, 1479, 164, 0, 0, 0.0, 0.0, 0.0, 0.0, 16000, 0.9099, 1.00, 1.000, 2, 0.000, 30, 446],
-    ["11/15/2018, 8:00:00 AM", 28, 1480, 163, 0, 0, 0.0, 0.0, 0.0, 0.0, 16000, 0.9099, 1.00, 1.000, 2, 0.000, 33, 428],
-    ["11/15/2018, 9:00:00 AM", 28, 1469, 165, 0, 0, 0.0, 0.0, 0.0, 0.0, 16000, 0.9099, 1.00, 1.000, 3, 0.000, 39, 431],
-    ["11/27/2018, 2:00:00 PM", 28, -3820, -1, 0, 0, 0.0, 0.0, 0.0, 0.0, 16000, 0.9099, 0.00, 1.000, 0, 0.000, 0, -3858],
-    ["11/27/2018, 3:00:00 PM", 28, -3820, 2159, 0, 0, 0.0, 0.0, 0.0, 0.0, 16000, 0.9099, 0.00, 1.000, 0, 0.000, 0, -3858],
-    ["11/27/2018, 4:00:00 PM", 28, -3820, -1, 0, 0, 0.0, 0.0, 0.0, 0.0, 16000, 0.9099, 0.00, 1.000, 0, 0.000, 0, -3858]]
-    
-    const testdataMain =[...testheader, ...testData];
-      //===== end test data ===
+    ]
+  ];
+  const error = props ? "" : <h1>Loading....</h1>;
+  let data = [];
+  const d = props.csvData.map(item => {
+    let time = moment(item.time).format("L_LTS");
+    let newArr = [time, ...item.vals];
+    data.push(newArr);
+  });
+  const fileTimeStamp = moment().format("L_LTS");
 
-    return (
-      // <CSVLink data={finalData} filename={`flowback_${fileTimeStamp}.csv`}>
-      <CSVLink
-        data={testdataMain}
-        // filename={`flowback_${fileTimeStamp}.csv`}
-      >
+  const finalData = [...header, ...data];
+
+  return (
+    <div>
+      <h1>{error}</h1>
+      <CSVLink data={finalData} filename={`flowback_${fileTimeStamp}.csv`}>
         <IconButton>
           <CloudDownload />
         </IconButton>
       </CSVLink>
-    );
-}
-
+    </div>
+  );
+};

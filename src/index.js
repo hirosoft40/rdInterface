@@ -2,18 +2,18 @@ import React from "react";
 import App from "./App";
 import BaseLayout from "./BaseLayout";
 import EnhancedTable from "./components/Tables/EnhancedTable";
-import FetchData from "./components/reducers/FetchData";
 import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import thunk from "redux-thunk";
+// import { Provider } from "react-redux";
+// import FetchData from "./components/reducers/FetchData";
+// import thunk from "redux-thunk";
 
-const store = createStore(
-  FetchData,
-  composeWithDevTools(applyMiddleware(thunk))
-);
+// const store = createStore(
+//   FetchData,
+//   composeWithDevTools(applyMiddleware(thunk))
+// );
 
 const theme = createMuiTheme({
   typography: {
@@ -26,7 +26,7 @@ const theme = createMuiTheme({
 });
 
 ReactDOM.render(
-  <Provider store={store}>
+  // <Provider store={store}>
     <BrowserRouter>
       <MuiThemeProvider theme={theme}>
         <BaseLayout>
@@ -37,6 +37,6 @@ ReactDOM.render(
         </BaseLayout>
       </MuiThemeProvider>
     </BrowserRouter>
-  </Provider>,
-  document.getElementById("root")
+  // </Provider>
+  , document.getElementById("root")
 );

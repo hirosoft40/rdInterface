@@ -178,8 +178,7 @@ const toolbarStyles = theme => ({
 });
 
 let EnhancedTableToolbar = props => {
-  const { numSelected, classes } = props;
-
+  const { numSelected, classes, csvData } = props;
   return (
     <Toolbar
       className={classNames(classes.root, {
@@ -199,8 +198,8 @@ let EnhancedTableToolbar = props => {
       </div>
       <div className={classes.spacer} />
       <div className={classes.actions}>
-        <DownloadCSV />
-        {numSelected > 0 ? (
+        <DownloadCSV csvData={csvData} />
+        {/* {numSelected > 0 ? (
           <Tooltip title="Delete">
             <IconButton aria-label="Delete">
               <DeleteIcon />
@@ -212,7 +211,7 @@ let EnhancedTableToolbar = props => {
               <FilterListIcon />
             </IconButton>
           </Tooltip>
-        )}
+        )} */}
       </div>
     </Toolbar>
   );
@@ -239,28 +238,95 @@ const styles = theme => ({
 });
 
 class EnhancedTable extends React.Component {
-  state = {
-    order: "asc",
-    orderBy: "calories",
-    selected: [],
-    data: [
-      createData("11/14/2018 1:00:00 PM", 305, 3.7, 67, 4.3),
-      createData("11/14/2018 1:00:00 PM", 452, 25.0, 51, 4.9),
-      createData("11/14/2018 1:00:00 PM", 262, 16.0, 24, 6.0),
-      createData("11/14/2018 1:00:00 PM", 159, 6.0, 24, 4.0),
-      createData("11/14/2018 1:00:00 PM", 356, 16.0, 49, 3.9),
-      createData("11/15/2018 1:00:00 PM", 408, 3.2, 87, 6.5),
-      createData("11/15/2018 1:00:00 PM", 237, 9.0, 37, 4.3),
-      createData("11/15/2018 1:00:00 PM", 375, 0.0, 94, 0.0),
-      createData("11/15/2018 1:00:00 PM", 518, 26.0, 100, 7.0),
-      createData("11/15/2018 1:00:00 PM", 392, 0.2, 98, 0.0),
-      createData("11/27/2018 1:00:00 PM", 318, 0, 81, 2.0),
-      createData("11/27/2018 1:00:00 PM", 360, 19.0, 9, 37.0),
-      createData("11/27/2018 1:00:00 PM", 437, 18.0, 63, 4.0)
-    ],
-    page: 0,
-    rowsPerPage: 5
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      order: "asc",
+      orderBy: "timestamp",
+      selected: [],
+      header: [],
+      data: [],
+      page: 0,
+      rowsPerPage: 5,
+      csvData: []
+    };
+    this.connectToTableApi = this.connectToTableApi.bind(this);
+  }
+  // state = {
+  //   order: "asc",
+  //   orderBy: "calories",
+  //   selected: [],
+  //   header: [],
+  //   finaldata: [],
+  //   page: 0,
+  //   rowsPerPage: 5,
+  // data: [
+  //   createData("11/14/2018 1:00:00 PM", 305, 3.7, 67, 4.3),
+  //   createData("11/14/2018 1:00:00 PM", 452, 25.0, 51, 4.9),
+  //   createData("11/14/2018 1:00:00 PM", 262, 16.0, 24, 6.0),
+  //   createData("11/14/2018 1:00:00 PM", 159, 6.0, 24, 4.0),
+  //   createData("11/14/2018 1:00:00 PM", 356, 16.0, 49, 3.9),
+  //   createData("11/15/2018 1:00:00 PM", 408, 3.2, 87, 6.5),
+  //   createData("11/15/2018 1:00:00 PM", 237, 9.0, 37, 4.3),
+  //   createData("11/15/2018 1:00:00 PM", 375, 0.0, 94, 0.0),
+  //   createData("11/15/2018 1:00:00 PM", 518, 26.0, 100, 7.0),
+  //   createData("11/15/2018 1:00:00 PM", 392, 0.2, 98, 0.0),
+  //   createData("11/27/2018 1:00:00 PM", 318, 0, 81, 2.0),
+  //   createData("11/27/2018 1:00:00 PM", 360, 19.0, 9, 37.0),
+  //   createData("11/27/2018 1:00:00 PM", 437, 18.0, 63, 4.0)
+  // ]
+
+  //};
+
+  componentDidMount() {
+    this.connectToTableApi();
+  }
+
+  //========= API CALL FOR TABLE ==========
+  connectToTableApi() {
+    var exampleSocket = new WebSocket("ws://rdsfastrack.com/backend/", [
+      "com.campbellsci.webdata"
+    ]);
+
+    exampleSocket.addEventListener("open", event => {
+      console.log("Hello Server!");
+      exampleSocket.send(
+        '{"message":"AddRequests","requests":[{"uri":"LNDB:8782_Hour_Table","mode":"since-record","p1":"1","transaction":1,"order":"collected"}]}'
+      );
+    });
+
+    // ***SIMPLE CALL***
+
+    exampleSocket.addEventListener("message", async mEvent => {
+      // const results= await JSON.parse(mEvent.data).records.data
+      const results = await JSON.parse(mEvent.data);
+      if (results.message === "RequestRecords") {
+        this.setState({
+          data: results.records.data,
+          time: results.time
+        });
+        // console.log("finaldata:", this.state.data);
+      } else {
+        //seting header info
+        this.setState({
+          header: results.head.fields
+        });
+      }
+      this.createTableData();
+    });
+  }
+  //===== API CALL END=====
+
+  // ====== CREATE TABLE DATA SET FOR TABLE AND CSV ========
+  createTableData() {
+    const finalData = this.state.data.map(item => {
+      const time = item.time;
+      this.setState({
+        csvData: [time, ...item.vals]
+      });
+    });
+  }
+  //===============
 
   handleRequestSort = (event, property) => {
     const orderBy = property;
@@ -313,7 +379,7 @@ class EnhancedTable extends React.Component {
   isSelected = id => this.state.selected.indexOf(id) !== -1;
 
   render() {
-    console.log(this.props.finaldata);
+    // console.log(this.props.finaldata);
     const { classes } = this.props;
     const { data, order, orderBy, selected, rowsPerPage, page } = this.state;
     const emptyRows =
@@ -321,7 +387,7 @@ class EnhancedTable extends React.Component {
 
     return (
       <Paper className={classes.root}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+        <EnhancedTableToolbar numSelected={selected.length} csvData={data} />
         <div className={classes.tableWrapper}>
           <Table className={classes.table} aria-labelledby="tableTitle">
             <EnhancedTableHead

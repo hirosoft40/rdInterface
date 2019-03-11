@@ -65,14 +65,14 @@ class LiquidGauge extends Component {
           style={{ margin: "0 auto" }}
           width={radius * 2}
           height={radius * 2}
-          value={this.props.val}
+          value={this.state.value}
           //   name={this.props.name}
           percent={this.props.unit}
           textSize={1}
           textOffsetX={0}
           textOffsetY={0}
           textRenderer={props => {
-            const value = +this.props.value.toFixd(2);
+            const value = props.value;
             const radius = Math.min(props.height / 2, props.width / 2);
             const textPixels = (props.textSize * radius) / 3;
             const valueStyle = {
@@ -111,9 +111,9 @@ class LiquidGauge extends Component {
             fill: color("#fff").toString(),
             fontFamily: "Arial"
           }}
-          //   onClick={() => {
-          //     this.setState({ value: this.props.val });
-          //   }}
+            onClick={() => {
+              this.setState({ value: this.props.val });
+            }}
         />
         {/* <div>
           {this.props.name}
