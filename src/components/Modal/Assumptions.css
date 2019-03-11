@@ -1,3 +1,10 @@
 .buttonColor {
     color: white
 }
+
+
+/* Internal Modal */
+ span{
+    color: black;
+    font-size: 13px;
+}

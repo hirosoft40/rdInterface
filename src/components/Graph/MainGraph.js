@@ -6,13 +6,12 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import "./MainGraph.css";
 import { Grid, Row, Col } from "react-flexbox-grid";
-// import LiquidGauge from "../Gauge/LiquidGauge";
+import LiquidGauge from "../Gauge/LiquidGauge";
 import PlotCore from '../Plot/Plot'
-import Adjusters from '../Modal/Adjusters'
-import Assumptions from '../Modal/Assumptions'
 import moment from 'moment';
 
 function MainGraph(props) {
+  console.log(props)
   return (
     // FLEXBOX GRID
     <Grid fluid className="grid">
@@ -67,12 +66,26 @@ function MainGraph(props) {
               <CardActions>Graph Captions</CardActions>
             </Card>
         </Col>
-{/* 
+ 
         <Col xs={12} sm={12} md={2} lg={2}>
-          < Assumptions 
-          />
-        </Col> */}
-      </Row>
+        <h3>Water Tank 1</h3>
+          <LiquidGauge  val = {props.waterLevel[props.waterLevel.length -1]}
+                        name = {'Water Level'}
+                        unit ={"in"}/>
+          <LiquidGauge  val = {props.waterVolume[props.waterVolume.length -1]}
+                        name = {'Water Volume'}
+                        unit ={"bbl"}/>
+          <h4>Oil Tank 1</h4>                        
+          <LiquidGauge  val = {props.oilLevel[props.oilLevel.length -1]}
+                        name = {'Oil Level'}
+                        unit ={"in"}/>
+          <LiquidGauge  val = {props.oilVolume[props.oilVolume.length -1]}
+                        name = {'Oil Volume'}
+                        unit ={"bbl"}/>
+        </Col>  
+
+        
+        </Row>
       
       {/* SECOND ROW */}
       <Row className="gridRow">
@@ -128,9 +141,7 @@ function MainGraph(props) {
         {/* <Col xs={12} sm={12} md={2} lg={2}>
           <LiquidGauge  val = {this.props.level_w}
                         name = {'Water Level'}/>
-          <LiquidGauge  val = {this.props.level_o}
-                        name = {'Oil Level'}/>
-          <LiquidGauge  val = {this.props.vol_w}
+          <LiquidGauge  val = {props.vol_w}
                         name = {'Water Volume'}/>
           <LiquidGauge  val = {this.props.vol_o}
                         name = {'Water Level'}/>

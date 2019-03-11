@@ -7,6 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import "./Adjusters.css"
+import { format } from 'url';
 
 export default class Assumptions extends React.Component {
     constructor(props) {
@@ -25,21 +26,36 @@ export default class Assumptions extends React.Component {
         };
       }
 
+      
+  // Open Modal
   handleClickOpen = () => {
     this.setState({ open: true });
   };
 
+
+  // Close Modal
   handleClose = () => {
     this.setState({ open: false });
   };
 
-  handleSubmit=() => {
+
+  // Submitting information to the backend
+  handleSubmit=(e) => {
     // insert call to submit data to backend
+    
 
-
+    e.PreventDefault();
+    this.clearData()
     this.handleClose()
   }
 
+
+  // Clear form fields upon clicking "update"
+  clearData=() =>{
+
+  }
+
+  // Displays text as typing
   handleChange = name => event => {
     const { value } = event.target;
     // Just in Case, error handling : Material-UI will not accept non integer numbers
@@ -61,6 +77,7 @@ export default class Assumptions extends React.Component {
 
   render() {
     return (
+
     <div>
         <Button variant="outlined" color="default" onClick={this.handleClickOpen}>
         Assumptions
@@ -69,20 +86,23 @@ export default class Assumptions extends React.Component {
             open={this.state.open}
             onClose={this.handleClose}
             aria-labelledby="form-dialog-title"
-          
+            maxWidth = {'sm'}
         >
         <DialogTitle id="form-dialog-title">Assumptions</DialogTitle>
         <DialogContent>
             <DialogContentText>
             Update the assumptions and information below to populate the graphs
             </DialogContentText>
+
+
+
             <TextField
                 autoFocus
                 margin="dense"
                 id="chokeSize"
-                label="Choke Size"
+                label={"Current Choke Size: " + this.props.chokeSize[this.props.chokeSize.length -1]}
                 type="number"
-                value = {this.state.chokeSize}
+                value = {0}
                 onChange = {this.handleChange("chokeSize")}
                 defaultValue={0}
                 InputProps={{ inputProps: { min: 0 } }}
@@ -92,7 +112,7 @@ export default class Assumptions extends React.Component {
                 autoFocus
                 margin="dense"
                 id="oilGravity"
-                label="Oil Gravity"
+                label={"Currrent Oil Gravity: " + this.props.oilGravity[this.props.oilGravity.length -1]}
                 type="number"
                 value = {this.state.oilGravity}
                 onChange={this.handleChange("oilGravity")}
@@ -104,7 +124,7 @@ export default class Assumptions extends React.Component {
                 autoFocus
                 margin="dense"
                 id="oilShrinkage"
-                label="Oil Shrinkage"
+                label={"Current Oil Shrinkage: " + this.props.oilShrinkage[this.props.oilShrinkage.length -1]}
                 type="number"
                 value = {this.state.oilShrinkage}
                 onChange={this.handleChange("oilShrinkage")}
@@ -116,7 +136,7 @@ export default class Assumptions extends React.Component {
                 autoFocus
                 margin="dense"
                 id="waterChlorides"
-                label="Water Chlorides"
+                label={"Current Water Chlorides: " + this.props.waterChlorides[this.props.waterChlorides.length -1]}
                 type="number"
                 value = {this.state.waterChlorides}
                 onChange={this.handleChange("waterChlorides")}
