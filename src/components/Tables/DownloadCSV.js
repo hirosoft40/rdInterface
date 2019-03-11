@@ -39,7 +39,7 @@ export const DownloadCSV = props => {
   ];
   const error = props ? "" : <h1>Loading....</h1>;
   let data = [];
-  const d = props.csvData.map(item => {
+  const d = props.tableData.map(item => {
     let time = moment(item.time).format("L_LTS");
     let newArr = [time, ...item.vals];
     data.push(newArr);

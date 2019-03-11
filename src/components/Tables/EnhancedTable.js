@@ -178,7 +178,7 @@ const toolbarStyles = theme => ({
 });
 
 let EnhancedTableToolbar = props => {
-  const { numSelected, classes, csvData } = props;
+  const { numSelected, classes, tableData } = props;
   return (
     <Toolbar
       className={classNames(classes.root, {
@@ -198,7 +198,7 @@ let EnhancedTableToolbar = props => {
       </div>
       <div className={classes.spacer} />
       <div className={classes.actions}>
-        <DownloadCSV csvData={csvData} />
+        <DownloadCSV tableData={tableData} />
         {/* {numSelected > 0 ? (
           <Tooltip title="Delete">
             <IconButton aria-label="Delete">
@@ -248,7 +248,7 @@ class EnhancedTable extends React.Component {
       data: [],
       page: 0,
       rowsPerPage: 5,
-      csvData: []
+      tableData: [] // for csv file
     };
     this.connectToTableApi = this.connectToTableApi.bind(this);
   }
@@ -317,12 +317,12 @@ class EnhancedTable extends React.Component {
   }
   //===== API CALL END=====
 
-  // ====== CREATE TABLE DATA SET FOR TABLE AND CSV ========
+  // ====== CREATE Array DATA SET FOR TABLE AND CSV ========
   createTableData() {
     const finalData = this.state.data.map(item => {
       const time = item.time;
       this.setState({
-        csvData: [time, ...item.vals]
+        tableData: [time, ...item.vals]
       });
     });
   }
@@ -387,7 +387,7 @@ class EnhancedTable extends React.Component {
 
     return (
       <Paper className={classes.root}>
-        <EnhancedTableToolbar numSelected={selected.length} csvData={data} />
+        <EnhancedTableToolbar numSelected={selected.length} tableData={data} />
         <div className={classes.tableWrapper}>
           <Table className={classes.table} aria-labelledby="tableTitle">
             <EnhancedTableHead
