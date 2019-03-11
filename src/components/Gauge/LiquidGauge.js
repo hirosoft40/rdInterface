@@ -15,7 +15,9 @@ import LiquidFillGauge from "react-liquid-gauge";
 
 class LiquidGauge extends Component {
   state = {
-    value: 0
+    value: 0,
+    name: "",
+    unit: ""
   };
   startColor = "#6495ed"; // cornflowerblue
   endColor = "#dc143c"; // crimson
@@ -23,7 +25,9 @@ class LiquidGauge extends Component {
   componentDidMount() {
     // console.log(this.props.val);
     this.setState({
-      value: this.props.val
+      value: this.props.val,
+      name: this.props.name,
+      unit: this.props.unit
     });
   }
 
@@ -59,15 +63,14 @@ class LiquidGauge extends Component {
     return (
       <div>
         <div style={{ color: "white", textAlign: "center" }}>
-          {this.props.name}
+          {this.state.name}
         </div>
         <LiquidFillGauge
           style={{ margin: "0 auto" }}
           width={radius * 2}
           height={radius * 2}
           value={this.state.value}
-          //   name={this.props.name}
-          percent={this.props.unit}
+          percent={this.state.unit}
           textSize={1}
           textOffsetX={0}
           textOffsetY={0}
@@ -111,9 +114,9 @@ class LiquidGauge extends Component {
             fill: color("#fff").toString(),
             fontFamily: "Arial"
           }}
-            onClick={() => {
-              this.setState({ value: this.props.val });
-            }}
+          onClick={() => {
+            this.setState({ value: this.state.val });
+          }}
         />
         {/* <div>
           {this.props.name}
