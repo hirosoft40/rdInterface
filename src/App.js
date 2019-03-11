@@ -75,7 +75,6 @@ class App extends Component {
       "com.campbellsci.webdata"
     ]);
 
-    // Static Data
     // exampleSocket.addEventListener("open", event => {
     //   console.log("Hello Server!");
     //   exampleSocket.send(
@@ -84,56 +83,54 @@ class App extends Component {
     // });
 
     
-    // Real-time Data
+
     exampleSocket.addEventListener('open', function (event) {
       console.log('Hello Server!')
       exampleSocket.send('{"message":"AddRequests","requests":[{"uri":"Server:9664_FBM_(A).Flowback","mode":"backfill","p1":"1000","transaction":1,"order":"collected"}]}')
     })
 
     // ***SIMPLE CALL***
-    setInterval(()=>{
-      exampleSocket.addEventListener("message", async mEvent => {
-        const results = await JSON.parse(mEvent.data);
-        if (!results) {
-          console.log("Nothing returned from API. results:", results);
-          this.setState({
-            errorMessage:
-              "Unable to get the real time data. Please contact system team."
-          });
-          return;
-        }
-        console.log("results", results);
-        if (results.message === "RequestRecords") {
-          // setting data information
-          this.setState({
-            figures: results.records.data
-          });
-        } else {
-          // setting header info
-          this.setState({
-            header: results.head.fields
-          });
-        }
-        this.createArray();
-      });
-    }, 10000)
+    exampleSocket.addEventListener("message", async mEvent => {
+      const results = await JSON.parse(mEvent.data);
+      if (!results) {
+        console.log("Nothing returned from API. results:", results);
+        this.setState({
+          errorMessage:
+            "Unable to get the real time data. Please contact system team."
+        });
+        return;
+      }
+      console.log("results", results);
+      if (results.message === "RequestRecords") {
+        // setting data information
+        this.setState({
+          figures: results.records.data
+        });
+      } else {
+        // setting header info
+        this.setState({
+          header: results.head.fields
+        });
+      }
+      this.createArray();
+    });
   }
   // ====  END ===
 
-  // getTimeFormat(time) {
-  //   const d = time
-  //     .slice(0, 10)
-  //     .split("-")
-  //     .join("/");
-  //   const hour = parseInt(time.slice(11, 13)) - 12;
-  //   if (hour < 0) {
-  //     return `${d}, ${time.slice(11)} AM`;
-  //   } else if (hour < 10) {
-  //     return `${d}, 0${hour}${time.slice(13)} PM`;
-  //   } else {
-  //     return `${d}, ${hour}${time.slice(13)} PM`;
-  //   }
-  // }
+  getTimeFormat(time) {
+    const d = time
+      .slice(0, 10)
+      .split("-")
+      .join("/");
+    const hour = parseInt(time.slice(11, 13)) - 12;
+    if (hour < 0) {
+      return `${d}, ${time.slice(11)} AM`;
+    } else if (hour < 10) {
+      return `${d}, 0${hour}${time.slice(13)} PM`;
+    } else {
+      return `${d}, ${hour}${time.slice(13)} PM`;
+    }
+  }
 
   //==== create Array for each data set ===
   createArray() {
@@ -228,9 +225,9 @@ class App extends Component {
           oilLevel = {this.state.oilLevel}
           choke = {this.state.choke}
           // gasGravity = {this.state.gasGravity}
-          // oilGravity = {this.state.oilGravity}
-          // shrinkage = {this.state.shrinkage}
-          // chlorides = {this.state.chlorides}
+          oilGravity = {this.state.oilGravity}
+          shrinkage = {this.state.shrinkage}
+          chlorides = {this.state.chlorides}
         />
         {/* <Gauge
           level_w={level_w}

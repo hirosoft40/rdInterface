@@ -70,7 +70,8 @@ function MainGraph(props) {
 
         <Col xs={12} sm={12} md={2} lg={2}>
           {/* <Adjusters/> */}
-          < Assumptions />
+          < Assumptions 
+          />
         </Col>
       </Row>
       
