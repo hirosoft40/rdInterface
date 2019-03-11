@@ -8,11 +8,10 @@ import "./MainGraph.css";
 import { Grid, Row, Col } from "react-flexbox-grid";
 // import LiquidGauge from "../Gauge/LiquidGauge";
 import PlotCore from '../Plot/Plot'
-import Adjusters from '../Modal/Adjusters'
-import Assumptions from '../Modal/Assumptions'
 import moment from 'moment';
 
 function MainGraph(props) {
+  console.log(props)
   return (
     // FLEXBOX GRID
     <Grid fluid className="grid">
@@ -69,9 +68,7 @@ function MainGraph(props) {
         </Col>
 
         <Col xs={12} sm={12} md={2} lg={2}>
-          {/* <Adjusters/> */}
-          < Assumptions 
-          />
+
         </Col>
       </Row>
       

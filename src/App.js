@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import "./App.css";
 import Gauge from "./components/Gauge/Gauge";
 import MainGraph from "./components/Graph/MainGraph";
+import Assumptions from './components/Modal/Assumptions'
 
 // Initializing variables (with definition and index)
 let dtime = [], // time (x coordinates)
@@ -86,7 +87,7 @@ class App extends Component {
 
     exampleSocket.addEventListener('open', function (event) {
       console.log('Hello Server!')
-      exampleSocket.send('{"message":"AddRequests","requests":[{"uri":"Server:9664_FBM_(A).Flowback","mode":"backfill","p1":"1000","transaction":1,"order":"collected"}]}')
+      exampleSocket.send('{"message":"AddRequests","requests":[{"uri":"Server:9664_FBM_(A).Flowback","mode":"backfill","p1":"100","transaction":1,"order":"collected"}]}')
     })
 
     // ***SIMPLE CALL***
@@ -154,9 +155,7 @@ class App extends Component {
       cumWater.push(vals[9]);
       cumOil.push(vals[10]);
       gasPrevint.push(vals[11]);
-      level_w.push(vals[12]);
       waterLevel.push(vals[12])
-      level_o.push(vals[13]);
       oilLevel.push(vals[13])
       vol_w.push(vals[14]);
       vol_o.push(vals[15]);
@@ -207,6 +206,12 @@ class App extends Component {
     return (
       <div>
         <h1>{this.state.errorMessage}</h1>
+        <Assumptions 
+          chokeSize = {this.state.choke}
+          oilGravity = {this.state.oilGravity}
+          oilShrinkage = {this.state.shrinkage}
+          waterChlorides = {this.state.chlorides}
+        />
         <MainGraph
           dtime = {this.state.dtime}
           pAnn = {this.state.pAnn}
@@ -225,9 +230,6 @@ class App extends Component {
           oilLevel = {this.state.oilLevel}
           choke = {this.state.choke}
           // gasGravity = {this.state.gasGravity}
-          oilGravity = {this.state.oilGravity}
-          shrinkage = {this.state.shrinkage}
-          chlorides = {this.state.chlorides}
         />
         {/* <Gauge
           level_w={level_w}
