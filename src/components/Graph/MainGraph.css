@@ -7,7 +7,8 @@
 
 .colCard {
   display: flex;
-  justify-content: flex-start;
+  flex-wrap: wrap;
+  justify-content: center;
   align-content: center;
   margin: 10px !important;
 }
@@ -26,8 +27,9 @@
 .mainCard {
   /* background-color: var(--main-color) !important; */
   background-color: #212121c1 !important; /* Jean */
+  /* display: flex; */
   margin: 10px !important;
-  height: 480px;
-  /* width: 500px; */
+  height: 490px;
+  /* min-width: 370px; */
   
 }
