@@ -57,6 +57,11 @@ class PlotCore extends React.Component {
 
                     //Margins Titles
                     xaxis: {title: '', //This holds the time label which we don't need
+                            titlefont: {
+                                family: 'Arial, sans-serif',
+                                size: 15,
+                                color: 'white'
+                            },
                             autorange: true,
                             showgrid: true,
                             gridcolor: '#555555',
@@ -67,6 +72,7 @@ class PlotCore extends React.Component {
                             // Read https://plot.ly/javascript/reference/#layout-xaxis-tick0
 
                     yaxis: {title: this.props.yaxis1,
+                            rangemode: 'tozero',
                             titlefont: {
                                 family: 'Arial, sans-serif',
                                 size: 15,
@@ -91,6 +97,7 @@ class PlotCore extends React.Component {
                             },
 
                     yaxis2: {title: this.props.yaxis2,
+                        rangemode: 'tozero',
                             titlefont: {
                                 family: 'Arial, sans-serif',
                                 size: 15,
