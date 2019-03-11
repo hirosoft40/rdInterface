@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-// import Graph from "./components/Graph/Graph";
 import "./App.css";
 import MainGraph from "./components/Graph/MainGraph";
-import EnhancedTable from "./components/Tables/EnhancedTable";
+import Assumptions from './components/Modal/Assumptions'
 
+// Initializing variables (with definition and index)
 let dtime = [], // time (x coordinates)
   pAnn = [], // annular pressure (0)
   pWH = [], // wellhead pressure (1)
@@ -28,141 +28,153 @@ let dtime = [], // time (x coordinates)
   chlorides = []; // chlorides (20)
 
 class App extends Component {
-  // constructor(props) {
-  //   super(props);
+  constructor(props) {
+    super(props);
 
-  //   this.state = {
-  //     header: [],
-  //     figures: [],
-  //     errorMessage: "",
-  //     waterLevel: 0,
-  //     oilLevel: 0,
-  //     vol_w_val: 0,
-  //     vol_o_val: 0
-  //   };
-  //   this.connectToApi = this.connectToApi.bind(this);
-  //   this.createArray = this.createArray.bind(this);
-  // }
+    this.state = {
+      header: [],
+      figures: [], 
+      errorMessage: "",
+      dtime: [],
+      pAnn: [], 
+      pWH: [], 
+      pDS: [], 
+      pSep: [],
+      pDiff: [],
+      gasTemp: [],
+      gasRate: [],
+      waterRate: [],
+      oilRate: [],
+      cumWater: [],
+      cumOil: [],
+      gasPrevint: [],
+      level_w_val: 0,
+      waterLevel: [],
+      level_o_val: 0,
+      oilLevel: [],
+      vol_w_val: 0,
+      vol_o_val: 0,
+      choke: [],
+      gasGravity: [],
+      oilGravity: [],
+      shrinkage: [],
+      chlorides: []
+    };
+    this.connectToApi = this.connectToApi.bind(this);
+    this.createArray = this.createArray.bind(this);
+  }
 
-  // //=== API CALL =====
-  // connectToApi() {
-  //   var exampleSocket = new WebSocket("ws://rdsfastrack.com/backend/", [
-  //     "com.campbellsci.webdata"
-  //   ]);
+  //=== API CALL =====
+  connectToApi() {
+    var exampleSocket = new WebSocket("ws://rdsfastrack.com/backend/", [
+      "com.campbellsci.webdata"
+    ]);
 
-  //   exampleSocket.addEventListener("open", event => {
-  //     console.log("Hello Server!");
-  //     exampleSocket.send(
-  //       '{"message":"AddRequests","requests":[{"uri":"Server:9664_FBM_(A).Flowback","mode":"backfill","p1":"7200","transaction":1,"order":"collected"}]}'
-  //     );
-  //   });
+    exampleSocket.addEventListener("open", event => {
+      console.log("Hello Server!");
+      exampleSocket.send(
+        '{"message":"AddRequests","requests":[{"uri":"LNDB:8782_Flowback","mode":"most-recent","p1":"1000","transaction":1,"order":"collected"}]}'
+      );
+    });
 
-  //   // ***SIMPLE CALL***
-  //   exampleSocket.addEventListener("message", async mEvent => {
-  //     const results = await JSON.parse(mEvent.data);
-  //     if (!results) {
-  //       console.log("Nothing returned from API. results:", results);
-  //       this.setState({
-  //         errorMessage:
-  //           "Unable to get the real time data. Please contact system team."
-  //       });
-  //       return;
-  //     }
-  //     console.log("results", results);
-  //     if (results.message === "RequestRecords") {
-  //       // === setting data information ===
-  //       this.setState({
-  //         figures: results.records.data
-  //       });
-  //     } else {
-  //       // === setting header info ===
-  //       this.setState({
-  //         header: results.head.fields
-  //       });
-  //     }
-  //     this.createArray();
-  //   });
-  // }
-  // // ====  END ===
+    exampleSocket.addEventListener('open', function (event) {
+      console.log('Hello Server!')
+      exampleSocket.send('{"message":"AddRequests","requests":[{"uri":"Server:9664_FBM_(A).Flowback","mode":"backfill","p1":"100","transaction":1,"order":"collected"}]}')
+    })
+  }
+  //==== create Array for each data set ===
+  createArray() {
+    let curArr = [...this.state.figures];
 
-  // //==== create Array for each data set ===
-  // createArray() {
-  //   let curArr = [...this.state.figures];
-  //   // console.log(this.state.figures);
-  //   const gaugeData = curArr.forEach(item => {
-  //     const { time, vals } = item;
-  //     // console.log("item", item);
-  //     // dtime.push(this.getTimeFormat(time));
-  //     dtime.push(time);
-  //     pAnn.push(vals[0]);
-  //     pWH.push(vals[1]);
-  //     pDS.push(vals[2]);
-  //     pSep.push(vals[3]);
-  //     pDiff.push(vals[4]);
-  //     gasTemp.push(vals[5]);
-  //     gasRate.push(vals[6]);
-  //     waterRate.push(vals[7]);
-  //     oilRate.push(vals[8]);
-  //     cumWater.push(vals[9]);
-  //     cumOil.push(vals[10]);
-  //     gasPrevint.push(vals[11]);
-  //     waterLevel.push(vals[12]);
-  //     oilLevel.push(vals[13]);
-  //     vol_w.push(vals[14]);
-  //     vol_o.push(vals[15]);
-  //     choke.push(vals[16]);
-  //     gasGravity.push(vals[17]);
-  //     oilGravity.push(vals[18]);
-  //     shrinkage.push(vals[19]);
-  //     chlorides.push(vals[20]);
+    const data = curArr.forEach(item => {
+      const { time, vals } = item;
+      dtime.push(time);
+      pAnn.push(vals[0]);
+      pWH.push(vals[1]);
+      pDS.push(vals[2]);
+      pSep.push(vals[3]);
+      pDiff.push(vals[4]);
+      gasTemp.push(vals[5]);
+      gasRate.push(vals[6]);
+      waterRate.push(vals[7]);
+      oilRate.push(vals[8]);
+      cumWater.push(vals[9]);
+      cumOil.push(vals[10]);
+      gasPrevint.push(vals[11]);
+      waterLevel.push(vals[12])
+      oilLevel.push(vals[13])
+      vol_w.push(vals[14]);
+      vol_o.push(vals[15]);
+      choke.push(vals[16]);
+      gasGravity.push(vals[17]);
+      oilGravity.push(vals[18]);
+      shrinkage.push(vals[19]);
+      chlorides.push(vals[20]);
 
-  //     this.setState({
-  //       waterLevel: vals[12],
-  //       oilLevel: vals[13],
-  //       vol_w_val: vals[14],
-  //       vol_o_val: vals[15]
-  //     });
-  //   });
-  //   // console.log("gaugeData", level_o);
-  //   return gaugeData;
-  // }
 
-  // componentDidMount() {
-  //   this.connectToApi();
-  // }
+      this.setState({
+        dtime: dtime,
+        pAnn: pAnn,
+        pWH: pWH,
+        pDS: pDS,
+        pSep: pSep,
+        pDiff: pDiff,
+        gasTemp: gasTemp,
+        gasRate: gasRate,
+        waterRate: waterRate,
+        oilRate: oilRate,
+        cumWater: cumWater,
+        cumOil: cumOil,
+        gasPrevint: gasPrevint,
+        level_w_val: vals[12],
+        waterLevel: waterLevel,
+        level_o_val: vals[13],
+        oilLevel: oilLevel,
+        vol_w_val: vals[14],
+        vol_o_val: vals[15],
+        choke: choke,
+        gasGravity: gasGravity,
+        oilGravity: oilGravity,
+        shrinkage: shrinkage,
+        chlorides: chlorides      
+      }) // end of setting state
+
+    });
+    return data;
+  } // end of createArray function
+
+  componentDidMount() {
+    this.connectToApi();
+  }
 
   render() {
     return (
       <div>
         <h1>{this.state.errorMessage}</h1>
-        {/* <MainGraph
-          pAnn={this.pAnn}
-          pWH={this.pWH}
-          pDS={this.pDS}
-          pSep={this.pSep}
-          pDiff={this.pDiff}
-          gasTemp={this.gasTemp}
-          gasRate={this.gasRate}
-          waterRate={this.waterRate}
-          oilRate={this.oilRate}
-          // cumWater = {this.cumWater}
-          // cumOil = {this.cumOil}
-          // gasPrevint = {this.gasPrevint}
-          waterLevel={this.waterLevel}
-          oilLevel={this.oilLevel}
-          choke={this.choke}
-          // gasGravity = {this.gasGravity}
-          oilGravity={this.oilGravity}
-          shrinkage={this.shrinkage}
-          chlorides={this.chlorides}
-          level_w={this.state.waterLevel}
-          level_o={this.state.oilLevel}
-          vol_w={this.state.vol_w_val}
-          vol_o={this.state.vol_o_val}
-        /> */}
-
-        <EnhancedTable
-        // finalData={this.state.finalData} header={this.state.header}
+        <Assumptions 
+          chokeSize = {this.state.choke}
+          oilGravity = {this.state.oilGravity}
+          oilShrinkage = {this.state.shrinkage}
+          waterChlorides = {this.state.chlorides}
+        />
+        <MainGraph
+          dtime = {this.state.dtime}
+          pAnn = {this.state.pAnn}
+          pWH = {this.state.pWH}
+          pDS = {this.state.pDS}
+          pSep = {this.state.pSep}
+          pDiff = {this.state.pDiff}
+          gasTemp = {this.state.gasTemp}
+          gasRate = {this.state.gasRate}
+          waterRate = {this.state.waterRate}
+          oilRate = {this.state.oilRate}
+          // cumWater = {this.state.cumWater}
+          // cumOil = {this.state.cumOil}
+          // gasPrevint = {this.state.gasPrevint}
+          waterLevel = {this.state.waterLevel}
+          oilLevel = {this.state.oilLevel}
+          choke = {this.state.choke}
+          // gasGravity = {this.state.gasGravity}
         />
       </div>
     );
