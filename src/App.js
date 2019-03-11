@@ -19,8 +19,8 @@ let dtime = [], // time (x coordinates)
   gasPrevint = [], // gasPrevint (11)
   waterLevel = [], // water level(12)
   oilLevel = [], // oil level (13)
-  vol_w = [], // water volume (14)
-  vol_o = [], // oil volume (15)
+  waterVolume = [], // water volume (14)
+  oilVolume = [], // oil volume (15)
   choke = [], // choke (16)
   gasGravity = [], // gas gravity (17)
   oilGravity = [], // oil gravity (18)
@@ -48,12 +48,10 @@ class App extends Component {
       cumWater: [],
       cumOil: [],
       gasPrevint: [],
-      level_w_val: 0,
       waterLevel: [],
-      level_o_val: 0,
       oilLevel: [],
-      vol_w_val: 0,
-      vol_o_val: 0,
+      waterVolume: [],
+      oilVolume: [],
       choke: [],
       gasGravity: [],
       oilGravity: [],
@@ -70,17 +68,41 @@ class App extends Component {
       "com.campbellsci.webdata"
     ]);
 
-    exampleSocket.addEventListener("open", event => {
-      console.log("Hello Server!");
-      exampleSocket.send(
-        '{"message":"AddRequests","requests":[{"uri":"LNDB:8782_Flowback","mode":"most-recent","p1":"1000","transaction":1,"order":"collected"}]}'
-      );
-    });
-
     exampleSocket.addEventListener('open', function (event) {
       console.log('Hello Server!')
       exampleSocket.send('{"message":"AddRequests","requests":[{"uri":"Server:9664_FBM_(A).Flowback","mode":"backfill","p1":"100","transaction":1,"order":"collected"}]}')
     })
+
+    // Real-time Data Call
+    exampleSocket.addEventListener("message", async mEvent => {
+      const results = await JSON.parse(mEvent.data);
+      if (!results) {
+        console.log("Nothing returned from API. results:", results);
+        this.setState({
+          errorMessage:
+            "Unable to get the real time data. Please contact system team."
+        });
+        return;
+      }
+      console.log("results", results);
+      if (results.message === "RequestRecords") {
+        // setting data information
+        this.setState({
+          figures: results.records.data
+        });
+      } else {
+        // setting header info
+        this.setState({
+          header: results.head.fields
+        });
+      }
+      this.createArray();
+    });
+
+
+
+
+
   }
   //==== create Array for each data set ===
   createArray() {
@@ -103,8 +125,8 @@ class App extends Component {
       gasPrevint.push(vals[11]);
       waterLevel.push(vals[12])
       oilLevel.push(vals[13])
-      vol_w.push(vals[14]);
-      vol_o.push(vals[15]);
+      waterVolume.push(vals[14]);
+      oilVolume.push(vals[15]);
       choke.push(vals[16]);
       gasGravity.push(vals[17]);
       oilGravity.push(vals[18]);
@@ -126,12 +148,10 @@ class App extends Component {
         cumWater: cumWater,
         cumOil: cumOil,
         gasPrevint: gasPrevint,
-        level_w_val: vals[12],
         waterLevel: waterLevel,
-        level_o_val: vals[13],
         oilLevel: oilLevel,
-        vol_w_val: vals[14],
-        vol_o_val: vals[15],
+        waterVolume: waterVolume,
+        oilVolume: oilVolume,
         choke: choke,
         gasGravity: gasGravity,
         oilGravity: oilGravity,
@@ -173,6 +193,8 @@ class App extends Component {
           // gasPrevint = {this.state.gasPrevint}
           waterLevel = {this.state.waterLevel}
           oilLevel = {this.state.oilLevel}
+          waterVolume = {this.state.waterVolume}
+          oilVolume = {this.state.oilVolume}
           choke = {this.state.choke}
           // gasGravity = {this.state.gasGravity}
         />

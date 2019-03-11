@@ -69,17 +69,17 @@ function MainGraph(props) {
 
         <Col xs={12} sm={12} md={2} lg={2}>
         <h3>Water Tank 1</h3>
-          <LiquidGauge  val = {props.level_w}
+          <LiquidGauge  val = {props.waterLevel[props.waterLevel.length -1]}
                         name = {'Water Level'}
                         unit ={"in"}/>
-          <LiquidGauge  val = {props.vol_w}
+          <LiquidGauge  val = {props.waterVolume[props.waterVolume.length -1]}
                         name = {'Water Volume'}
                         unit ={"bbl"}/>
           <h4>Oil Tank 1</h4>                        
-          <LiquidGauge  val = {props.level_o}
+          <LiquidGauge  val = {props.oilLevel[props.oilLevel.length -1]}
                         name = {'Oil Level'}
                         unit ={"in"}/>
-          <LiquidGauge  val = {props.vol_o}
+          <LiquidGauge  val = {props.oilVolume[props.oilVolume.length -1]}
                         name = {'Oil Volume'}
                         unit ={"bbl"}/>
         </Col>
