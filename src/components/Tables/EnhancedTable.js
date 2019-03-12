@@ -309,6 +309,10 @@ class EnhancedTable extends React.Component {
       const time = item.time;
       console.log(time)
       // let time = moment(item.time).format("L_LTS");
+
+
+    
+
       this.setState({
         tableData: [time, ...item.vals]
 
@@ -374,6 +378,8 @@ class EnhancedTable extends React.Component {
     const emptyRows =
       rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
 
+
+
     return (
       <Paper className={classes.root}>
         <EnhancedTableToolbar numSelected={selected.length} tableData={tableData} />
@@ -391,6 +397,7 @@ class EnhancedTable extends React.Component {
               {stableSort(data, getSorting(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(n => {
+                  console.log(n)
                   console.log("n",n)
                   const isSelected = this.isSelected(n.id);
                   return (

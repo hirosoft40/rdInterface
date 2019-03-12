@@ -78,10 +78,10 @@ function MainGraph(props) {
                 }
                 plotvalue3x={props.dtime}
                 plotvalue3y={props.waterRate}
-                plotparam4
+                plotparam4 = {"Cum Water: " +  props.cumWater[props.cumWater.length -1]} 
                 plotvalue4x
                 plotvalue4y
-                plotparam5
+                plotparam5 = {"Cum Oil: " +  props.cumOil[props.cumOil.length -1]} 
                 plotvalue5x
                 plotvalue5y
               />

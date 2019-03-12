@@ -202,8 +202,8 @@ class App extends Component {
           gasRate = {this.state.gasRate}
           waterRate = {this.state.waterRate}
           oilRate = {this.state.oilRate}
-          // cumWater = {this.state.cumWater}
-          // cumOil = {this.state.cumOil}
+          cumWater = {this.state.cumWater}
+          cumOil = {this.state.cumOil}
           // gasPrevint = {this.state.gasPrevint}
           waterLevel = {this.state.waterLevel}
           oilLevel = {this.state.oilLevel}
