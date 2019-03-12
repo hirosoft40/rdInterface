@@ -24,6 +24,7 @@ function MainGraph(props) {
       <Row className="gridRow">
         {/* PRESSURE VS CHOKE PLOT */}
         <Col xs={12} sm={12} md={6} lg={6}>
+        <div className='plotTitle'>Pressure over Time based on Choke Size</div>
           <Card className="mainCard">
             <CardContent>
               <PlotCore
@@ -57,10 +58,11 @@ function MainGraph(props) {
 
         {/* GAS, OIL & WATER RATE */}
         <Col xs={12} sm={12} md={6} lg={6}>
+        <div className='plotTitle'>Oil / Water / Gas Rate</div>
           <Card className="mainCard">
             <CardContent>
               <PlotCore
-                yaxis1="Gas mfcd / Oil bpd / Water bpd "
+                yaxis1="Gas (mfcd) / Oil (bpd) / Water (bpd)"
                 yaxis1range={[0, 10000]}
                 yaxis2="" // Doesn't need 2nd one
                 plotparam1={
@@ -90,7 +92,7 @@ function MainGraph(props) {
           </Card>
         </Col>
 
-        <Col xs={12} sm={12} md={2} lg={2}>
+        {/* <Col xs={12} sm={12} md={2} lg={2}>
           <h3>Water Tank 1</h3>
           <LiquidGauge
             val={waterLevel}
@@ -117,7 +119,7 @@ function MainGraph(props) {
             name={"Oil Volume"}
             unit={"bbl"}
           />
-        </Col>
+        </Col> */}
       </Row>
 
       {/* SECOND ROW */}
@@ -193,6 +195,43 @@ function MainGraph(props) {
                         name = {'Water Level'}/>
         </Col> */}
       </Row>
+
+      {/* ROW OF GAUGES */}
+      <Row>
+        <Col xs={12} sm={12} md={6} lg={6} className='gaugeColumn'>
+            {/* <h3>Water Tank</h3> */}
+            <LiquidGauge
+              val={waterLevel}
+              key={waterLevel}
+              name={"Water Level"}
+              unit={"in"}
+            />
+            <LiquidGauge
+              val={waterVolume}
+              key={waterVolume}
+              name={"Water Volume"}
+              unit={"bbl"}
+            />
+        </Col>
+
+        <Col xs={12} sm={12} md={6} lg={6} className='gaugeColumn'>
+          {/* <h3>Oil Tank</h3> */}
+          <LiquidGauge
+            val={oilLevel}
+            key={oilLevel}
+            name={"Oil Level"}
+            unit={"in"}
+          />
+          <LiquidGauge
+            val={oilVolume}
+            key={oilVolume}
+            name={"Oil Volume"}
+            unit={"bbl"}
+          />
+        </Col>
+      </Row>
+
+
     </Grid>
   );
 }

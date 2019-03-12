@@ -12,6 +12,7 @@ import { color } from "d3-color";
 import { interpolateRgb } from "d3-interpolate";
 import React, { Component } from "react";
 import LiquidFillGauge from "react-liquid-gauge";
+import './LiquidGauge.css'
 
 class LiquidGauge extends Component {
   // static getDerivedStateFromProps(props, current_state) {
@@ -78,7 +79,7 @@ class LiquidGauge extends Component {
 
     return (
       <div>
-        <div style={{ color: "white", textAlign: "center" }}>
+        <div className = 'gaugeLabel'>
           {this.state.name}
         </div>
         <LiquidFillGauge

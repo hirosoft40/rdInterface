@@ -25,11 +25,22 @@
 }
 
 .mainCard {
-  /* background-color: var(--main-color) !important; */
   background-color: #212121c1 !important; /* Jean */
-  /* display: flex; */
   margin: 10px !important;
   height: 490px;
-  /* min-width: 370px; */
-  
+}
+
+.gaugeColumn {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.plotTitle{
+  color: white;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: lighter;
+  font-size: 14px;
 }
