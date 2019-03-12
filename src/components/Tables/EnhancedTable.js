@@ -320,10 +320,10 @@ class EnhancedTable extends React.Component {
 
   // ====== CREATE Array DATA SET FOR TABLE AND CSV ========
   createTableData() {
-    const finalData = this.state.data.map(item => {
+    const finalData = this.state.data.map((item, idx) => {
       let time = moment(item.time).format("L_LTS");
       this.setState({
-        tableData: [time, ...item.vals]
+        tableData: {...idx,time, ...item.vals}
       });
     });
   }

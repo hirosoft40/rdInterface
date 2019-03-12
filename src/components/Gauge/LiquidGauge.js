@@ -14,16 +14,6 @@ import React, { Component } from "react";
 import LiquidFillGauge from "react-liquid-gauge";
 
 class LiquidGauge extends Component {
-  // static getDerivedStateFromProps(props, current_state) {
-  //   if (current_state.value !== props.value) {
-  //     return {
-  //       value: props.value,
-  //       computed_prop: heavy_computation(props.value)
-  //     }
-  //   }
-  //   return null
-  // }
-
   state = {
     value: 0,
     name: "",
@@ -40,12 +30,6 @@ class LiquidGauge extends Component {
       unit: this.props.unit
     });
   }
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (this.props.value !== prevProps.val) {
-  //     this.setState({ value: this.props.val });
-  //   }
-  // }
 
   render() {
     const radius = 68;
@@ -76,6 +60,7 @@ class LiquidGauge extends Component {
       }
     ];
 
+    //=== display data ====
     return (
       <div>
         <div style={{ color: "white", textAlign: "center" }}>
@@ -131,24 +116,10 @@ class LiquidGauge extends Component {
             fill: color("#fff").toString(),
             fontFamily: "Arial"
           }}
-          // onClick={() => {
-          //   this.setState({ value: this.state.val });
-          // }}
         />
-        {/* <div>
-          {this.props.name}
-          <button
-                        type="button"
-                        className="btn btn-default btn-block"
-                        onClick={() => {
-                            this.setState({ value: Math.random() * 100 });
-                        }}
-                    >
-                        Refresh
-                    </button> 
-        </div> */}
       </div>
     );
+    //===== end =====
   }
 }
 
