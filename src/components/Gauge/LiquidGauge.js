@@ -3,9 +3,7 @@
 // react-liquid-gauge : https://github.com/trendmicro-frontend/react-liquid-gauge
 // Data IN: props value of Water Level, Volume and Oil Level, Volume
 // Data OUT: n/a (display only)
-// 3/8 TODO:
-//    (1) Test with real data.
-//    (2) Check: data unit. What to display and decimal points?
+// Liquid gauge change color % for 104inch and 500bbl
 //==============
 
 import { color } from "d3-color";
@@ -32,9 +30,11 @@ class LiquidGauge extends Component {
   }
 
   render() {
+    const maxValue = this.state.unit === "in" ? 104 : 500;
+    const percentValue = (this.state.value / maxValue) * 100;
     const radius = 68;
     const interpolate = interpolateRgb(this.startColor, this.endColor);
-    const fillColor = interpolate(this.state.value / 100);
+    const fillColor = interpolate(this.state.value / maxValue);
     const gradientStops = [
       {
         key: "0%",
@@ -70,8 +70,10 @@ class LiquidGauge extends Component {
           style={{ margin: "0 auto" }}
           width={radius * 2}
           height={radius * 2}
-          value={this.props.val}
+          value={this.props.val }
+          // value={percentValue}
           percent={this.state.unit}
+          // percent="%"
           textSize={1}
           textOffsetX={0}
           textOffsetY={0}
