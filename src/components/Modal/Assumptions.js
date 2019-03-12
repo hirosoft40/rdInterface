@@ -25,6 +25,9 @@ export default class Assumptions extends React.Component {
           errorMsg: "",
           errorBln: false
         };
+
+        this.handleSubmit = this.handleSubmit.bind(this);
+
       }
 
       
@@ -43,6 +46,7 @@ export default class Assumptions extends React.Component {
   // Submitting information to the backend
   handleSubmit=(e) => {
     // insert call to submit data to backend
+    // POST Method here**
     
 
     e.PreventDefault();
@@ -84,116 +88,119 @@ export default class Assumptions extends React.Component {
         
         {/* <Button style={{color: '#f4cd00'}} variant="outlined" onClick={this.handleClickOpen}>
         Assumptions
-        </Button> */}
-        
-        <Dialog
-            open={this.state.open}
-            onClose={this.handleClose}
-            aria-labelledby="form-dialog-title"
-            maxWidth = {'sm'}
-        >
-        <DialogTitle id="form-dialog-title">Assumptions</DialogTitle>
-        <DialogContent>
-            <DialogContentText>
-            Update the assumptions and information below to populate the graphs
-            </DialogContentText>
+    </Button> */}
+
+        <form onSubmit = {this.handleSubmit}> 
+          <Dialog
+              open={this.state.open}
+              onClose={this.handleClose}
+              aria-labelledby="form-dialog-title"
+              maxWidth = {'sm'}
+          >
+          <DialogTitle id="form-dialog-title">Assumptions</DialogTitle>
+          <DialogContent>
+              <DialogContentText>
+              Update the assumptions and information below to populate the graphs
+              </DialogContentText>
 
 
 
-            <TextField
-                autoFocus
-                margin="dense"
-                id="chokeSize"
-                label={"Current Choke Size: " + this.props.chokeSize[this.props.chokeSize.length -1]}
-                type="number"
-                value = {0}
-                onChange = {this.handleChange("chokeSize")}
-                defaultValue={0}
-                InputProps={{ inputProps: { min: 0 } }}
-                fullWidth
-            />
-            <TextField
-                autoFocus
-                margin="dense"
-                id="oilGravity"
-                label={"Currrent Oil Gravity: " + this.props.oilGravity[this.props.oilGravity.length -1]}
-                type="number"
-                value = {this.state.oilGravity}
-                onChange={this.handleChange("oilGravity")}
-                defaultValue={0}
-                InputProps={{ inputProps: { min: 0 } }}
-                fullWidth
-            />
-            <TextField
-                autoFocus
-                margin="dense"
-                id="oilShrinkage"
-                label={"Current Oil Shrinkage: " + this.props.oilShrinkage[this.props.oilShrinkage.length -1]}
-                type="number"
-                value = {this.state.oilShrinkage}
-                onChange={this.handleChange("oilShrinkage")}
-                defaultValue={0}
-                InputProps={{ inputProps: { min: 0 } }}
-                fullWidth
-            />
-            <TextField
-                autoFocus
-                margin="dense"
-                id="waterChlorides"
-                label={"Current Water Chlorides: " + this.props.waterChlorides[this.props.waterChlorides.length -1]}
-                type="number"
-                value = {this.state.waterChlorides}
-                onChange={this.handleChange("waterChlorides")}
-                defaultValue={0}
-                InputProps={{ inputProps: { min: 0 } }}
-                fullWidth
-            />
-            <TextField
-                autoFocus
-                margin="dense"
-                id="plateSize"
-                label="Plate Size"
-                type="number"
-                value = {this.state.plateSize}
-                onChange={this.handleChange("plateSize")}
-                defaultValue={0}
-                InputProps={{ inputProps: { min: 0 } }}
-                fullWidth
-            />
-            <TextField
-                autoFocus
-                margin="dense"
-                id="waterKFactorAdj"
-                label="Water K-Factor Adjustment"
-                type="number"
-                value={this.state.waterKFactorAdj}
-                onChange={this.handleChange("waterKFactorAdj")}
-                defaultValue={0}
-                InputProps={{ inputProps: { min: 0 } }}
-                fullWidth
-            />
-            <TextField
-                autoFocus
-                margin="dense"
-                id="oilKFactorAdj"
-                label="Oil K-Factor Adjustment"
-                type="number"
-                value={this.state.oilKFactorAdj}
-                onChange={this.handleChange("oilKFactorAdj")}
-                defaultValue={0}
-                InputProps={{ inputProps: { min: 0 } }}
-                fullWidth
-            />
-        </DialogContent>
-        <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
-                Cancel
-            </Button>
-            <Button onClick={this.handleSubmit} color="primary">
-                Update
-            </Button>
-        </DialogActions>
-        </Dialog>
+              <TextField
+                  autoFocus
+                  margin="dense"
+                  id="chokeSize"
+                  label={"Current Choke Size: " + this.props.chokeSize[this.props.chokeSize.length -1]}
+                  type="number"
+                  value = {0}
+                  onChange = {this.handleChange("chokeSize")}
+                  defaultValue={0}
+                  InputProps={{ inputProps: { min: 0 } }}
+                  fullWidth
+              />
+              <TextField
+                  autoFocus
+                  margin="dense"
+                  id="oilGravity"
+                  label={"Currrent Oil Gravity: " + this.props.oilGravity[this.props.oilGravity.length -1]}
+                  type="number"
+                  value = {this.state.oilGravity}
+                  onChange={this.handleChange("oilGravity")}
+                  defaultValue={0}
+                  InputProps={{ inputProps: { min: 0 } }}
+                  fullWidth
+              />
+              <TextField
+                  autoFocus
+                  margin="dense"
+                  id="oilShrinkage"
+                  label={"Current Oil Shrinkage: " + this.props.oilShrinkage[this.props.oilShrinkage.length -1]}
+                  type="number"
+                  value = {this.state.oilShrinkage}
+                  onChange={this.handleChange("oilShrinkage")}
+                  defaultValue={0}
+                  InputProps={{ inputProps: { min: 0 } }}
+                  fullWidth
+              />
+              <TextField
+                  autoFocus
+                  margin="dense"
+                  id="waterChlorides"
+                  label={"Current Water Chlorides: " + this.props.waterChlorides[this.props.waterChlorides.length -1]}
+                  type="number"
+                  value = {this.state.waterChlorides}
+                  onChange={this.handleChange("waterChlorides")}
+                  defaultValue={0}
+                  InputProps={{ inputProps: { min: 0 } }}
+                  fullWidth
+              />
+              <TextField
+                  autoFocus
+                  margin="dense"
+                  id="plateSize"
+                  label="Plate Size"
+                  type="number"
+                  value = {this.state.plateSize}
+                  onChange={this.handleChange("plateSize")}
+                  defaultValue={0}
+                  InputProps={{ inputProps: { min: 0 } }}
+                  fullWidth
+              />
+              <TextField
+                  autoFocus
+                  margin="dense"
+                  id="waterKFactorAdj"
+                  label="Water K-Factor Adjustment"
+                  type="number"
+                  value={this.state.waterKFactorAdj}
+                  onChange={this.handleChange("waterKFactorAdj")}
+                  defaultValue={0}
+                  InputProps={{ inputProps: { min: 0 } }}
+                  fullWidth
+              />
+              <TextField
+                  autoFocus
+                  margin="dense"
+                  id="oilKFactorAdj"
+                  label="Oil K-Factor Adjustment"
+                  type="number"
+                  value={this.state.oilKFactorAdj}
+                  onChange={this.handleChange("oilKFactorAdj")}
+                  defaultValue={0}
+                  InputProps={{ inputProps: { min: 0 } }}
+                  fullWidth
+              />
+          </DialogContent>
+          <DialogActions>
+              <Button onClick={this.handleClose} color="primary">
+                  Cancel
+              </Button>
+              <Button onClick={this.handleSubmit} color="primary">
+                  Update
+              </Button>
+          </DialogActions>
+          </Dialog>
+
+        </form>
     </div>
     );
     }

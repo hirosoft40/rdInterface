@@ -8,7 +8,6 @@ import "./MainGraph.css";
 import { Grid, Row, Col } from "react-flexbox-grid";
 import LiquidGauge from "../Gauge/LiquidGauge";
 import PlotCore from "../Plot/Plot";
-import moment from "moment";
 
 function MainGraph(props) {
   
