@@ -19,6 +19,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import { lighten } from "@material-ui/core/styles/colorManipulator";
 import { DownloadCSV } from "./DownloadCSV";
+import moment from 'moment';
 
 let counter = 0;
 function createData(name, calories, fat, carbs, protein) {
@@ -64,24 +65,9 @@ const rows = [
   { id: "Qw_bph", numeric: true, disablePadding: false, label: "bwph" },
   { id: "Qw_bpd", numeric: true, disablePadding: false, label: "bwpd" },
   { id: "Chlorides", numeric: true, disablePadding: false, label: "Chlorides" },
-  {
-    id: "Shrinkage",
-    numeric: true,
-    disablePadding: false,
-    label: "Protein (g)"
-  },
-  {
-    id: "Plate-Size",
-    numeric: true,
-    disablePadding: false,
-    label: "Plate-Size"
-  },
-  {
-    id: "Gas-Gravity",
-    numeric: true,
-    disablePadding: false,
-    label: "Gas-Gravity"
-  },
+  {id: "Shrinkage", numeric: true, disablePadding: false, label: "Protein (g)"},
+  { id: "Plate-Size",numeric: true, disablePadding: false, label: "Plate-Size"},
+  {id: "Gas-Gravity", numeric: true, disablePadding: false, label: "Gas-Gravity"},
   { id: "P_Sep", numeric: true, disablePadding: false, label: "Static-Press" },
   { id: "P_Diff", numeric: true, disablePadding: false, label: "Diff-Press" },
   { id: "T_g", numeric: true, disablePadding: false, label: "Temp" },
@@ -242,7 +228,7 @@ class EnhancedTable extends React.Component {
     super(props);
     this.state = {
       order: "asc",
-      orderBy: "timestamp",
+      orderBy: "time",
       selected: [],
       header: [],
       data: [],
@@ -321,8 +307,11 @@ class EnhancedTable extends React.Component {
   createTableData() {
     const finalData = this.state.data.map(item => {
       const time = item.time;
+      console.log(time)
+      // let time = moment(item.time).format("L_LTS");
       this.setState({
         tableData: [time, ...item.vals]
+
       });
     });
   }
@@ -416,9 +405,7 @@ class EnhancedTable extends React.Component {
                       <TableCell padding="checkbox">
                         <Checkbox checked={isSelected} />
                       </TableCell>
-                      <TableCell component="th" scope="row" padding="none">
-                        {n.name}
-                      </TableCell>
+                      <TableCell component="th" scope="row" padding="none">{n.name}</TableCell>
                       <TableCell align="right">{n.calories}</TableCell>
                       <TableCell align="right">{n.fat}</TableCell>
                       <TableCell align="right">{n.carbs}</TableCell>

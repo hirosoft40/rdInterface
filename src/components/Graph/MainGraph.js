@@ -24,16 +24,16 @@ function MainGraph(props) {
           <Card className="mainCard">
               <CardContent>
                   <PlotCore
-                  yaxis1 ='Pressure (PSI)'                                         yaxis1range = {[0,5000]} //Sets parameters from range to display on yaxis (left)
-                  yaxis2 ='Choke Size (64ths)'                                     yaxis2range = {[0,64]}  //Sets parameters for range to display on yaxis (right)
-                  plotparam1 = {'Annular: ' + props.pAnn[props.pAnn.length-1]}    plotvalue1x = {props.dtime}
-                                                                                  plotvalue1y = {props.pAnn}
-                  plotparam2 = {'Wellhead: ' + props.pWH[props.pWH.length-1]}     plotvalue2x = {props.dtime}
-                                                                                  plotvalue2y = {props.pWH}
-                  plotparam3 = {'DS of Choke: ' + props.pDS[props.pDS.length-1]}  plotvalue3x = {props.dtime}
-                                                                                  plotvalue3y = {props.pDS}
-                  plotparam4 = {'Separator: ' + props.pSep[props.pSep.length-1]}  plotvalue4x = {props.dtime}
-                                                                                  plotvalue4y = {props.pSep}
+                  yaxis1 ='Pressure (PSI)'                                                yaxis1range = {[0,5000]} //Sets parameters from range to display on yaxis (left)
+                  yaxis2 ='Choke Size (64ths)'                                            yaxis2range = {[0,64]}  //Sets parameters for range to display on yaxis (right)
+                  plotparam1 = {'Annular: ' + props.pAnn[props.pAnn.length-1]}            plotvalue1x = {props.dtime}
+                                                                                          plotvalue1y = {props.pAnn}
+                  plotparam2 = {'Wellhead: ' + props.pWH[props.pWH.length-1]}             plotvalue2x = {props.dtime}
+                                                                                          plotvalue2y = {props.pWH}
+                  plotparam3 = {'DS of Choke: ' + props.pDS[props.pDS.length-1]}          plotvalue3x = {props.dtime}
+                                                                                          plotvalue3y = {props.pDS}
+                  plotparam4 = {'Separator: ' + props.pSep[props.pSep.length-1]}          plotvalue4x = {props.dtime}
+                                                                                          plotvalue4y = {props.pSep}
                   plotparam5 = {'Choke Size: ' + props.choke[props.choke.length-1]}       plotvalue5x = {props.dtime}
                                                                                           plotvalue5y = {props.choke}
                                                                                           yaxis = 'y2' // This is to display choke values along the right y axis
