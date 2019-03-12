@@ -12,19 +12,82 @@ import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
-import Checkbox from "@material-ui/core/Checkbox";
-import IconButton from "@material-ui/core/IconButton";
+// import Checkbox from "@material-ui/core/Checkbox";
+// import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
-import DeleteIcon from "@material-ui/icons/Delete";
-import FilterListIcon from "@material-ui/icons/FilterList";
+// import DeleteIcon from "@material-ui/icons/Delete";
+// import FilterListIcon from "@material-ui/icons/FilterList";
 import { lighten } from "@material-ui/core/styles/colorManipulator";
 import { DownloadCSV } from "./DownloadCSV";
-import {moment} from 'moment';
+import moment from "moment";
 
 let counter = 0;
-function createData(name, calories, fat, carbs, protein) {
+function createdt(ele) {
+  return createData(
+    ele.time,
+    ele.vals[0],
+    ele.vals[1],
+    ele.vals[2],
+    ele.vals[3],
+    ele.vals[4],
+    ele.vals[5],
+    ele.vals[6],
+    ele.vals[7],
+    ele.vals[8],
+    ele.vals[9],
+    ele.vals[10],
+    ele.vals[11],
+    ele.vals[12],
+    ele.vals[13],
+    ele.vals[14],
+    ele.vals[15],
+    ele.vals[16],
+    ele.vals[17]
+  );
+}
+
+function createData(
+  time,
+  Choke,
+  P_WH,
+  P_Ann,
+  Qg_mcfh,
+  Qg_mcfd,
+  Qo_bph,
+  Qo_bpd,
+  Qw_bph,
+  Qw_bpd,
+  Chlorides,
+  Shrinkage,
+  Plate_Size,
+  Gas_Gravity,
+  P_Sep,
+  P_Diff,
+  T_g,
+  P_DS
+) {
   counter += 1;
-  return { id: counter, name, calories, fat, carbs, protein };
+  return {
+    id: counter,
+    time,
+    Choke,
+    P_WH,
+    P_Ann,
+    Qg_mcfh,
+    Qg_mcfd,
+    Qo_bph,
+    Qo_bpd,
+    Qw_bph,
+    Qw_bpd,
+    Chlorides,
+    Shrinkage,
+    Plate_Size,
+    Gas_Gravity,
+    P_Sep,
+    P_Diff,
+    T_g,
+    P_DS
+  };
 }
 
 function desc(a, b, orderBy) {
@@ -65,9 +128,19 @@ const rows = [
   { id: "Qw_bph", numeric: true, disablePadding: false, label: "bwph" },
   { id: "Qw_bpd", numeric: true, disablePadding: false, label: "bwpd" },
   { id: "Chlorides", numeric: true, disablePadding: false, label: "Chlorides" },
-  {id: "Shrinkage", numeric: true, disablePadding: false, label: "Protein (g)"},
-  { id: "Plate-Size",numeric: true, disablePadding: false, label: "Plate-Size"},
-  {id: "Gas-Gravity", numeric: true, disablePadding: false, label: "Gas-Gravity"},
+  { id: "Shrinkage", numeric: true, disablePadding: false, label: "Shrinkage" },
+  {
+    id: "Plate_Size",
+    numeric: true,
+    disablePadding: false,
+    label: "Plate-Size"
+  },
+  {
+    id: "Gas_Gravity",
+    numeric: true,
+    disablePadding: false,
+    label: "Gas-Gravity"
+  },
   { id: "P_Sep", numeric: true, disablePadding: false, label: "Static-Press" },
   { id: "P_Diff", numeric: true, disablePadding: false, label: "Diff-Press" },
   { id: "T_g", numeric: true, disablePadding: false, label: "Temp" },
@@ -92,11 +165,11 @@ class EnhancedTableHead extends React.Component {
       <TableHead>
         <TableRow>
           <TableCell padding="checkbox">
-            <Checkbox
+            {/* <Checkbox
               indeterminate={numSelected > 0 && numSelected < rowCount}
               checked={numSelected === rowCount}
               onChange={onSelectAllClick}
-            />
+            /> */}
           </TableCell>
           {rows.map(
             row => (
@@ -164,7 +237,7 @@ const toolbarStyles = theme => ({
 });
 
 let EnhancedTableToolbar = props => {
-  const { numSelected, classes, tableData } = props;
+  const { numSelected, classes, csvData } = props;
   return (
     <Toolbar
       className={classNames(classes.root, {
@@ -184,7 +257,7 @@ let EnhancedTableToolbar = props => {
       </div>
       <div className={classes.spacer} />
       <div className={classes.actions}>
-        <DownloadCSV tableData={tableData} />
+        <DownloadCSV csvData={csvData} />
         {/* {numSelected > 0 ? (
           <Tooltip title="Delete">
             <IconButton aria-label="Delete">
@@ -232,37 +305,13 @@ class EnhancedTable extends React.Component {
       selected: [],
       header: [],
       data: [],
+      finalData: [],
       page: 0,
       rowsPerPage: 5,
-      tableData: [] // for csv file
+      csvData: [] // for csv file
     };
     this.connectToTableApi = this.connectToTableApi.bind(this);
   }
-  // state = {
-  //   order: "asc",
-  //   orderBy: "calories",
-  //   selected: [],
-  //   header: [],
-  //   finaldata: [],
-  //   page: 0,
-  //   rowsPerPage: 5,
-  // data: [
-  //   createData("11/14/2018 1:00:00 PM", 305, 3.7, 67, 4.3),
-  //   createData("11/14/2018 1:00:00 PM", 452, 25.0, 51, 4.9),
-  //   createData("11/14/2018 1:00:00 PM", 262, 16.0, 24, 6.0),
-  //   createData("11/14/2018 1:00:00 PM", 159, 6.0, 24, 4.0),
-  //   createData("11/14/2018 1:00:00 PM", 356, 16.0, 49, 3.9),
-  //   createData("11/15/2018 1:00:00 PM", 408, 3.2, 87, 6.5),
-  //   createData("11/15/2018 1:00:00 PM", 237, 9.0, 37, 4.3),
-  //   createData("11/15/2018 1:00:00 PM", 375, 0.0, 94, 0.0),
-  //   createData("11/15/2018 1:00:00 PM", 518, 26.0, 100, 7.0),
-  //   createData("11/15/2018 1:00:00 PM", 392, 0.2, 98, 0.0),
-  //   createData("11/27/2018 1:00:00 PM", 318, 0, 81, 2.0),
-  //   createData("11/27/2018 1:00:00 PM", 360, 19.0, 9, 37.0),
-  //   createData("11/27/2018 1:00:00 PM", 437, 18.0, 63, 4.0)
-  // ]
-
-  //};
 
   componentDidMount() {
     this.connectToTableApi();
@@ -289,35 +338,69 @@ class EnhancedTable extends React.Component {
       if (results.message === "RequestRecords") {
         this.setState({
           data: results.records.data,
-          time: results.time
+          time: results.time,
+          finalData: this.state.finalData.concat(results.records.data)
         });
-        // console.log("finaldata:", this.state.data);
+        // console.log("finaldata:", this.state.finalData);
       } else {
         //seting header info
         this.setState({
           header: results.head.fields
         });
       }
-      this.createTableData();
+      this.createCSVData();
+      this.actualData(this.state.finalData);
     });
   }
   //===== API CALL END=====
 
-  // ====== CREATE Array DATA SET FOR TABLE AND CSV ========
-  createTableData() {
-    const finalData = this.state.data.map(item => {
-      const time = item.time;
-      console.log(time)
-      // let time = moment(item.time).format("L_LTS");
-
-
-    
-
-      this.setState({
-        tableData: [time, ...item.vals]
-
-      });
+  actualData(tabdata) {
+    // var dt=[];
+    var dt = tabdata.map(ele => {
+      //console.log(ele.time)
+      return createData(
+        moment(ele.time).format("L_LTS"),
+        ele.vals[0],
+        ele.vals[1],
+        ele.vals[2],
+        ele.vals[3],
+        ele.vals[4],
+        ele.vals[5],
+        ele.vals[6],
+        ele.vals[7],
+        ele.vals[8],
+        ele.vals[9],
+        ele.vals[10],
+        ele.vals[11],
+        ele.vals[12],
+        ele.vals[13],
+        ele.vals[14],
+        ele.vals[15],
+        ele.vals[16],
+        ele.vals[17]
+      );
+      //  dt.push(createdt(ele))
     });
+    // console.log("after push");
+    // console.log(dt[0]);
+    return dt;
+  } // end of function
+
+  // ====== CREATE Array DATA SET FOR TABLE AND CSV ========
+  createCSVData() {
+    let cdata = [];
+
+    const csvd = this.state.data.map(item => {
+      // console.log(time)
+      let time = moment(item.time).format("L_LTS");
+      cdata.push([time, ...item.vals]);
+    });
+    this.setState(
+      {
+        csvData: cdata
+      },
+      () => console.log(this.state.csvData)
+    );
   }
   //===============
 
@@ -372,9 +455,18 @@ class EnhancedTable extends React.Component {
   isSelected = id => this.state.selected.indexOf(id) !== -1;
 
   render() {
-    // console.log(this.props.finaldata);
+    // console.log(this.state.finaldata);
     const { classes } = this.props;
-    const { data, order, orderBy, selected, rowsPerPage, page, tableData } = this.state;
+    const fdata = this.actualData(this.state.finalData);
+    const {
+      data,
+      order,
+      orderBy,
+      selected,
+      rowsPerPage,
+      page,
+      csvData
+    } = this.state;
     const emptyRows =
       rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
 
@@ -382,7 +474,7 @@ class EnhancedTable extends React.Component {
 
     return (
       <Paper className={classes.root}>
-        <EnhancedTableToolbar numSelected={selected.length} tableData={tableData} />
+        <EnhancedTableToolbar numSelected={selected.length} csvData={csvData} />
         <div className={classes.tableWrapper}>
           <Table className={classes.table} aria-labelledby="tableTitle">
             <EnhancedTableHead
@@ -394,12 +486,11 @@ class EnhancedTable extends React.Component {
               rowCount={data.length}
             />
             <TableBody>
-              {stableSort(data, getSorting(order, orderBy))
+              {stableSort(fdata, getSorting(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(n => {
-                  console.log(n)
-                  console.log("n",n)
                   const isSelected = this.isSelected(n.id);
+                  // const time = moment(n.time).format("L_LTS");
                   return (
                     <TableRow
                       hover
@@ -411,41 +502,43 @@ class EnhancedTable extends React.Component {
                       selected={isSelected}
                     >
                       <TableCell padding="checkbox">
-                        <Checkbox checked={isSelected} />
+                        {/* <Checkbox checked={isSelected} /> */}
                       </TableCell>
-                      <TableCell component="th" scope="row" padding="none">{n.name}</TableCell>
-                      <TableCell align="right">{n.calories}</TableCell>
-                      <TableCell align="right">{n.fat}</TableCell>
-                      <TableCell align="right">{n.carbs}</TableCell>
-                      <TableCell align="right">{n.protein}</TableCell>
-                      <TableCell align="right">{n.protein}</TableCell>
-                      <TableCell align="right">{n.protein}</TableCell>
-                      <TableCell align="right">{n.protein}</TableCell>
-                      <TableCell align="right">{n.protein}</TableCell>
-                      <TableCell align="right">{n.protein}</TableCell>
-                      <TableCell align="right">{n.protein}</TableCell>
-                      <TableCell align="right">{n.protein}</TableCell>
-                      <TableCell align="right">{n.protein}</TableCell>
-                      <TableCell align="right">{n.protein}</TableCell>
-                      <TableCell align="right">{n.protein}</TableCell>
-                      <TableCell align="right">{n.protein}</TableCell>
-                      <TableCell align="right">{n.protein}</TableCell>
-                      <TableCell align="right">{n.protein}</TableCell>
+                      <TableCell component="th" scope="row" padding="none">
+                        {n.time}
+                      </TableCell>
+                      <TableCell align="right">{n.Choke}</TableCell>
+                      <TableCell align="right">{n.P_WH}</TableCell>
+                      <TableCell align="right">{n.P_Ann}</TableCell>
+                      <TableCell align="right">{n.Qg_mcfh}</TableCell>
+                      <TableCell align="right">{n.Qg_mcfd}</TableCell>
+                      <TableCell align="right">{n.Qo_bph}</TableCell>
+                      <TableCell align="right">{n.Qo_bpd}</TableCell>
+                      <TableCell align="right">{n.Qw_bph}</TableCell>
+                      <TableCell align="right">{n.Qw_bpd}</TableCell>
+                      <TableCell align="right">{n.Chlorides}</TableCell>
+                      <TableCell align="right">{n.Shrinkage}</TableCell>
+                      <TableCell align="right">{n.Plate_Size}</TableCell>
+                      <TableCell align="right">{n.Gas_Gravity}</TableCell>
+                      <TableCell align="right">{n.P_Sep}</TableCell>
+                      <TableCell align="right">{n.P_Diff}</TableCell>
+                      <TableCell align="right">{n.T_g}</TableCell>
+                      <TableCell align="right">{n.P_DS}</TableCell>
                     </TableRow>
                   );
                 })}
-              {emptyRows > 0 && (
+              {/* {emptyRows > 0 && (
                 <TableRow style={{ height: 49 * emptyRows }}>
                   <TableCell colSpan={6} />
                 </TableRow>
-              )}
+              )} */}
             </TableBody>
           </Table>
         </div>
         <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
+          rowsPerPageOptions={[5, 100, 200]}
           component="div"
-          count={data.length}
+          count={fdata.length} // changed fdata length
           rowsPerPage={rowsPerPage}
           page={page}
           backIconButtonProps={{
@@ -467,4 +560,3 @@ EnhancedTable.propTypes = {
 };
 
 export default withStyles(styles)(EnhancedTable);
-// export default EnhancedTable;

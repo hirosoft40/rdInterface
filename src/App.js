@@ -85,7 +85,7 @@ class App extends Component {
         });
         return;
       }
-      console.log("results", results);
+      // console.log("results", results);
       if (results.message === "RequestRecords") {
         // setting data information
         this.setState({
