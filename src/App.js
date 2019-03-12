@@ -76,7 +76,6 @@ class App extends Component {
       "com.campbellsci.webdata"
     ]);
 
-    // Static Data
     // exampleSocket.addEventListener("open", event => {
     //   console.log("Hello Server!");
     //   exampleSocket.send(
@@ -119,20 +118,20 @@ class App extends Component {
   }
   // ====  END ===
 
-  // getTimeFormat(time) {
-  //   const d = time
-  //     .slice(0, 10)
-  //     .split("-")
-  //     .join("/");
-  //   const hour = parseInt(time.slice(11, 13)) - 12;
-  //   if (hour < 0) {
-  //     return `${d}, ${time.slice(11)} AM`;
-  //   } else if (hour < 10) {
-  //     return `${d}, 0${hour}${time.slice(13)} PM`;
-  //   } else {
-  //     return `${d}, ${hour}${time.slice(13)} PM`;
-  //   }
-  // }
+  getTimeFormat(time) {
+    const d = time
+      .slice(0, 10)
+      .split("-")
+      .join("/");
+    const hour = parseInt(time.slice(11, 13)) - 12;
+    if (hour < 0) {
+      return `${d}, ${time.slice(11)} AM`;
+    } else if (hour < 10) {
+      return `${d}, 0${hour}${time.slice(13)} PM`;
+    } else {
+      return `${d}, ${hour}${time.slice(13)} PM`;
+    }
+  }
 
   //==== create Array for each data set ===
   createArray() {
@@ -227,9 +226,9 @@ class App extends Component {
           oilLevel = {this.state.oilLevel}
           choke = {this.state.choke}
           // gasGravity = {this.state.gasGravity}
-          // oilGravity = {this.state.oilGravity}
-          // shrinkage = {this.state.shrinkage}
-          // chlorides = {this.state.chlorides}
+          oilGravity = {this.state.oilGravity}
+          shrinkage = {this.state.shrinkage}
+          chlorides = {this.state.chlorides}
         />
         {/* <Gauge
           level_w={level_w}
