@@ -8,7 +8,6 @@ import "./MainGraph.css";
 import { Grid, Row, Col } from "react-flexbox-grid";
 import LiquidGauge from "../Gauge/LiquidGauge";
 import PlotCore from "../Plot/Plot";
-import moment from "moment";
 
 function MainGraph(props) {
   
@@ -166,34 +165,23 @@ function MainGraph(props) {
           <Card className="mainCard">
             <CardContent>
               <PlotCore
-                yaxis1="Oil Level (in) / Water Level (in)"
-                yaxis1range={[0, 100]}
-                yaxis2="" // Doesn't need 2nd one
-                plotparam1={
-                  "Water Tank Level: " +
-                  props.waterLevel[props.waterLevel.length - 1]
-                }
-                plotvalue1x={props.dtime}
-                plotvalue1y={props.waterLevel}
-                plotparam2={
-                  "Oil Tank Level: " + props.oilLevel[props.pSep.oilLevel - 1]
-                }
-                plotvalue2x={props.dtime}
-                plotvalue2y={props.oilLevel}
-                plotparam3
-                plotvalue3x
-                plotvalue3y
-                plotparam4
-                plotvalue4x
-                plotvalue4y
-                plotparam5
-                plotvalue5x
-                plotvalue5y
-              />
-            </CardContent>
-            <CardActions>Graph Captions</CardActions>
-          </Card>
-        </Col>
+                  yaxis1 = 'Oil Level (in) / Water Level (in)' yaxis1range = {[0,100]}
+                  yaxis2 = ''                                  // Doesn't need 2nd one
+                  plotparam1 = {'Water Tank Level: ' + props.waterLevel[props.waterLevel.length-1]}   plotvalue1x = {props.dtime}
+                                                                                                      plotvalue1y = {props.waterLevel}
+                  plotparam2 = {'Oil Tank Level: ' + props.oilLevel[props.oilLevel.length-1]}         plotvalue2x = {props.dtime}
+                                                                                                      plotvalue2y = {props.oilLevel}
+                  plotparam3                                  plotvalue3x
+                                                              plotvalue3y
+                  plotparam4                                  plotvalue4x
+                                                              plotvalue4y
+                  plotparam5                                  plotvalue5x
+                                                              plotvalue5y
+                  />
+                </CardContent>
+              <CardActions>Graph Captions</CardActions>
+            </Card>
+        </Col >
 
         {/* GAUGES LIVE HERE */}
         {/* <Col xs={12} sm={12} md={2} lg={2}>
