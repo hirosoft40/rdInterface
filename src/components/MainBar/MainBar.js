@@ -7,6 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import InsertChart from '@material-ui/icons/InsertChart';
 import IconButton from '@material-ui/core/IconButton';
 import TableChart from '@material-ui/icons/TableChart';
+import Tooltip from '@material-ui/core/Tooltip';
+
 import Assumptions from '../Modal/Assumptions';
 import { Link } from 'react-router-dom'
 
@@ -35,28 +37,30 @@ function MainBar(props) {
                         {props.oilWellName}
                     </Typography>
                     
-
-                    <Link to ='/'>
-                        <IconButton style={{color: '#f4cd00', fontSize: 28}}>
-                            <InsertChart />
-                        </IconButton>
-                    </Link>
+                    <Tooltip title='Chart'>
+                        <Link to ='/'>
+                            <IconButton style={{color: '#f4cd00', fontSize: 28}}>
+                                <InsertChart />
+                            </IconButton>
+                        </Link>
+                    </Tooltip>
                     
-
-                    <Link to ='/table'>
-                        <IconButton style={{color: '#f4cd00', fontSize: 28}}>
-                            <TableChart />
-                        </IconButton>
-                    </Link>
+                    <Tooltip title="Table">
+                        <Link to ='/table'>
+                            <IconButton style={{color: '#f4cd00', fontSize: 28}}>
+                                <TableChart />
+                            </IconButton>
+                        </Link>
+                    </Tooltip>
 
 
                     {/* THIS IS WHERE VALUES ARE TO BE INPUT. LOCATED IN src/components/modals/Assumptions */}
-                    <Assumptions 
-                        chokeSize = {props.chokeSize}
-                        oilGravity = {props.oilGravity}
-                        oilShrinkage = {props.oilShrinkage}
-                        waterChlorides = {props.waterChlorides}
-                    />
+                        <Assumptions 
+                            chokeSize = {props.chokeSize}
+                            oilGravity = {props.oilGravity}
+                            oilShrinkage = {props.oilShrinkage}
+                            waterChlorides = {props.waterChlorides}
+                        />
                 
                 </Toolbar>
             </AppBar>

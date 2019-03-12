@@ -8,6 +8,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Tooltip from '@material-ui/core/Tooltip';
+
 import "./Adjusters.css"
 // import { format } from 'url';
 
@@ -87,9 +89,11 @@ export default class Assumptions extends React.Component {
     <div>
 
         {/* THIS IS THE SETTINGS BUTTON */}
-        <IconButton style={{color: '#f4cd00', fontSize: 28}} onClick={this.handleClickOpen}>
-            <Settings/>
+        <Tooltip title='User Input'>
+          <IconButton style={{color: '#f4cd00', fontSize: 28}} onClick={this.handleClickOpen}>
+              <Settings/>
           </IconButton>
+        </Tooltip>
 
         <form onSubmit = {this.handleSubmit}> 
           <Dialog
