@@ -14,7 +14,7 @@ import { CSVLink } from "react-csv";
 import moment from "moment";
 
 export const DownloadCSV = props => {
-  // console.log("props", props);
+  console.log("props", props);
   const header = [
     [
       "Timestamp",
@@ -37,12 +37,12 @@ export const DownloadCSV = props => {
       "DS of Man Press"
     ]
   ];
-  const error = typeof props==='undefined' ? "" : <h1>Loading....</h1>;
+  const error = typeof props === "undefined" ? "" : "";
   let data = [];
-  const d = props.tableData.map(item => {
-    let time = moment(item.time).format("L_LTS");
-    let newArr = [time, ...item.vals];
-    data.push(newArr);
+  const d = props.csvData.map(item => {
+    // let time = moment(item.time).format("L_LTS");
+    // let newArr = [time, ...item.vals];
+    data.push(item);
   });
   const fileTimeStamp = moment().format("L_LTS");
 

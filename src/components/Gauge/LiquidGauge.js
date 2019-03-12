@@ -10,6 +10,7 @@ import { color } from "d3-color";
 import { interpolateRgb } from "d3-interpolate";
 import React, { Component } from "react";
 import LiquidFillGauge from "react-liquid-gauge";
+import './LiquidGauge.css'
 
 class LiquidGauge extends Component {
   state = {
@@ -60,26 +61,29 @@ class LiquidGauge extends Component {
       }
     ];
 
+    // const newVal = this.props.val / maxValue * 100;
     //=== display data ====
     return (
       <div>
-        <div style={{ color: "white", textAlign: "center" }}>
-          {this.state.name}
+        <div className='gaugeLabel'>
+          {this.state.name} <br />
+          {`${this.props.actualVal} ${this.state.unit} / ${maxValue} ${this.state.unit} `}
         </div>
         <LiquidFillGauge
           style={{ margin: "0 auto" }}
           width={radius * 2}
           height={radius * 2}
-          value={this.props.val }
+          value={this.props.val}
           // value={percentValue}
           percent={this.state.unit}
           // percent="%"
           textSize={1}
+          actualVal={this.props.actualVal}
           textOffsetX={0}
           textOffsetY={0}
           textRenderer={props => {
             // console.log("props", props);
-            const value = props.value;
+            const value = props.actualVal;
             const radius = Math.min(props.height / 2, props.width / 2);
             const textPixels = (props.textSize * radius) / 3;
             const valueStyle = {
