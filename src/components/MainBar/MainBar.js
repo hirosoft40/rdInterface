@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import AccountCircle from '@material-ui/icons/AccountCircle';
+import InsertChart from '@material-ui/icons/InsertChart';
 import IconButton from '@material-ui/core/IconButton';
 import TableChart from '@material-ui/icons/TableChart';
 import Assumptions from '../Modal/Assumptions';
@@ -35,13 +35,13 @@ function MainBar(props) {
                         {props.oilWellName}
                     </Typography>
                     
-                    {/* THIS IS WHERE VALUES ARE TO BE INPUT. LOCATED IN src/components/modals/Assumptions */}
-                    <Assumptions 
-                        chokeSize = {props.chokeSize}
-                        oilGravity = {props.oilGravity}
-                        oilShrinkage = {props.oilShrinkage}
-                        waterChlorides = {props.waterChlorides}
-                    />
+
+                    <Link to ='/'>
+                        <IconButton style={{color: '#f4cd00', fontSize: 28}}>
+                            <InsertChart />
+                        </IconButton>
+                    </Link>
+                    
 
                     <Link to ='/table'>
                         <IconButton style={{color: '#f4cd00', fontSize: 28}}>
@@ -49,11 +49,14 @@ function MainBar(props) {
                         </IconButton>
                     </Link>
 
-                    <Link to ='/table'>
-                        <IconButton style={{color: '#f4cd00', fontSize: 28}}>
-                            <AccountCircle />
-                        </IconButton>
-                    </Link>
+
+                    {/* THIS IS WHERE VALUES ARE TO BE INPUT. LOCATED IN src/components/modals/Assumptions */}
+                    <Assumptions 
+                        chokeSize = {props.chokeSize}
+                        oilGravity = {props.oilGravity}
+                        oilShrinkage = {props.oilShrinkage}
+                        waterChlorides = {props.waterChlorides}
+                    />
                 
                 </Toolbar>
             </AppBar>
