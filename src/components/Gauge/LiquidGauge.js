@@ -14,8 +14,20 @@ import React, { Component } from "react";
 import LiquidFillGauge from "react-liquid-gauge";
 
 class LiquidGauge extends Component {
+  // static getDerivedStateFromProps(props, current_state) {
+  //   if (current_state.value !== props.value) {
+  //     return {
+  //       value: props.value,
+  //       computed_prop: heavy_computation(props.value)
+  //     }
+  //   }
+  //   return null
+  // }
+
   state = {
-    value: 0
+    value: 0,
+    name: "",
+    unit: ""
   };
   startColor = "#6495ed"; // cornflowerblue
   endColor = "#dc143c"; // crimson
@@ -23,9 +35,17 @@ class LiquidGauge extends Component {
   componentDidMount() {
     // console.log(this.props.val);
     this.setState({
-      value: this.props.val
+      value: this.props.val,
+      name: this.props.name,
+      unit: this.props.unit
     });
   }
+
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (this.props.value !== prevProps.val) {
+  //     this.setState({ value: this.props.val });
+  //   }
+  // }
 
   render() {
     const radius = 68;
@@ -59,19 +79,19 @@ class LiquidGauge extends Component {
     return (
       <div>
         <div style={{ color: "white", textAlign: "center" }}>
-          {this.props.name}
+          {this.state.name}
         </div>
         <LiquidFillGauge
           style={{ margin: "0 auto" }}
           width={radius * 2}
           height={radius * 2}
-          value={this.state.value}
-          //   name={this.props.name}
-          percent={this.props.unit}
+          value={this.props.val}
+          percent={this.state.unit}
           textSize={1}
           textOffsetX={0}
           textOffsetY={0}
           textRenderer={props => {
+            // console.log("props", props);
             const value = props.value;
             const radius = Math.min(props.height / 2, props.width / 2);
             const textPixels = (props.textSize * radius) / 3;
@@ -111,9 +131,9 @@ class LiquidGauge extends Component {
             fill: color("#fff").toString(),
             fontFamily: "Arial"
           }}
-            onClick={() => {
-              this.setState({ value: this.props.val });
-            }}
+          // onClick={() => {
+          //   this.setState({ value: this.state.val });
+          // }}
         />
         {/* <div>
           {this.props.name}

@@ -6,7 +6,12 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+<<<<<<< HEAD
 import { format } from 'url';
+=======
+import "./Adjusters.css"
+// import { format } from 'url';
+>>>>>>> 59a9e4762ca04b5d26f36f92318ec923baaa86d2
 
 export default class Assumptions extends React.Component {
     constructor(props) {
@@ -82,7 +87,7 @@ export default class Assumptions extends React.Component {
     return (
 
     <div>
-        <Button variant="outlined" color="default" onClick={this.handleClickOpen}>
+        <Button style={{color: '#f4cd00'}} variant="outlined" onClick={this.handleClickOpen}>
         Assumptions
         </Button>
 

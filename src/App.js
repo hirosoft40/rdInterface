@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
+import MainBar from './components/MainBar/MainBar'
 import MainGraph from "./components/Graph/MainGraph";
 import Assumptions from './components/Modal/Assumptions'
 
@@ -170,6 +171,19 @@ class App extends Component {
   render() {
     return (
       <div>
+        
+        {/* MAIN NAV BAR */}
+        <MainBar
+        oilWellName = 'Oil Well Name' // Pass Down Oil Well Name
+        dtime ={this.state.dtime}
+        chokeSize = {this.state.choke}
+        oilGravity = {this.state.oilGravity}
+        oilShrinkage = {this.state.shrinkage}
+        waterChlorides = {this.state.chlorides}
+        />
+
+        {/*  */}
+        <h3>Time at Location: {this.state.dtime[this.state.dtime.length-1]}</h3>
         <h1>{this.state.errorMessage}</h1>
         <Assumptions 
           chokeSize = {this.state.choke}
