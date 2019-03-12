@@ -14,6 +14,16 @@ import React, { Component } from "react";
 import LiquidFillGauge from "react-liquid-gauge";
 
 class LiquidGauge extends Component {
+  // static getDerivedStateFromProps(props, current_state) {
+  //   if (current_state.value !== props.value) {
+  //     return {
+  //       value: props.value,
+  //       computed_prop: heavy_computation(props.value)
+  //     }
+  //   }
+  //   return null
+  // }
+
   state = {
     value: 0,
     name: "",
@@ -30,6 +40,12 @@ class LiquidGauge extends Component {
       unit: this.props.unit
     });
   }
+
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (this.props.value !== prevProps.val) {
+  //     this.setState({ value: this.props.val });
+  //   }
+  // }
 
   render() {
     const radius = 68;
@@ -69,12 +85,13 @@ class LiquidGauge extends Component {
           style={{ margin: "0 auto" }}
           width={radius * 2}
           height={radius * 2}
-          value={this.state.value}
+          value={this.props.val}
           percent={this.state.unit}
           textSize={1}
           textOffsetX={0}
           textOffsetY={0}
           textRenderer={props => {
+            // console.log("props", props);
             const value = props.value;
             const radius = Math.min(props.height / 2, props.width / 2);
             const textPixels = (props.textSize * radius) / 3;
@@ -114,9 +131,9 @@ class LiquidGauge extends Component {
             fill: color("#fff").toString(),
             fontFamily: "Arial"
           }}
-          onClick={() => {
-            this.setState({ value: this.state.val });
-          }}
+          // onClick={() => {
+          //   this.setState({ value: this.state.val });
+          // }}
         />
         {/* <div>
           {this.props.name}
