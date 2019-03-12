@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
+import Settings from '@material-ui/icons/Settings'
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -79,9 +80,12 @@ export default class Assumptions extends React.Component {
     return (
 
     <div>
-        <Button style={{color: '#f4cd00'}} variant="outlined" onClick={this.handleClickOpen}>
+        <Settings style={{color: '#f4cd00'}} onClick={this.handleClickOpen}/>
+        
+        {/* <Button style={{color: '#f4cd00'}} variant="outlined" onClick={this.handleClickOpen}>
         Assumptions
-        </Button>
+        </Button> */}
+        
         <Dialog
             open={this.state.open}
             onClose={this.handleClose}
