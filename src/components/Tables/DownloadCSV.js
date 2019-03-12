@@ -37,7 +37,7 @@ export const DownloadCSV = props => {
       "DS of Man Press"
     ]
   ];
-  const error = typeof props === "undefined" ? "" : "Loading....";
+  const error = typeof props === "undefined" ? "" : "";
   let data = [];
   const d = props.csvData.map(item => {
     // let time = moment(item.time).format("L_LTS");
