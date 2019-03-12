@@ -19,11 +19,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import { lighten } from "@material-ui/core/styles/colorManipulator";
 import { DownloadCSV } from "./DownloadCSV";
-<<<<<<< HEAD
-import moment from 'moment';
-=======
 import {moment} from 'moment';
->>>>>>> 59a9e4762ca04b5d26f36f92318ec923baaa86d2
 
 let counter = 0;
 function createData(name, calories, fat, carbs, protein) {
@@ -310,13 +306,9 @@ class EnhancedTable extends React.Component {
   // ====== CREATE Array DATA SET FOR TABLE AND CSV ========
   createTableData() {
     const finalData = this.state.data.map(item => {
-<<<<<<< HEAD
       const time = item.time;
       console.log(time)
       // let time = moment(item.time).format("L_LTS");
-=======
-      let time = moment(item.time).format("L_LTS");
->>>>>>> 59a9e4762ca04b5d26f36f92318ec923baaa86d2
       this.setState({
         tableData: [time, ...item.vals]
 
