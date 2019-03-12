@@ -171,6 +171,8 @@ class App extends Component {
   render() {
     return (
       <div>
+        
+        {/* MAIN NAV BAR */}
         <MainBar
         oilWellName = 'Oil Well Name' // Pass Down Oil Well Name
         dtime ={this.state.dtime}
@@ -179,6 +181,8 @@ class App extends Component {
         oilShrinkage = {this.state.shrinkage}
         waterChlorides = {this.state.chlorides}
         />
+
+        {/*  */}
         <h3>Time at Location: {this.state.dtime[this.state.dtime.length-1]}</h3>
         <h1>{this.state.errorMessage}</h1>
         <Assumptions 
