@@ -376,20 +376,18 @@ class EnhancedTable extends React.Component {
     this.setState({ rowsPerPage: event.target.value });
   };
 
-
-
   isSelected = id => this.state.selected.indexOf(id) !== -1;
 
   render() {
     // console.log(this.props.finaldata);
     const { classes } = this.props;
-    const { data, order, orderBy, selected, rowsPerPage, page } = this.state;
+    const { data, order, orderBy, selected, rowsPerPage, page, tableData } = this.state;
     const emptyRows =
       rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
 
     return (
       <Paper className={classes.root}>
-        <EnhancedTableToolbar numSelected={selected.length} tableData={data} />
+        <EnhancedTableToolbar numSelected={selected.length} tableData={tableData} />
         <div className={classes.tableWrapper}>
           <Table className={classes.table} aria-labelledby="tableTitle">
             <EnhancedTableHead
