@@ -26,7 +26,8 @@
 
 .mainCard {
   background-color: #212121c1 !important; /* Jean */
-  margin: 10px !important;
+  margin: 10px;
+  margin-bottom: 30px;
   height: 490px;
 }
 
