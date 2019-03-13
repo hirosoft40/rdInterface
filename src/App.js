@@ -16,6 +16,7 @@ import MainBar from './components/MainBar/MainBar'
 import MainGraph from "./components/Graph/MainGraph";
 import { url, urlArg2, reqChartData, serverName } from './EnvConfig'
 import moment from 'moment';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 // Initializing variables (with definition and index)
 let dtime = [], // time (x coordinates)
@@ -70,7 +71,8 @@ class App extends Component {
       gasGravity: [],
       oilGravity: [],
       shrinkage: [],
-      chlorides: []
+      chlorides: [],
+      status: false
     };
     this.connectToApi = this.connectToApi.bind(this);
     this.createArray = this.createArray.bind(this);
@@ -102,7 +104,8 @@ class App extends Component {
       if (results.message === "RequestRecords") {
         // setting data information
         this.setState({
-          figures: results.records.data
+          figures: results.records.data,
+          status: true
         });
       } else {
         // setting header info
