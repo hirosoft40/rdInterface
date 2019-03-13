@@ -1,10 +1,8 @@
-// ==== REACT COMPONENT to display LiquidGauge ====
-// Libracy used:
-// - react-liquid-gauge : https://github.com/trendmicro-frontend/react-liquid-gauge
-// Data IN: props value of Water Level, Volume and Oil Level, Volume
-// Data OUT: n/a (display only)
-// Liquid gauge change color cornflower blue to crimson depending on the % 
-//  500bbl(for volume) and 104inch (for level)
+// ==== REACT COMPONENT  A LiquidGauge ====
+// Re-using this component for 4 liquid gauges on MainGraph.js
+// Libracy used: react-liquid-gauge(https://github.com/trendmicro-frontend/react-liquid-gauge)
+// Data IN: From MainGraph.js: props value of Water Level, Volume and Oil Level, Volume
+// Note: Display only. Liquid gauge change color % for 104inch and 500bbl
 //==============
 
 import { color } from "d3-color";
@@ -23,7 +21,6 @@ class LiquidGauge extends Component {
   endColor = "#dc143c"; // crimson
 
   componentDidMount() {
-    // console.log(this.props.val);
     this.setState({
       value: this.props.val,
       name: this.props.name,
@@ -33,7 +30,6 @@ class LiquidGauge extends Component {
 
   render() {
     const maxValue = this.state.unit === "in" ? 104 : 500;
-    // const percentValue = (this.state.value / maxValue) * 100;
     const radius = 68;
     const interpolate = interpolateRgb(this.startColor, this.endColor);
     const fillColor = interpolate(this.state.value / maxValue);
@@ -62,7 +58,6 @@ class LiquidGauge extends Component {
       }
     ];
 
-    // const newVal = this.props.val / maxValue * 100;
     //=== display data ====
     return (
       <div>
@@ -76,13 +71,11 @@ class LiquidGauge extends Component {
           height={radius * 2}
           value={this.props.val}
           percent={this.state.unit}
-          // percent="%"
           textSize={1}
           actualVal={this.props.actualVal}
           textOffsetX={0}
           textOffsetY={0}
           textRenderer={props => {
-            // console.log("props", props);
             const value = props.actualVal;
             const radius = Math.min(props.height / 2, props.width / 2);
             const textPixels = (props.textSize * radius) / 3;

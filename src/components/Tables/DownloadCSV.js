@@ -1,10 +1,11 @@
 // ==== REACT COMPONENT to download CSV file ====
-// Libracy used: Material-ui, React-csv
-// Data IN: props header and finalData from  (Array of Array)
-// Data OUT: timestamp(String), everything else(numbers)
-// 3/8 TODO:
-//    (1) test with real data esp make header array of array.
-//    (2) Timestamp format
+// Libracy used: 
+//      Material-ui, 
+//      React-csv(https://github.com/react-csv/react-csv)
+//      moment.js (https://momentjs.com/)
+// Data IN: From EnchancedTable.js:and finalData from  (Array of Array)
+// Data OUT: CSV file(file name: flowback_YYYYMMDD_HH:MM:SS AM/PM)
+// 
 //==============
 
 import React from "react";
@@ -37,11 +38,9 @@ export const DownloadCSV = props => {
     ]
   ];
 
-  const error = typeof props === "undefined" ? "" : "";
-
   // creating array to export
   let data = [];
-  const d = props.csvData.map(item => {
+  props.csvData.forEach(item => {
     data.push(item);
   });
 
@@ -54,7 +53,6 @@ export const DownloadCSV = props => {
 
   return (
     <div>
-      <h1>{error}</h1>
       <CSVLink data={finalData} filename={`flowback_${fileTimeStamp}.csv`}>
         <IconButton disabled={!data || data.length < 1 ? true : false}>
           <CloudDownload />

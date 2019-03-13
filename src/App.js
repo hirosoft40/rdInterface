@@ -1,8 +1,20 @@
+// ==== REACT COMPONENT  ====
+// Purpose: API CALL
+// Re-using this component for 4 liquid gauges on MainGraph.js
+// Libracy used: 
+//      react-liquid-gauge(https://github.com/trendmicro-frontend/react-liquid-gauge)
+//      moment.js
+// Data IN: API 
+// Data OUT: API data to MainBar and MainGraph
+// Note: Display only. Liquid gauge change color % for 104inch and 500bbl
+//==============
+
+
 import React, { Component } from "react";
 import "./App.css";
 import MainBar from './components/MainBar/MainBar'
 import MainGraph from "./components/Graph/MainGraph";
-import Assumptions from './components/Modal/Assumptions'
+import { url, urlArg2, reqChartData, serverName } from './EnvConfig'
 import moment from 'moment';
 
 // Initializing variables (with definition and index)
@@ -58,7 +70,8 @@ class App extends Component {
       gasGravity: [],
       oilGravity: [],
       shrinkage: [],
-      chlorides: []
+      chlorides: [],
+      status: false
     };
     this.connectToApi = this.connectToApi.bind(this);
     this.createArray = this.createArray.bind(this);
@@ -66,13 +79,13 @@ class App extends Component {
 
   //=== API CALL =====
   connectToApi() {
-    var exampleSocket = new WebSocket("ws://rdsfastrack.com/backend/", [
-      "com.campbellsci.webdata"
+    var exampleSocket = new WebSocket(url, [
+      urlArg2
     ]);
 
     exampleSocket.addEventListener('open', function (event) {
       console.log('Hello Server!')
-      exampleSocket.send('{"message":"AddRequests","requests":[{"uri":"Server:9664_FBM_(A).Flowback","mode":"backfill","p1":"100","transaction":1,"order":"collected"}]}')
+      exampleSocket.send(reqChartData)
     })
 
     // Real-time Data Call
@@ -90,7 +103,8 @@ class App extends Component {
       if (results.message === "RequestRecords") {
         // setting data information
         this.setState({
-          figures: results.records.data
+          figures: results.records.data,
+          status: true
         });
       } else {
         // setting header info
@@ -100,9 +114,9 @@ class App extends Component {
       }
       this.createArray();
     });
-
-
   }
+  // ==== API Call End
+
   //==== create Array for each data set ===
   createArray() {
     let curArr = [...this.state.figures];
@@ -171,7 +185,7 @@ class App extends Component {
       <div>
         {/* MAIN NAV BAR */}
         <MainBar
-          oilWellName='Server: 9664_FBM_(A)' // OIL WELL SERVER NAME PASSED DOWN TO MAINBAR
+          oilWellName={serverName} // OIL WELL SERVER NAME PASSED DOWN TO MAINBAR
           dtime={this.state.dtime}
           chokeSize={this.state.choke}
           oilGravity={this.state.oilGravity}
@@ -184,13 +198,6 @@ class App extends Component {
 
         <h1>{this.state.errorMessage}</h1>
 
-        {/* DATA PASSED DOWN TO GRAPH */}
-        {/* <Assumptions 
-            chokeSize = {this.state.choke}
-            oilGravity = {this.state.oilGravity}
-            oilShrinkage = {this.state.shrinkage}
-            waterChlorides = {this.state.chlorides}
-          /> */}
 
         <MainGraph
           dtime={this.state.dtime}
