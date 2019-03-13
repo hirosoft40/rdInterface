@@ -11,7 +11,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import InsertChart from '@material-ui/icons/InsertChart';
-import { IconButton, CircularProgress } from '@material-ui/core';
+import { IconButton } from '@material-ui/core';
 import TableChart from '@material-ui/icons/TableChart';
 import Tooltip from '@material-ui/core/Tooltip';
 import Assumptions from '../Modal/Assumptions';
@@ -34,7 +34,7 @@ const styles = {
 
 
 function MainBar(props) {
-    const { classes, status } = props;
+    const { classes } = props;
 
     return (
         <div className={classes.root}>
@@ -46,28 +46,28 @@ function MainBar(props) {
                         {props.oilWellName}
                     </Typography>
                     <Tooltip title='Chart'>
-                        <Link to ='/'>
+                        <Link to='/'>
                             <IconButton>
-                                <InsertChart style={{color: '#f4cd00', fontSize: 28}} />
+                                <InsertChart style={{ color: '#f4cd00', fontSize: 28 }} />
                             </IconButton>
                         </Link>
                     </Tooltip>
 
                     <Tooltip title="Table">
-                        <Link to ='/table'>
+                        <Link to='/table'>
                             <IconButton>
-                                <TableChart style={{color: '#f4cd00', fontSize: 28}}/>
+                                <TableChart style={{ color: '#f4cd00', fontSize: 28 }} />
                             </IconButton>
                         </Link>
                     </Tooltip>
 
                     {/* THIS IS WHERE VALUES ARE TO BE INPUT. LOCATED IN src/components/modals/Assumptions */}
-                        <Assumptions 
-                            chokeSize = {props.chokeSize}
-                            oilGravity = {props.oilGravity}
-                            oilShrinkage = {props.oilShrinkage}
-                            waterChlorides = {props.waterChlorides}
-                        />
+                    <Assumptions
+                        chokeSize={props.chokeSize}
+                        oilGravity={props.oilGravity}
+                        oilShrinkage={props.oilShrinkage}
+                        waterChlorides={props.waterChlorides}
+                    />
                 </Toolbar>
             </AppBar>
         </div>
