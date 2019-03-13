@@ -18,6 +18,10 @@ const styles = theme => ({
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 1,
     paddingBottom: theme.spacing.unit * 1,
+    backgroundColor: 'gray',
+    height: '50',
+    width: '50'
+
   },
 });
 
