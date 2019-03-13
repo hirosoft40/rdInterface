@@ -1,3 +1,10 @@
+// ==== REACT COMPONENT TO CREATE PLOTLY GRAPHS ====
+// Library used: plotly (https://plot.ly/javascript/)
+// Data IN: props value from MainGraph component
+// NOTE: CREATING PLOTLY GRAPHS
+//==============
+
+
 import React from 'react';
 import Plot from 'react-plotly.js';
 

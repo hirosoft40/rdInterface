@@ -12,40 +12,13 @@ import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
-// import Checkbox from "@material-ui/core/Checkbox";
-// import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
-// import DeleteIcon from "@material-ui/icons/Delete";
-// import FilterListIcon from "@material-ui/icons/FilterList";
 import { lighten } from "@material-ui/core/styles/colorManipulator";
 import MainBar from '../MainBar/MainBar'
 import { DownloadCSV } from "./DownloadCSV";
 import moment from "moment";
 
 let counter = 0;
-function createdt(ele) {
-  return createData(
-    ele.time,
-    ele.vals[0],
-    ele.vals[1],
-    ele.vals[2],
-    ele.vals[3],
-    ele.vals[4],
-    ele.vals[5],
-    ele.vals[6],
-    ele.vals[7],
-    ele.vals[8],
-    ele.vals[9],
-    ele.vals[10],
-    ele.vals[11],
-    ele.vals[12],
-    ele.vals[13],
-    ele.vals[14],
-    ele.vals[15],
-    ele.vals[16],
-    ele.vals[17]
-  );
-}
 
 function createData(
   time,
@@ -154,24 +127,14 @@ class EnhancedTableHead extends React.Component {
   };
 
   render() {
-    const {
-      onSelectAllClick,
-      order,
-      orderBy,
-      numSelected,
-      rowCount
-    } = this.props;
+    const {onSelectAllClick, order, orderBy, numSelected, rowCount} = this.props;
 
     return (
 
       <TableHead>
         <TableRow>
           <TableCell padding="checkbox">
-            {/* <Checkbox
-              indeterminate={numSelected > 0 && numSelected < rowCount}
-              checked={numSelected === rowCount}
-              onChange={onSelectAllClick}
-            /> */}
+
           </TableCell>
           {rows.map(
             row => (
@@ -220,13 +183,13 @@ const toolbarStyles = theme => ({
   highlight:
     theme.palette.type === "light"
       ? {
-          color: theme.palette.secondary.main,
-          backgroundColor: lighten(theme.palette.secondary.light, 0.85)
-        }
+        color: theme.palette.secondary.main,
+        backgroundColor: lighten(theme.palette.secondary.light, 0.85)
+      }
       : {
-          color: theme.palette.text.primary,
-          backgroundColor: theme.palette.secondary.dark
-        },
+        color: theme.palette.text.primary,
+        backgroundColor: theme.palette.secondary.dark
+      },
   spacer: {
     flex: "1 1 100%"
   },
@@ -239,7 +202,7 @@ const toolbarStyles = theme => ({
 });
 
 let EnhancedTableToolbar = props => {
-  const { numSelected, classes, csvData } = props;
+  const { numSelected, classes, csvData, status } = props;
   return (
     <Toolbar
       className={classNames(classes.root, {
@@ -252,27 +215,15 @@ let EnhancedTableToolbar = props => {
             {numSelected} selected
           </Typography>
         ) : (
-          <Typography variant="h6" id="tableTitle">
-            Covenant Flowback Hourly Table
-          </Typography>
-        )}
+            <Typography variant="h6" id="tableTitle">
+            "nt Flowback Hourly Table
+              {!status ? <span style={{ color: "red", marginLeft: "20px", fontSize: "20px" }}>Loading Data...</span> : null}
+            </Typography>
+          )}
       </div>
       <div className={classes.spacer} />
       <div className={classes.actions}>
         <DownloadCSV csvData={csvData} />
-        {/* {numSelected > 0 ? (
-          <Tooltip title="Delete">
-            <IconButton aria-label="Delete">
-              <DeleteIcon />
-            </IconButton>
-          </Tooltip>
-        ) : (
-          <Tooltip title="Filter list">
-            <IconButton aria-label="Filter list">
-              <FilterListIcon />
-            </IconButton>
-          </Tooltip>
-        )} */}
       </div>
     </Toolbar>
   );
@@ -308,6 +259,7 @@ class EnhancedTable extends React.Component {
       header: [],
       data: [],
       finalData: [],
+      status: false,
       page: 0,
       rowsPerPage: 5,
       csvData: [] // for csv file
@@ -333,17 +285,15 @@ class EnhancedTable extends React.Component {
     });
 
     // ***SIMPLE CALL***
-
     exampleSocket.addEventListener("message", async mEvent => {
-      // const results= await JSON.parse(mEvent.data).records.data
       const results = await JSON.parse(mEvent.data);
       if (results.message === "RequestRecords") {
         this.setState({
           data: results.records.data,
           time: results.time,
-          finalData: this.state.finalData.concat(results.records.data)
+          finalData: this.state.finalData.concat(results.records.data),
+          status: true
         });
-        // console.log("finaldata:", this.state.finalData);
       } else {
         //seting header info
         this.setState({
@@ -359,7 +309,6 @@ class EnhancedTable extends React.Component {
   actualData(tabdata) {
     // var dt=[];
     var dt = tabdata.map(ele => {
-      //console.log(ele.time)
       return createData(
         moment(ele.time).format("L_LTS"),
         ele.vals[0],
@@ -381,10 +330,7 @@ class EnhancedTable extends React.Component {
         ele.vals[16],
         ele.vals[17]
       );
-      //  dt.push(createdt(ele))
     });
-    // console.log("after push");
-    // console.log(dt[0]);
     return dt;
   } // end of function
 
@@ -393,15 +339,13 @@ class EnhancedTable extends React.Component {
     let cdata = [];
 
     const csvd = this.state.data.map(item => {
-      // console.log(time)
       let time = moment(item.time).format("L_LTS");
-      cdata.push([time, ...item.vals]);
+       return cdata.push([time, ...item.vals]);
     });
     this.setState(
       {
         csvData: cdata
-      },
-      () => console.log(this.state.csvData)
+      }
     );
   }
   //===============
@@ -456,8 +400,10 @@ class EnhancedTable extends React.Component {
 
   isSelected = id => this.state.selected.indexOf(id) !== -1;
 
+
+
+
   render() {
-    // console.log(this.state.finaldata);
     const { classes } = this.props;
     const fdata = this.actualData(this.state.finalData);
     const {
@@ -472,10 +418,12 @@ class EnhancedTable extends React.Component {
     const emptyRows =
       rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
 
+
+
     return (
       
       <Paper className={classes.root}>
-        <EnhancedTableToolbar numSelected={selected.length} csvData={csvData} />
+        <EnhancedTableToolbar numSelected={selected.length} csvData={csvData} status={this.state.status} />
         <div className={classes.tableWrapper}>
           <Table className={classes.table} aria-labelledby="tableTitle">
             <EnhancedTableHead
@@ -491,7 +439,6 @@ class EnhancedTable extends React.Component {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(n => {
                   const isSelected = this.isSelected(n.id);
-                  // const time = moment(n.time).format("L_LTS");
                   return (
                     <TableRow
                       hover
@@ -503,7 +450,6 @@ class EnhancedTable extends React.Component {
                       selected={isSelected}
                     >
                       <TableCell padding="checkbox">
-                        {/* <Checkbox checked={isSelected} /> */}
                       </TableCell>
                       <TableCell component="th" scope="row" padding="none">
                         {n.time}
@@ -528,11 +474,6 @@ class EnhancedTable extends React.Component {
                     </TableRow>
                   );
                 })}
-              {/* {emptyRows > 0 && (
-                <TableRow style={{ height: 49 * emptyRows }}>
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )} */}
             </TableBody>
           </Table>
         </div>

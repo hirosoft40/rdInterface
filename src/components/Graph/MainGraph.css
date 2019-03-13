@@ -45,3 +45,17 @@
   font-weight: lighter;
   font-size: 14px;
 }
+
+.cards{
+  background-color: gray;
+  height: 110px;
+  width: 130px;
+  text-align: center;
+ 
+}
+
+.cardTitle{
+  font-family: Arial, Helvetica, sans-serif;
+  color: #f4cd00;
+  font-weight: normal;
+}

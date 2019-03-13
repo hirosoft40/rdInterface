@@ -1,6 +1,10 @@
+// ==== REACT COMPONENT TO DISPLAY CHARTS AND GAUGES ====
+// Library used: material-ui (https://material-ui.com/), react-flexbox-grid (https://github.com/roylee0704/react-flexbox-grid_)
+// Data IN: props value of API call 
+// NOTE: DISPLAY ONLY
+//==============
+
 import React from "react";
-import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -8,14 +12,25 @@ import "./MainGraph.css";
 import { Grid, Row, Col } from "react-flexbox-grid";
 import LiquidGauge from "../Gauge/LiquidGauge";
 import PlotCore from "../Plot/Plot";
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+
 
 function MainGraph(props) {
-  
+  // Latest value to be displayed on gauges
   const waterLevel = props.waterLevel[props.waterLevel.length - 1];
-  const waterVolume = props.waterVolume[props.waterVolume.length - 1];
-  const oilLevel = props.oilLevel[props.oilLevel.length - 1];
-  const oilVolume = props.oilVolume[props.oilVolume.length - 1];
+  const waterLevelPercentage = (waterLevel / 104) * 100;
 
+  const waterVolume = props.waterVolume[props.waterVolume.length - 1];
+  const waterVolumePercentage = (waterVolume / 500) * 100;
+
+  const oilLevel = props.oilLevel[props.oilLevel.length - 1];
+  const oilLevelPercentage = (oilLevel / 104) * 100;
+  
+  const oilVolume = props.oilVolume[props.oilVolume.length - 1];
+  const oilVolumePercentage = (oilVolume / 500) * 100;
+  //=== end ===
+  
   return (
     // FLEXBOX GRID
     <Grid fluid className="grid">
@@ -28,8 +43,8 @@ function MainGraph(props) {
           <Card className="mainCard">
             <CardContent>
               <PlotCore
-                yaxis1="Pressure (PSI)"                   yaxis1range={[0, 5000]} //Sets parameters from range to display on yaxis (left)
-                yaxis2="Choke Size (64ths)"               yaxis2range={[0, 64]} //Sets parameters for range to display on yaxis (right)
+                yaxis1="Pressure (PSI)"                                           yaxis1range={[0, 5000]} //Sets parameters from range to display on yaxis (left)
+                yaxis2="Choke Size (64ths)"                                       yaxis2range={[0, 64]} //Sets parameters for range to display on yaxis (right)
                 plotparam1={"Annular: " + props.pAnn[props.pAnn.length - 1]}      plotvalue1x={props.dtime}
                                                                                   plotvalue1y={props.pAnn}
                 plotparam2={"Wellhead: " + props.pWH[props.pWH.length - 1]}       plotvalue2x={props.dtime}
@@ -53,7 +68,7 @@ function MainGraph(props) {
           <Card className="mainCard">
             <CardContent>
               <PlotCore
-                yaxis1="Gas (mfcd) / Oil (bpd) / Water (bpd)"         yaxis1range={[0, 10000]}
+                yaxis1="Gas (mfcd) / Oil (bpd) / Water (bpd)"                               yaxis1range={[0, 10000]}
                 yaxis2="" // Doesn't need 2nd one
                 plotparam1={"Gas Rate: " + props.gasRate[props.gasRate.length - 1]}         plotvalue1x={props.dtime}
                                                                                             plotvalue1y={props.gasRate}
@@ -121,20 +136,31 @@ function MainGraph(props) {
         </Col >
       </Row>
 
-
       {/* ROW OF GAUGES */}
       <Row>
         <Col xs={12} sm={12} md={6} lg={6} className='gaugeColumn'>
             {/* <h3>Water Tank</h3> */}
             <LiquidGauge
-              val={waterLevel}
+              val={waterLevelPercentage}
               key={waterLevel}
+              actualVal={waterLevel}
               name={"Water Level"}
               unit={"in"}
             />
+
+            <Paper className="cards" elevation={4}>
+                    <Typography className="cardTitle" variant="h5" component="h3">
+                      Cumulative Water
+                    </Typography>
+                    <Typography component="p">
+                      {props.cumWater[props.cumWater.length -1] + " bbl"}
+                    </Typography>
+            </Paper>
+
             <LiquidGauge
-              val={waterVolume}
+              val={waterVolumePercentage}
               key={waterVolume}
+              actualVal={waterVolume}
               name={"Water Volume"}
               unit={"bbl"}
             />
@@ -143,21 +169,30 @@ function MainGraph(props) {
         <Col xs={12} sm={12} md={6} lg={6} className='gaugeColumn'>
           {/* <h3>Oil Tank</h3> */}
           <LiquidGauge
-            val={oilLevel}
+            val={oilLevelPercentage}
             key={oilLevel}
+            actualVal={oilLevel}
             name={"Oil Level"}
             unit={"in"}
           />
+
+          <Paper className= "cards" elevation={3}>
+                    <Typography className="cardTitle" variant="h5" component="h3">
+                      Cumulative Oil
+                    </Typography>
+                    <Typography component="p">
+                      {props.cumOil[props.cumOil.length -1] + " bbl"}
+                    </Typography>
+            </Paper>
           <LiquidGauge
-            val={oilVolume}
+            val={oilVolumePercentage}
             key={oilVolume}
+            actualVal={oilVolume}
             name={"Oil Volume"}
             unit={"bbl"}
           />
         </Col>
       </Row>
-
-
     </Grid>
   );
 }

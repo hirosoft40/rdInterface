@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./App.css";
 import MainBar from './components/MainBar/MainBar'
 import MainGraph from "./components/Graph/MainGraph";
-import Assumptions from './components/Modal/Assumptions'
 
 // Initializing variables (with definition and index)
 let dtime = [], // time (x coordinates)
@@ -101,9 +100,6 @@ class App extends Component {
     });
 
 
-
-
-
   }
   //==== create Array for each data set ===
   createArray() {
@@ -174,7 +170,7 @@ class App extends Component {
         
           {/* MAIN NAV BAR */}
           <MainBar
-            oilWellName = 'Server: 9664_FBM_(A)' // OIL WELL SERVER NAME PASSED DOWN TP MAINBAR
+            oilWellName = 'Server: 9664_FBM_(A)' // OIL WELL SERVER NAME PASSED DOWN TO MAINBAR
             dtime ={this.state.dtime}
             chokeSize = {this.state.choke}
             oilGravity = {this.state.oilGravity}
@@ -182,19 +178,11 @@ class App extends Component {
             waterChlorides = {this.state.chlorides}
           />
 
-          {/*  */}
           <h3>Time at Location: {this.state.dtime[this.state.dtime.length-1]}</h3>
           
           <h1>{this.state.errorMessage}</h1>
           
           {/* DATA PASSED DOWN TO GRAPH */}
-          {/* <Assumptions 
-            chokeSize = {this.state.choke}
-            oilGravity = {this.state.oilGravity}
-            oilShrinkage = {this.state.shrinkage}
-            waterChlorides = {this.state.chlorides}
-          /> */}
-
           <MainGraph
             dtime = {this.state.dtime}
             pAnn = {this.state.pAnn}
@@ -206,8 +194,8 @@ class App extends Component {
             gasRate = {this.state.gasRate}
             waterRate = {this.state.waterRate}
             oilRate = {this.state.oilRate}
-            // cumWater = {this.state.cumWater}
-            // cumOil = {this.state.cumOil}
+            cumWater = {this.state.cumWater}
+            cumOil = {this.state.cumOil}
             // gasPrevint = {this.state.gasPrevint}
             waterLevel = {this.state.waterLevel}
             oilLevel = {this.state.oilLevel}
