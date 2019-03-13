@@ -11,7 +11,7 @@ import PlotCore from "../Plot/Plot";
 
 function MainGraph(props) {
   
-  //=== initiaint values for liqudGauge
+  // Latest value to be displayed on gauges
   const waterLevel = props.waterLevel[props.waterLevel.length - 1];
   const waterLevelPercentage = (waterLevel / 104) * 100;
 
@@ -37,8 +37,8 @@ function MainGraph(props) {
           <Card className="mainCard">
             <CardContent>
               <PlotCore
-                yaxis1="Pressure (PSI)"                   yaxis1range={[0, 5000]} //Sets parameters from range to display on yaxis (left)
-                yaxis2="Choke Size (64ths)"               yaxis2range={[0, 64]} //Sets parameters for range to display on yaxis (right)
+                yaxis1="Pressure (PSI)"                                           yaxis1range={[0, 5000]} //Sets parameters from range to display on yaxis (left)
+                yaxis2="Choke Size (64ths)"                                       yaxis2range={[0, 64]} //Sets parameters for range to display on yaxis (right)
                 plotparam1={"Annular: " + props.pAnn[props.pAnn.length - 1]}      plotvalue1x={props.dtime}
                                                                                   plotvalue1y={props.pAnn}
                 plotparam2={"Wellhead: " + props.pWH[props.pWH.length - 1]}       plotvalue2x={props.dtime}
@@ -62,7 +62,7 @@ function MainGraph(props) {
           <Card className="mainCard">
             <CardContent>
               <PlotCore
-                yaxis1="Gas (mfcd) / Oil (bpd) / Water (bpd)"         yaxis1range={[0, 10000]}
+                yaxis1="Gas (mfcd) / Oil (bpd) / Water (bpd)"                               yaxis1range={[0, 10000]}
                 yaxis2="" // Doesn't need 2nd one
                 plotparam1={"Gas Rate: " + props.gasRate[props.gasRate.length - 1]}         plotvalue1x={props.dtime}
                                                                                             plotvalue1y={props.gasRate}

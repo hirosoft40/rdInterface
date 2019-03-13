@@ -472,6 +472,8 @@ class EnhancedTable extends React.Component {
     const emptyRows =
       rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
 
+
+
     return (
       <Paper className={classes.root}>
         <EnhancedTableToolbar numSelected={selected.length} csvData={csvData} />
