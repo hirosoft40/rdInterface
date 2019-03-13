@@ -13,17 +13,17 @@ import Typography from '@material-ui/core/Typography';
 
 
 
-const styles = theme => ({
-  root: {
-    ...theme.mixins.gutters(),
-    paddingTop: theme.spacing.unit * 1,
-    paddingBottom: theme.spacing.unit * 1,
-    backgroundColor: 'gray',
-    height: '50',
-    width: '50'
+// const styles = theme => ({
+//   root: {
+//     ...theme.mixins.gutters(),
+//     paddingTop: theme.spacing.unit * 1,
+//     paddingBottom: theme.spacing.unit * 1,
+//     backgroundColor: 'gray',
+//     height: '50',
+//     width: '50'
 
-  },
-});
+//   },
+// });
 
 function MainGraph(props) {
   const { classes } = props;
@@ -152,8 +152,8 @@ function MainGraph(props) {
               unit={"in"}
             />
 
-            <Paper className={classes.root} elevation={4}>
-                    <Typography variant="h5" component="h3">
+            <Paper className="cards" elevation={4}>
+                    <Typography className="cardTitle" variant="h5" component="h3">
                       Cumulative Water
                     </Typography>
                     <Typography component="p">
@@ -178,8 +178,8 @@ function MainGraph(props) {
             unit={"in"}
           />
 
-          <Paper className={classes.root} elevation={3}>
-                    <Typography variant="h5" component="h3">
+          <Paper className= "cards" elevation={3}>
+                    <Typography className="cardTitle" variant="h5" component="h3">
                       Cumulative Oil
                     </Typography>
                     <Typography component="p">
@@ -200,4 +200,4 @@ function MainGraph(props) {
   );
 }
 
-export default withStyles(styles)(MainGraph);
+export default MainGraph;

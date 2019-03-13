@@ -178,19 +178,11 @@ class App extends Component {
             waterChlorides = {this.state.chlorides}
           />
 
-          {/*  */}
           <h3>Time at Location: {this.state.dtime[this.state.dtime.length-1]}</h3>
           
           <h1>{this.state.errorMessage}</h1>
           
           {/* DATA PASSED DOWN TO GRAPH */}
-          {/* <Assumptions 
-            chokeSize = {this.state.choke}
-            oilGravity = {this.state.oilGravity}
-            oilShrinkage = {this.state.shrinkage}
-            waterChlorides = {this.state.chlorides}
-          /> */}
-
           <MainGraph
             dtime = {this.state.dtime}
             pAnn = {this.state.pAnn}
