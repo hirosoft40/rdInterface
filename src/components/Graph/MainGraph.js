@@ -147,12 +147,13 @@ function MainGraph(props) {
               name={"Water Level"}
               unit={"in"}
             />
-
-            <Paper className="cards" elevation={4}>
-                    <Typography className="cardTitle" variant="h5" component="h3">
+            
+            {/* DISPLAYS CUMULATIVE WATER */}
+            <Paper className="cards" style={{backgroundColor: '#212121'}} elevation={3}>
+                    <Typography className="cardTitle" style={{color: '#f4cd00', marginTop: 6}} variant="h6" >
                       Cumulative Water
                     </Typography>
-                    <Typography component="p">
+                    <Typography style={{color: 'white', paddingTop: 4}} component="p">
                       {props.cumWater[props.cumWater.length -1] + " bbl"}
                     </Typography>
             </Paper>
@@ -176,14 +177,16 @@ function MainGraph(props) {
             unit={"in"}
           />
 
-          <Paper className= "cards" elevation={3}>
-                    <Typography className="cardTitle" variant="h5" component="h3">
+          {/* DISPLAYS CUMULATIVE OIL */}
+          <Paper className= "cards" style={{backgroundColor: '#212121'}} elevation={3}>
+                    <Typography className="cardTitle" style={{color: '#f4cd00', marginTop: 6}} variant="h6">
                       Cumulative Oil
                     </Typography>
-                    <Typography component="p">
+                    <Typography style={{color: 'white', paddingTop: 4}} component="p">
                       {props.cumOil[props.cumOil.length -1] + " bbl"}
                     </Typography>
             </Paper>
+
           <LiquidGauge
             val={oilVolumePercentage}
             key={oilVolume}

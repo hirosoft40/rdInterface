@@ -14,6 +14,7 @@ import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import Tooltip from "@material-ui/core/Tooltip";
 import { lighten } from "@material-ui/core/styles/colorManipulator";
+import MainBar from '../MainBar/MainBar'
 import { DownloadCSV } from "./DownloadCSV";
 import moment from "moment";
 
@@ -129,6 +130,7 @@ class EnhancedTableHead extends React.Component {
     const {onSelectAllClick, order, orderBy, numSelected, rowCount} = this.props;
 
     return (
+
       <TableHead>
         <TableRow>
           <TableCell padding="checkbox">
@@ -419,6 +421,7 @@ class EnhancedTable extends React.Component {
 
 
     return (
+      
       <Paper className={classes.root}>
         <EnhancedTableToolbar numSelected={selected.length} csvData={csvData} status={this.state.status} />
         <div className={classes.tableWrapper}>
