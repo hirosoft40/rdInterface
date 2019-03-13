@@ -18,6 +18,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 // import DeleteIcon from "@material-ui/icons/Delete";
 // import FilterListIcon from "@material-ui/icons/FilterList";
 import { lighten } from "@material-ui/core/styles/colorManipulator";
+import MainBar from '../MainBar/MainBar'
 import { DownloadCSV } from "./DownloadCSV";
 import moment from "moment";
 
@@ -162,6 +163,7 @@ class EnhancedTableHead extends React.Component {
     } = this.props;
 
     return (
+
       <TableHead>
         <TableRow>
           <TableCell padding="checkbox">
@@ -471,6 +473,7 @@ class EnhancedTable extends React.Component {
       rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
 
     return (
+      
       <Paper className={classes.root}>
         <EnhancedTableToolbar numSelected={selected.length} csvData={csvData} />
         <div className={classes.tableWrapper}>
