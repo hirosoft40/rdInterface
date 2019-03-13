@@ -8,8 +8,22 @@ import "./MainGraph.css";
 import { Grid, Row, Col } from "react-flexbox-grid";
 import LiquidGauge from "../Gauge/LiquidGauge";
 import PlotCore from "../Plot/Plot";
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+
+
+
+const styles = theme => ({
+  root: {
+    ...theme.mixins.gutters(),
+    paddingTop: theme.spacing.unit * 1,
+    paddingBottom: theme.spacing.unit * 1,
+  },
+});
 
 function MainGraph(props) {
+  const { classes } = props;
+
   
   // Latest value to be displayed on gauges
   const waterLevel = props.waterLevel[props.waterLevel.length - 1];
@@ -133,6 +147,16 @@ function MainGraph(props) {
               name={"Water Level"}
               unit={"in"}
             />
+
+            <Paper className={classes.root} elevation={4}>
+                    <Typography variant="h5" component="h3">
+                      Cumulative Water
+                    </Typography>
+                    <Typography component="p">
+                      {props.cumWater[props.cumWater.length -1] + " bbl"}
+                    </Typography>
+            </Paper>
+
             <LiquidGauge
               val={waterVolume}
               key={waterVolume}
@@ -149,6 +173,15 @@ function MainGraph(props) {
             name={"Oil Level"}
             unit={"in"}
           />
+
+          <Paper className={classes.root} elevation={3}>
+                    <Typography variant="h5" component="h3">
+                      Cumulative Oil
+                    </Typography>
+                    <Typography component="p">
+                      {props.cumOil[props.cumOil.length -1] + " bbl"}
+                    </Typography>
+            </Paper>
           <LiquidGauge
             val={oilVolume}
             key={oilVolume}
@@ -163,4 +196,4 @@ function MainGraph(props) {
   );
 }
 
-export default MainGraph;
+export default withStyles(styles)(MainGraph);
