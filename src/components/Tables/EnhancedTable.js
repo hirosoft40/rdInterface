@@ -237,7 +237,7 @@ const toolbarStyles = theme => ({
 });
 
 let EnhancedTableToolbar = props => {
-  const { numSelected, classes, csvData } = props;
+  const { numSelected, classes, csvData, status } = props;
   return (
     <Toolbar
       className={classNames(classes.root, {
@@ -252,7 +252,8 @@ let EnhancedTableToolbar = props => {
         ) : (
             <Typography variant="h6" id="tableTitle">
               Covenant Flowback Hourly Table
-          </Typography>
+              {!status ? <span style={{ color: "red", marginLeft: "20px", fontSize: "20px" }}>Loading Data...</span> : null}
+            </Typography>
           )}
       </div>
       <div className={classes.spacer} />
@@ -306,6 +307,7 @@ class EnhancedTable extends React.Component {
       header: [],
       data: [],
       finalData: [],
+      status: false,
       page: 0,
       rowsPerPage: 5,
       csvData: [] // for csv file
@@ -331,15 +333,14 @@ class EnhancedTable extends React.Component {
     });
 
     // ***SIMPLE CALL***
-
     exampleSocket.addEventListener("message", async mEvent => {
-      // const results= await JSON.parse(mEvent.data).records.data
       const results = await JSON.parse(mEvent.data);
       if (results.message === "RequestRecords") {
         this.setState({
           data: results.records.data,
           time: results.time,
-          finalData: this.state.finalData.concat(results.records.data)
+          finalData: this.state.finalData.concat(results.records.data),
+          status: true
         });
         // console.log("finaldata:", this.state.finalData);
       } else {
@@ -476,7 +477,7 @@ class EnhancedTable extends React.Component {
 
     return (
       <Paper className={classes.root}>
-        <EnhancedTableToolbar numSelected={selected.length} csvData={csvData} />
+        <EnhancedTableToolbar numSelected={selected.length} csvData={csvData} status={this.state.status} />
         <div className={classes.tableWrapper}>
           <Table className={classes.table} aria-labelledby="tableTitle">
             <EnhancedTableHead
