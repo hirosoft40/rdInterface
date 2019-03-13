@@ -14,7 +14,7 @@ import React, { Component } from "react";
 import "./App.css";
 import MainBar from './components/MainBar/MainBar'
 import MainGraph from "./components/Graph/MainGraph";
-import { url, urlArg2, reqChartData, serverName } from './E-nvConfig'
+import { url, urlArg2, reqChartData, serverName } from './EnvConfig'
 import moment from 'moment';
 
 // Initializing variables (with definition and index)
