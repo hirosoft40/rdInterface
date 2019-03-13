@@ -1,3 +1,11 @@
+// ==== REACT COMPONENT : A Chart component  ====
+// Reusing this component to display 4 charts on MainGraph.js
+// Libracy used: 
+//      Plotly(https://github.com/plotly/react-plotly.js/)
+// Data IN: props received from MainGraph.js
+// Data OUT: Component displayed on MainGraph.js
+//==============
+
 import React from 'react';
 import Plot from 'react-plotly.js';
 

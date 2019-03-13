@@ -1,29 +1,41 @@
+// ==== REACT COMPONENT FOR MODAL OF ASSUMPTIONS/ USER INPUT ====
+// Library used: material-ui (https://material-ui.com/)
+// Data IN: props value of chokeSize, oilGravity, oilShrinkage, 
+//          waterChlorides, plateSize, waterKFactorAdj, oilKFactorAdj
+// NOTE: DISPLAY IN NAV BAR
+//==============
+
 import React from 'react';
 import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import Settings from '@material-ui/icons/Settings'
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import "./Adjusters.css"
-import { format } from 'url';
+import Tooltip from '@material-ui/core/Tooltip';
+import "./Assumptions.css"
 
 export default class Assumptions extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
           open: false,
-          chokeSize: 0,
-          oilGravity: 0,
-          oilShrinkage: 0,
-          waterChlorides: 0,
-          plateSize: 0,
-          waterKFactorAdj: 0,
-          oilKFactorAdj: 0,
+          chokeSize: "",
+          oilGravity: "",
+          oilShrinkage: "",
+          waterChlorides: "",
+          plateSize: "",
+          waterKFactorAdj: "",
+          oilKFactorAdj: "",
           errorMsg: "",
           errorBln: false
         };
+
+        this.handleSubmit = this.handleSubmit.bind(this);
+
       }
 
       
@@ -42,9 +54,9 @@ export default class Assumptions extends React.Component {
   // Submitting information to the backend
   handleSubmit=(e) => {
     // insert call to submit data to backend
+    // POST Method here**
     
 
-    e.PreventDefault();
     this.clearData()
     this.handleClose()
   }
@@ -79,117 +91,123 @@ export default class Assumptions extends React.Component {
     return (
 
     <div>
-        <Button variant="outlined" color="default" onClick={this.handleClickOpen}>
-        Assumptions
-        </Button>
-        <Dialog
-            open={this.state.open}
-            onClose={this.handleClose}
-            aria-labelledby="form-dialog-title"
-            maxWidth = {'sm'}
-        >
-        <DialogTitle id="form-dialog-title">Assumptions</DialogTitle>
-        <DialogContent>
-            <DialogContentText>
-            Update the assumptions and information below to populate the graphs
-            </DialogContentText>
 
+        {/* THIS IS THE SETTINGS BUTTON */}
+        <Tooltip title='User Input'>
+          <IconButton onClick={this.handleClickOpen}>
+              <Settings style={{color: '#f4cd00', fontSize: 28}} />
+          </IconButton>
+        </Tooltip>
 
+        {/* Modal Form */}
+        <form onSubmit = {this.handleSubmit}> 
+          <Dialog
+              open={this.state.open}
+              onClose={this.handleClose}
+              aria-labelledby="form-dialog-title"
+              maxWidth = {'sm'}
+          >
+          <DialogTitle id="form-dialog-title">Assumptions</DialogTitle>
+          <DialogContent>
+              <DialogContentText>
+              Update the assumptions and information below to populate the graphs
+              </DialogContentText>
 
-            <TextField
-                autoFocus
-                margin="dense"
-                id="chokeSize"
-                label={"Current Choke Size: " + this.props.chokeSize[this.props.chokeSize.length -1]}
-                type="number"
-                value = {0}
-                onChange = {this.handleChange("chokeSize")}
-                defaultValue={0}
-                InputProps={{ inputProps: { min: 0 } }}
-                fullWidth
-            />
-            <TextField
-                autoFocus
-                margin="dense"
-                id="oilGravity"
-                label={"Currrent Oil Gravity: " + this.props.oilGravity[this.props.oilGravity.length -1]}
-                type="number"
-                value = {this.state.oilGravity}
-                onChange={this.handleChange("oilGravity")}
-                defaultValue={0}
-                InputProps={{ inputProps: { min: 0 } }}
-                fullWidth
-            />
-            <TextField
-                autoFocus
-                margin="dense"
-                id="oilShrinkage"
-                label={"Current Oil Shrinkage: " + this.props.oilShrinkage[this.props.oilShrinkage.length -1]}
-                type="number"
-                value = {this.state.oilShrinkage}
-                onChange={this.handleChange("oilShrinkage")}
-                defaultValue={0}
-                InputProps={{ inputProps: { min: 0 } }}
-                fullWidth
-            />
-            <TextField
-                autoFocus
-                margin="dense"
-                id="waterChlorides"
-                label={"Current Water Chlorides: " + this.props.waterChlorides[this.props.waterChlorides.length -1]}
-                type="number"
-                value = {this.state.waterChlorides}
-                onChange={this.handleChange("waterChlorides")}
-                defaultValue={0}
-                InputProps={{ inputProps: { min: 0 } }}
-                fullWidth
-            />
-            <TextField
-                autoFocus
-                margin="dense"
-                id="plateSize"
-                label="Plate Size"
-                type="number"
-                value = {this.state.plateSize}
-                onChange={this.handleChange("plateSize")}
-                defaultValue={0}
-                InputProps={{ inputProps: { min: 0 } }}
-                fullWidth
-            />
-            <TextField
-                autoFocus
-                margin="dense"
-                id="waterKFactorAdj"
-                label="Water K-Factor Adjustment"
-                type="number"
-                value={this.state.waterKFactorAdj}
-                onChange={this.handleChange("waterKFactorAdj")}
-                defaultValue={0}
-                InputProps={{ inputProps: { min: 0 } }}
-                fullWidth
-            />
-            <TextField
-                autoFocus
-                margin="dense"
-                id="oilKFactorAdj"
-                label="Oil K-Factor Adjustment"
-                type="number"
-                value={this.state.oilKFactorAdj}
-                onChange={this.handleChange("oilKFactorAdj")}
-                defaultValue={0}
-                InputProps={{ inputProps: { min: 0 } }}
-                fullWidth
-            />
-        </DialogContent>
-        <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
-                Cancel
-            </Button>
-            <Button onClick={this.handleSubmit} color="primary">
-                Update
-            </Button>
-        </DialogActions>
-        </Dialog>
+              {/* Choke Size */}
+              <TextField
+                  autoFocus
+                  margin="dense"
+                  id="chokeSize"
+                  label={"Current Choke Size: " + this.props.chokeSize[this.props.chokeSize.length -1]}
+                  type="string"
+                  value = {this.state.chokeSize}
+                  onChange={this.handleChange("chokeSize")}
+                  fullWidth
+              />
+
+              {/* Oil Gravity */}
+              <TextField
+                  autoFocus
+                  margin="dense"
+                  id="oilGravity"
+                  label={"Currrent Oil Gravity: " + this.props.oilGravity[this.props.oilGravity.length -1]}
+                  type="string"
+                  value = {this.state.oilGravity}
+                  onChange={this.handleChange("oilGravity")}
+                  fullWidth
+              />
+
+              {/* Oil Shrinkage */}
+              <TextField
+                  autoFocus
+                  margin="dense"
+                  id="oilShrinkage"
+                  label={"Current Oil Shrinkage: " + this.props.oilShrinkage[this.props.oilShrinkage.length -1]}
+                  type="string"
+                  value = {this.state.oilShrinkage}
+                  onChange={this.handleChange("oilShrinkage")}
+                  fullWidth
+              />
+
+              {/* Water Chlorides */}
+              <TextField
+                  autoFocus
+                  margin="dense"
+                  id="waterChlorides"
+                  label={"Current Water Chlorides: " + this.props.waterChlorides[this.props.waterChlorides.length -1]}
+                  type="string"
+                  value = {this.state.waterChlorides}
+                  onChange={this.handleChange("waterChlorides")}
+                  fullWidth
+              />
+
+              {/* Plate Size */}
+              <TextField
+                  autoFocus
+                  margin="dense"
+                  id="plateSize"
+                  label="Plate Size"
+                  type="string"
+                  value = {this.state.plateSize}
+                  onChange={this.handleChange("plateSize")}
+                  fullWidth
+              />
+
+              {/* Water K-Factor Adjustment */}
+              <TextField
+                  autoFocus
+                  margin="dense"
+                  id="waterKFactorAdj"
+                  label="Water K-Factor Adjustment"
+                  type="string"
+                  value= {this.state.waterKFactorAdj}
+                  onChange={this.handleChange("waterKFactorAdj")}
+                  fullWidth
+              />
+
+              {/* Oil K-Factor Adjustment */}
+              <TextField
+                  autoFocus
+                  margin="dense"
+                  id="oilKFactorAdj"
+                  label="Oil K-Factor Adjustment"
+                  type="string"
+                  value={this.state.oilKFactorAdj}
+                  onChange={this.handleChange("oilKFactorAdj")}
+                  fullWidth
+              />
+          </DialogContent>
+          <DialogActions>
+              <Button onClick={this.handleClose} color="primary">
+                  Cancel
+              </Button>
+              <Button onClick={this.handleSubmit} color="primary">
+                  Update
+              </Button>
+          </DialogActions>
+          </Dialog>
+
+        </form>
     </div>
     );
     }

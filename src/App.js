@@ -1,7 +1,21 @@
+// ==== REACT COMPONENT  ====
+// Purpose: API CALL
+// Re-using this component for 4 liquid gauges on MainGraph.js
+// Libracy used: 
+//      react-liquid-gauge(https://github.com/trendmicro-frontend/react-liquid-gauge)
+//      moment.js
+// Data IN: API 
+// Data OUT: API data to MainBar and MainGraph
+// Note: Display only. Liquid gauge change color % for 104inch and 500bbl
+//==============
+
+
 import React, { Component } from "react";
 import "./App.css";
+import MainBar from './components/MainBar/MainBar'
 import MainGraph from "./components/Graph/MainGraph";
-import Assumptions from './components/Modal/Assumptions'
+import { url, urlArg2, reqChartData, serverName } from './EnvConfig'
+import moment from 'moment';
 
 // Initializing variables (with definition and index)
 let dtime = [], // time (x coordinates)
@@ -33,12 +47,12 @@ class App extends Component {
 
     this.state = {
       header: [],
-      figures: [], 
+      figures: [],
       errorMessage: "",
       dtime: [],
-      pAnn: [], 
-      pWH: [], 
-      pDS: [], 
+      pAnn: [],
+      pWH: [],
+      pDS: [],
       pSep: [],
       pDiff: [],
       gasTemp: [],
@@ -64,13 +78,13 @@ class App extends Component {
 
   //=== API CALL =====
   connectToApi() {
-    var exampleSocket = new WebSocket("ws://rdsfastrack.com/backend/", [
-      "com.campbellsci.webdata"
+    var exampleSocket = new WebSocket(url, [
+      urlArg2
     ]);
 
     exampleSocket.addEventListener('open', function (event) {
       console.log('Hello Server!')
-      exampleSocket.send('{"message":"AddRequests","requests":[{"uri":"Server:9664_FBM_(A).Flowback","mode":"backfill","p1":"100","transaction":1,"order":"collected"}]}')
+      exampleSocket.send(reqChartData)
     })
 
     // Real-time Data Call
@@ -84,7 +98,7 @@ class App extends Component {
         });
         return;
       }
-      console.log("results", results);
+      // console.log("results", results);
       if (results.message === "RequestRecords") {
         // setting data information
         this.setState({
@@ -98,12 +112,9 @@ class App extends Component {
       }
       this.createArray();
     });
-
-
-
-
-
   }
+  // ==== API Call End
+
   //==== create Array for each data set ===
   createArray() {
     let curArr = [...this.state.figures];
@@ -156,7 +167,7 @@ class App extends Component {
         gasGravity: gasGravity,
         oilGravity: oilGravity,
         shrinkage: shrinkage,
-        chlorides: chlorides      
+        chlorides: chlorides
       }) // end of setting state
 
     });
@@ -170,33 +181,42 @@ class App extends Component {
   render() {
     return (
       <div>
-        <h1>{this.state.errorMessage}</h1>
-        <Assumptions 
-          chokeSize = {this.state.choke}
-          oilGravity = {this.state.oilGravity}
-          oilShrinkage = {this.state.shrinkage}
-          waterChlorides = {this.state.chlorides}
+        {/* MAIN NAV BAR */}
+        <MainBar
+          oilWellName={serverName} // OIL WELL SERVER NAME PASSED DOWN TO MAINBAR
+          dtime={this.state.dtime}
+          chokeSize={this.state.choke}
+          oilGravity={this.state.oilGravity}
+          oilShrinkage={this.state.shrinkage}
+          waterChlorides={this.state.chlorides}
         />
+
+        {/*  */}
+        <h3>Time at Location: {moment(this.state.dtime[this.state.dtime.length - 1]).format("L_LTS")}</h3>
+
+        <h1>{this.state.errorMessage}</h1>
+
+
         <MainGraph
-          dtime = {this.state.dtime}
-          pAnn = {this.state.pAnn}
-          pWH = {this.state.pWH}
-          pDS = {this.state.pDS}
-          pSep = {this.state.pSep}
-          pDiff = {this.state.pDiff}
-          gasTemp = {this.state.gasTemp}
-          gasRate = {this.state.gasRate}
-          waterRate = {this.state.waterRate}
-          oilRate = {this.state.oilRate}
-          // cumWater = {this.state.cumWater}
-          // cumOil = {this.state.cumOil}
+          dtime={this.state.dtime}
+          pAnn={this.state.pAnn}
+          pWH={this.state.pWH}
+          pDS={this.state.pDS}
+          pSep={this.state.pSep}
+          pDiff={this.state.pDiff}
+          gasTemp={this.state.gasTemp}
+          gasRate={this.state.gasRate}
+          waterRate={this.state.waterRate}
+          oilRate={this.state.oilRate}
+          cumWater={this.state.cumWater}
+          cumOil={this.state.cumOil}
           // gasPrevint = {this.state.gasPrevint}
-          waterLevel = {this.state.waterLevel}
-          oilLevel = {this.state.oilLevel}
-          waterVolume = {this.state.waterVolume}
-          oilVolume = {this.state.oilVolume}
-          choke = {this.state.choke}
-          // gasGravity = {this.state.gasGravity}
+          waterLevel={this.state.waterLevel}
+          oilLevel={this.state.oilLevel}
+          waterVolume={this.state.waterVolume}
+          oilVolume={this.state.oilVolume}
+          choke={this.state.choke}
+        // gasGravity = {this.state.gasGravity}
         />
       </div>
     );

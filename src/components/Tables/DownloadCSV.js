@@ -1,10 +1,11 @@
 // ==== REACT COMPONENT to download CSV file ====
-// Libracy used: Material-ui, React-csv
-// Data IN: props header and finalData from  (Array of Array)
-// Data OUT: timestamp(String), everything else(numbers)
-// 3/8 TODO:
-//    (1) test with real data esp make header array of array.
-//    (2) Timestamp format
+// Libracy used: 
+//      Material-ui, 
+//      React-csv(https://github.com/react-csv/react-csv)
+//      moment.js (https://momentjs.com/)
+// Data IN: From EnchancedTable.js:and finalData from  (Array of Array)
+// Data OUT: CSV file(file name: flowback_YYYYMMDD_HH:MM:SS AM/PM)
+// 
 //==============
 
 import React from "react";
@@ -12,9 +13,14 @@ import IconButton from "@material-ui/core/IconButton";
 import { CloudDownload } from "@material-ui/icons";
 import { CSVLink } from "react-csv";
 import moment from "moment";
+import Tooltip from "@material-ui/core/Tooltip";
+import { Link } from 'react-router-dom';
+import InsertChart from '@material-ui/icons/InsertChart';
+
+
+
 
 export const DownloadCSV = props => {
-  console.log("props", props);
   const header = [
     [
       "Timestamp",
@@ -37,25 +43,36 @@ export const DownloadCSV = props => {
       "DS of Man Press"
     ]
   ];
-  const error = props ? "" : <h1>Loading....</h1>;
+
+  // creating array to export
   let data = [];
-  const d = props.tableData.map(item => {
-    let time = moment(item.time).format("L_LTS");
-    let newArr = [time, ...item.vals];
-    data.push(newArr);
+  props.csvData.forEach(item => {
+    data.push(item);
   });
+
+  // data to export to csv
+  const finalData = [...header, ...data];
+
+  // timestamp for filename
   const fileTimeStamp = moment().format("L_LTS");
 
-  const finalData = [...header, ...data];
 
   return (
     <div>
-      <h1>{error}</h1>
-      <CSVLink data={finalData} filename={`flowback_${fileTimeStamp}.csv`}>
-        <IconButton>
-          <CloudDownload />
-        </IconButton>
-      </CSVLink>
+      <Tooltip title='Chart'>
+        <Link to ='/'>
+            <IconButton>
+                <InsertChart style={{color: '#212121', fontSize: 28}} />
+            </IconButton>
+        </Link>
+      </Tooltip>
+      <Tooltip title='Download CSV'>             
+        <CSVLink data={finalData} filename={`flowback_${fileTimeStamp}.csv`}>
+          <IconButton disabled={!data || data.length < 1 ? true : false}>
+            <CloudDownload />
+          </IconButton>
+        </CSVLink>
+      </Tooltip>
     </div>
   );
 };

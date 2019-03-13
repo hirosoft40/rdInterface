@@ -14,7 +14,7 @@
 }
 
 .grid{
-  max-width: 1335px;
+  max-width: 1450px;
   margin: 0 auto;
 }
 
@@ -25,11 +25,37 @@
 }
 
 .mainCard {
-  /* background-color: var(--main-color) !important; */
   background-color: #212121c1 !important; /* Jean */
-  /* display: flex; */
-  margin: 10px !important;
+  margin: 10px;
+  margin-bottom: 30px;
   height: 490px;
-  /* min-width: 370px; */
-  
+}
+
+.gaugeColumn {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.plotTitle{
+  color: white;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: lighter;
+  font-size: 14px;
+}
+
+.cards{
+  height: 110px;
+  width: 130px;
+  text-align: center;
+  align-content: center;
+  align-items: center;
+}
+
+.cardTitle{
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: normal;
 }

@@ -1,3 +1,11 @@
+// ==== REACT COMPONENT  ====
+// Library Used: Material-ui, react-router-dom, react-dom
+// Purpose: 
+//    Export all component to display on html
+//    Color Theme setting for material us
+//    Setup route
+//==============
+
 import React from "react";
 import App from "./App";
 import BaseLayout from "./BaseLayout";
@@ -6,14 +14,6 @@ import ReactDOM from "react-dom";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-// import { Provider } from "react-redux";
-// import FetchData from "./components/reducers/FetchData";
-// import thunk from "redux-thunk";
-
-// const store = createStore(
-//   FetchData,
-//   composeWithDevTools(applyMiddleware(thunk))
-// );
 
 const theme = createMuiTheme({
   typography: {
@@ -26,17 +26,15 @@ const theme = createMuiTheme({
 });
 
 ReactDOM.render(
-  // <Provider store={store}>
-    <BrowserRouter>
-      <MuiThemeProvider theme={theme}>
-        <BaseLayout>
-          <Switch>
-            <Route exact path="/" component={App} />
-            <Route path="/table" component={EnhancedTable} />
-          </Switch>
-        </BaseLayout>
-      </MuiThemeProvider>
-    </BrowserRouter>
-  // </Provider>
+  <BrowserRouter>
+    <MuiThemeProvider theme={theme}>
+      <BaseLayout>
+        <Switch>
+          <Route exact path="/" component={App} />
+          <Route path="/table" component={EnhancedTable} />
+        </Switch>
+      </BaseLayout>
+    </MuiThemeProvider>
+  </BrowserRouter>
   , document.getElementById("root")
 );
