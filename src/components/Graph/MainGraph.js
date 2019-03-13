@@ -17,7 +17,8 @@ import Typography from '@material-ui/core/Typography';
 
 
 function MainGraph(props) {
-  // Latest value to be displayed on gauges
+  
+  // === set up data for LiquidGauge.js 
   const waterLevel = props.waterLevel[props.waterLevel.length - 1];
   const waterLevelPercentage = (waterLevel / 104) * 100;
 
@@ -136,7 +137,8 @@ function MainGraph(props) {
         </Col >
       </Row>
 
-      {/* ROW OF GAUGES */}
+
+      {/* ROW OF LIQUIDGAUGES (LiquidGauge.js) */}
       <Row>
         <Col xs={12} sm={12} md={6} lg={6} className='gaugeColumn'>
             {/* <h3>Water Tank</h3> */}
@@ -147,12 +149,13 @@ function MainGraph(props) {
               name={"Water Level"}
               unit={"in"}
             />
-
-            <Paper className="cards" elevation={4}>
-                    <Typography className="cardTitle" variant="h5" component="h3">
+            
+            {/* DISPLAYS CUMULATIVE WATER */}
+            <Paper className="cards" style={{backgroundColor: '#212121'}} elevation={3}>
+                    <Typography className="cardTitle" style={{color: '#f4cd00', marginTop: 6}} variant="h6" >
                       Cumulative Water
                     </Typography>
-                    <Typography component="p">
+                    <Typography style={{color: 'white', paddingTop: 4}} component="p">
                       {props.cumWater[props.cumWater.length -1] + " bbl"}
                     </Typography>
             </Paper>
@@ -167,7 +170,6 @@ function MainGraph(props) {
         </Col>
 
         <Col xs={12} sm={12} md={6} lg={6} className='gaugeColumn'>
-          {/* <h3>Oil Tank</h3> */}
           <LiquidGauge
             val={oilLevelPercentage}
             key={oilLevel}
@@ -176,14 +178,16 @@ function MainGraph(props) {
             unit={"in"}
           />
 
-          <Paper className= "cards" elevation={3}>
-                    <Typography className="cardTitle" variant="h5" component="h3">
+          {/* DISPLAYS CUMULATIVE OIL */}
+          <Paper className= "cards" style={{backgroundColor: '#212121'}} elevation={3}>
+                    <Typography className="cardTitle" style={{color: '#f4cd00', marginTop: 6}} variant="h6">
                       Cumulative Oil
                     </Typography>
-                    <Typography component="p">
+                    <Typography style={{color: 'white', paddingTop: 4}} component="p">
                       {props.cumOil[props.cumOil.length -1] + " bbl"}
                     </Typography>
             </Paper>
+
           <LiquidGauge
             val={oilVolumePercentage}
             key={oilVolume}

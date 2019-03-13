@@ -94,8 +94,8 @@ export default class Assumptions extends React.Component {
 
         {/* THIS IS THE SETTINGS BUTTON */}
         <Tooltip title='User Input'>
-          <IconButton style={{color: '#f4cd00', fontSize: 28}} onClick={this.handleClickOpen}>
-              <Settings/>
+          <IconButton onClick={this.handleClickOpen}>
+              <Settings style={{color: '#f4cd00', fontSize: 28}} />
           </IconButton>
         </Tooltip>
 
