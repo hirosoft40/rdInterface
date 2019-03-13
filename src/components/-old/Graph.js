@@ -54,8 +54,8 @@ componentDidMount(){
    }
    var data = records[0]
    var data1 = records[0]
-   console.log(data)
-   console.log(data1)
+  //  console.log(data)
+  //  console.log(data1)
 
    for (var i = 0; i < data.length; i++){
     xPoints.push(data[i]["time"])

@@ -14,7 +14,6 @@ import { CSVLink } from "react-csv";
 import moment from "moment";
 
 export const DownloadCSV = props => {
-  console.log("props", props);
   const header = [
     [
       "Timestamp",
@@ -37,22 +36,27 @@ export const DownloadCSV = props => {
       "DS of Man Press"
     ]
   ];
+
   const error = typeof props === "undefined" ? "" : "";
+
+  // creating array to export
   let data = [];
   const d = props.csvData.map(item => {
-    // let time = moment(item.time).format("L_LTS");
-    // let newArr = [time, ...item.vals];
     data.push(item);
   });
+
+  // data to export to csv
+  const finalData = [...header, ...data];
+
+  // timestamp for filename
   const fileTimeStamp = moment().format("L_LTS");
 
-  const finalData = [...header, ...data];
 
   return (
     <div>
       <h1>{error}</h1>
       <CSVLink data={finalData} filename={`flowback_${fileTimeStamp}.csv`}>
-        <IconButton>
+        <IconButton disabled={!data || data.length < 1 ? true : false}>
           <CloudDownload />
         </IconButton>
       </CSVLink>

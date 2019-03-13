@@ -10,21 +10,20 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Tooltip from '@material-ui/core/Tooltip';
 
-import "./Adjusters.css"
-// import { format } from 'url';
+import "./Assumptions.css"
 
 export default class Assumptions extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
           open: false,
-          chokeSize: 0,
-          oilGravity: 0,
-          oilShrinkage: 0,
-          waterChlorides: 0,
-          plateSize: 0,
-          waterKFactorAdj: 0,
-          oilKFactorAdj: 0,
+          chokeSize: "",
+          oilGravity: "",
+          oilShrinkage: "",
+          waterChlorides: "",
+          plateSize: "",
+          waterKFactorAdj: "",
+          oilKFactorAdj: "",
           errorMsg: "",
           errorBln: false
         };

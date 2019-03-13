@@ -31,10 +31,18 @@ function MainGraph(props) {
   
   // Latest value to be displayed on gauges
   const waterLevel = props.waterLevel[props.waterLevel.length - 1];
-  const waterVolume = props.waterVolume[props.waterVolume.length - 1];
-  const oilLevel = props.oilLevel[props.oilLevel.length - 1];
-  const oilVolume = props.oilVolume[props.oilVolume.length - 1];
+  const waterLevelPercentage = (waterLevel / 104) * 100;
 
+  const waterVolume = props.waterVolume[props.waterVolume.length - 1];
+  const waterVolumePercentage = (waterVolume / 500) * 100;
+
+  const oilLevel = props.oilLevel[props.oilLevel.length - 1];
+  const oilLevelPercentage = (oilLevel / 104) * 100;
+  
+  const oilVolume = props.oilVolume[props.oilVolume.length - 1];
+  const oilVolumePercentage = (oilVolume / 500) * 100;
+  //=== end ===
+  
   return (
     // FLEXBOX GRID
     <Grid fluid className="grid">
@@ -146,8 +154,9 @@ function MainGraph(props) {
         <Col xs={12} sm={12} md={6} lg={6} className='gaugeColumn'>
             {/* <h3>Water Tank</h3> */}
             <LiquidGauge
-              val={waterLevel}
+              val={waterLevelPercentage}
               key={waterLevel}
+              actualVal={waterLevel}
               name={"Water Level"}
               unit={"in"}
             />
@@ -162,8 +171,9 @@ function MainGraph(props) {
             </Paper>
 
             <LiquidGauge
-              val={waterVolume}
+              val={waterVolumePercentage}
               key={waterVolume}
+              actualVal={waterVolume}
               name={"Water Volume"}
               unit={"bbl"}
             />
@@ -172,8 +182,9 @@ function MainGraph(props) {
         <Col xs={12} sm={12} md={6} lg={6} className='gaugeColumn'>
           {/* <h3>Oil Tank</h3> */}
           <LiquidGauge
-            val={oilLevel}
+            val={oilLevelPercentage}
             key={oilLevel}
+            actualVal={oilLevel}
             name={"Oil Level"}
             unit={"in"}
           />
@@ -187,8 +198,9 @@ function MainGraph(props) {
                     </Typography>
             </Paper>
           <LiquidGauge
-            val={oilVolume}
+            val={oilVolumePercentage}
             key={oilVolume}
+            actualVal={oilVolume}
             name={"Oil Volume"}
             unit={"bbl"}
           />
