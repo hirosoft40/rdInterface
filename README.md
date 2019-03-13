@@ -4,7 +4,7 @@
 
 (1) WebSocket API<br/>
 We have experience with REST API and Socket.IO, so initially we were not expecting any challenge here, until we found that we received 2 separate responses in 1 request.
-We tried to store response into 2 state or 2 variables which was not successful. After hours of try and errors, we were able to store data successfully by changing syntax to Arrow Function, and handle storing depeinding on type of response data.
+We tried to store response into 2 state or 2 variables which was not successful. After hours of try and errors, we were able to store data successfully by changing syntax to Arrow Function, and handle storing depending on type of response data.
 
 ### `Built with`
 
@@ -18,6 +18,7 @@ We tried to store response into 2 state or 2 variables which was not successful.
 - Material-ui
 - react-liquid-gauge
 - react-csv
+- moment.js
 
 ### `Authors`
 
