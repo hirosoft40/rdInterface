@@ -70,9 +70,8 @@ class App extends Component {
       gasGravity: [],
       oilGravity: [],
       shrinkage: [],
-      chlorides: [],
-      status: false
-    };
+      chlorides: []
+        };
     this.connectToApi = this.connectToApi.bind(this);
     this.createArray = this.createArray.bind(this);
   }
@@ -104,7 +103,6 @@ class App extends Component {
         // setting data information
         this.setState({
           figures: results.records.data,
-          status: true
         });
       } else {
         // setting header info
