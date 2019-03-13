@@ -17,7 +17,7 @@ import { lighten } from "@material-ui/core/styles/colorManipulator";
 import MainBar from '../MainBar/MainBar'
 import { DownloadCSV } from "./DownloadCSV";
 import moment from "moment";
-import { url, urlArg2, reqTableData } from '../../E-nvConfig'
+import { url, urlArg2, reqTableData } from '../../EnvConfig'
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 
@@ -236,7 +236,7 @@ let EnhancedTableToolbar = props => {
       <div className={classes.actions}>
 
         {/* ==== connecting to DownloadCSV ==== */}
-        {/* <DownloadCSV csvData={csvData} /> */}
+        <DownloadCSV csvData={csvData} />
         {/* ==== END ==== */}
 
 
@@ -277,7 +277,7 @@ class EnhancedTable extends React.Component {
       finalData: [],
       page: 0,
       rowsPerPage: 5,
-      state: false,
+      status: false,
       csvData: [] // for csv file
     };
     this.connectToTableApi = this.connectToTableApi.bind(this);
@@ -305,7 +305,7 @@ class EnhancedTable extends React.Component {
         this.setState({
           data: results.records.data,
           time: results.time,
-          state: true,
+          status: true,
           finalData: this.state.finalData.concat(results.records.data),
         });
       } else {
