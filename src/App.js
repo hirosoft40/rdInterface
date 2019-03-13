@@ -3,6 +3,7 @@ import "./App.css";
 import MainBar from './components/MainBar/MainBar'
 import MainGraph from "./components/Graph/MainGraph";
 import Assumptions from './components/Modal/Assumptions'
+import moment from 'moment';
 
 // Initializing variables (with definition and index)
 let dtime = [], // time (x coordinates)
@@ -34,12 +35,12 @@ class App extends Component {
 
     this.state = {
       header: [],
-      figures: [], 
+      figures: [],
       errorMessage: "",
       dtime: [],
-      pAnn: [], 
-      pWH: [], 
-      pDS: [], 
+      pAnn: [],
+      pWH: [],
+      pDS: [],
       pSep: [],
       pDiff: [],
       gasTemp: [],
@@ -154,7 +155,7 @@ class App extends Component {
         gasGravity: gasGravity,
         oilGravity: oilGravity,
         shrinkage: shrinkage,
-        chlorides: chlorides      
+        chlorides: chlorides
       }) // end of setting state
 
     });
@@ -168,51 +169,50 @@ class App extends Component {
   render() {
     return (
       <div>
-        
-          {/* MAIN NAV BAR */}
-          <MainBar
-            oilWellName = 'Server: 9664_FBM_(A)' // OIL WELL SERVER NAME PASSED DOWN TO MAINBAR
-            dtime ={this.state.dtime}
-            chokeSize = {this.state.choke}
-            oilGravity = {this.state.oilGravity}
-            oilShrinkage = {this.state.shrinkage}
-            waterChlorides = {this.state.chlorides}
-          />
+        {/* MAIN NAV BAR */}
+        <MainBar
+          oilWellName='Server: 9664_FBM_(A)' // OIL WELL SERVER NAME PASSED DOWN TO MAINBAR
+          dtime={this.state.dtime}
+          chokeSize={this.state.choke}
+          oilGravity={this.state.oilGravity}
+          oilShrinkage={this.state.shrinkage}
+          waterChlorides={this.state.chlorides}
+        />
 
-          {/*  */}
-          <h3>Time at Location: {this.state.dtime[this.state.dtime.length-1]}</h3>
-          
-          <h1>{this.state.errorMessage}</h1>
-          
-          {/* DATA PASSED DOWN TO GRAPH */}
-          {/* <Assumptions 
+        {/*  */}
+        <h3>Time at Location: {moment(this.state.dtime[this.state.dtime.length - 1]).format("L_LTS")}</h3>
+
+        <h1>{this.state.errorMessage}</h1>
+
+        {/* DATA PASSED DOWN TO GRAPH */}
+        {/* <Assumptions 
             chokeSize = {this.state.choke}
             oilGravity = {this.state.oilGravity}
             oilShrinkage = {this.state.shrinkage}
             waterChlorides = {this.state.chlorides}
           /> */}
 
-          <MainGraph
-            dtime = {this.state.dtime}
-            pAnn = {this.state.pAnn}
-            pWH = {this.state.pWH}
-            pDS = {this.state.pDS}
-            pSep = {this.state.pSep}
-            pDiff = {this.state.pDiff}
-            gasTemp = {this.state.gasTemp}
-            gasRate = {this.state.gasRate}
-            waterRate = {this.state.waterRate}
-            oilRate = {this.state.oilRate}
-            cumWater = {this.state.cumWater}
-            cumOil = {this.state.cumOil}
-            // gasPrevint = {this.state.gasPrevint}
-            waterLevel = {this.state.waterLevel}
-            oilLevel = {this.state.oilLevel}
-            waterVolume = {this.state.waterVolume}
-            oilVolume = {this.state.oilVolume}
-            choke = {this.state.choke}
-            // gasGravity = {this.state.gasGravity}
-          />
+        <MainGraph
+          dtime={this.state.dtime}
+          pAnn={this.state.pAnn}
+          pWH={this.state.pWH}
+          pDS={this.state.pDS}
+          pSep={this.state.pSep}
+          pDiff={this.state.pDiff}
+          gasTemp={this.state.gasTemp}
+          gasRate={this.state.gasRate}
+          waterRate={this.state.waterRate}
+          oilRate={this.state.oilRate}
+          cumWater={this.state.cumWater}
+          cumOil={this.state.cumOil}
+          // gasPrevint = {this.state.gasPrevint}
+          waterLevel={this.state.waterLevel}
+          oilLevel={this.state.oilLevel}
+          waterVolume={this.state.waterVolume}
+          oilVolume={this.state.oilVolume}
+          choke={this.state.choke}
+        // gasGravity = {this.state.gasGravity}
+        />
       </div>
     );
   }

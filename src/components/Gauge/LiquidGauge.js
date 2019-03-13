@@ -1,9 +1,10 @@
 // ==== REACT COMPONENT to display LiquidGauge ====
 // Libracy used:
-// react-liquid-gauge : https://github.com/trendmicro-frontend/react-liquid-gauge
+// - react-liquid-gauge : https://github.com/trendmicro-frontend/react-liquid-gauge
 // Data IN: props value of Water Level, Volume and Oil Level, Volume
 // Data OUT: n/a (display only)
-// Liquid gauge change color % for 104inch and 500bbl
+// Liquid gauge change color cornflower blue to crimson depending on the % 
+//  500bbl(for volume) and 104inch (for level)
 //==============
 
 import { color } from "d3-color";
@@ -32,7 +33,7 @@ class LiquidGauge extends Component {
 
   render() {
     const maxValue = this.state.unit === "in" ? 104 : 500;
-    const percentValue = (this.state.value / maxValue) * 100;
+    // const percentValue = (this.state.value / maxValue) * 100;
     const radius = 68;
     const interpolate = interpolateRgb(this.startColor, this.endColor);
     const fillColor = interpolate(this.state.value / maxValue);
@@ -74,7 +75,6 @@ class LiquidGauge extends Component {
           width={radius * 2}
           height={radius * 2}
           value={this.props.val}
-          // value={percentValue}
           percent={this.state.unit}
           // percent="%"
           textSize={1}
