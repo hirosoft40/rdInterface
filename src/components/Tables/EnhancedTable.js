@@ -48,13 +48,14 @@ function stableSort(array, cmp) {
   });
   return stabilizedThis.map(el => el[0]);
 }
-
+// sorting functionality
 function getSorting(order, orderBy) {
   return order === "desc"
     ? (a, b) => desc(a, b, orderBy)
     : (a, b) => -desc(a, b, orderBy);
 }
 
+// labelling Columns
 const rows = [
   { id: 'time', numeric: false, disablePadding: true, label: 'Timestamp' },
   { id: 'Choke', numeric: true, disablePadding: false, label: 'Choke' },
@@ -170,7 +171,7 @@ let EnhancedTableToolbar = props => {
           </Typography>
         ) : (
             <Typography variant="h6" id="tableTitle">
-            "nt Flowback Hourly Table
+            Covenant Flowback Hourly Table
               {!status ? <span style={{ color: "red", marginLeft: "20px", fontSize: "20px" }}>Loading Data...</span> : null}
             </Typography>
           )}
@@ -259,9 +260,9 @@ class EnhancedTable extends React.Component {
     });
   }
   //===== API CALL END=====
-
+// Getting required data from result API
   actualData(tabdata) {
-    // var dt=[];
+  
     var dt = tabdata.map(ele => {
       return createData(
         moment(ele.time).format("L_LTS"),
@@ -302,22 +303,7 @@ class EnhancedTable extends React.Component {
       }
     );
   }
-  //===============
-
-  actualData(tabdata)
-  {
-  // var dt=[];
-   var dt=tabdata.map((ele)=>{
-    //console.log(ele.time)
-    return (createData(ele.time,ele.vals[0],ele.vals[1],ele.vals[2],ele.vals[3],ele.vals[4],ele.vals[5],ele.vals[6],ele.vals[7],ele.vals[8],ele.vals[9],ele.vals[10],ele.vals[11],ele.vals[12],ele.vals[13],ele.vals[14],ele.vals[15],ele.vals[16],ele.vals[17]))
-    //  dt.push(createdt(ele))
-    
-    })
-    console.log("after push")
-    console.log(dt[0])
-    return dt;
-  }// end of function
-//con end
+  
   handleRequestSort = (event, property) => {
     const orderBy = property;
     let order = "desc";
