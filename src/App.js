@@ -16,7 +16,6 @@ import MainBar from './components/MainBar/MainBar'
 import MainGraph from "./components/Graph/MainGraph";
 import { url, urlArg2, reqChartData, serverName } from './EnvConfig'
 import moment from 'moment';
-import CircularProgress from '@material-ui/core/CircularProgress';
 
 // Initializing variables (with definition and index)
 let dtime = [], // time (x coordinates)

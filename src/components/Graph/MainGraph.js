@@ -1,6 +1,10 @@
+// ==== REACT COMPONENT TO DISPLAY CHARTS AND GAUGES ====
+// Library used: material-ui (https://material-ui.com/), react-flexbox-grid (https://github.com/roylee0704/react-flexbox-grid_)
+// Data IN: props value of API call 
+// NOTE: DISPLAY ONLY
+//==============
+
 import React from "react";
-import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -8,6 +12,9 @@ import "./MainGraph.css";
 import { Grid, Row, Col } from "react-flexbox-grid";
 import LiquidGauge from "../Gauge/LiquidGauge";
 import PlotCore from "../Plot/Plot";
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+
 
 function MainGraph(props) {
   
@@ -142,6 +149,17 @@ function MainGraph(props) {
               name={"Water Level"}
               unit={"in"}
             />
+            
+            {/* DISPLAYS CUMULATIVE WATER */}
+            <Paper className="cards" style={{backgroundColor: '#212121'}} elevation={3}>
+                    <Typography className="cardTitle" style={{color: '#f4cd00', marginTop: 6}} variant="h6" >
+                      Cumulative Water
+                    </Typography>
+                    <Typography style={{color: 'white', paddingTop: 4}} component="p">
+                      {props.cumWater[props.cumWater.length -1] + " bbl"}
+                    </Typography>
+            </Paper>
+
             <LiquidGauge
               val={waterVolumePercentage}
               key={waterVolume}
@@ -159,6 +177,17 @@ function MainGraph(props) {
             name={"Oil Level"}
             unit={"in"}
           />
+
+          {/* DISPLAYS CUMULATIVE OIL */}
+          <Paper className= "cards" style={{backgroundColor: '#212121'}} elevation={3}>
+                    <Typography className="cardTitle" style={{color: '#f4cd00', marginTop: 6}} variant="h6">
+                      Cumulative Oil
+                    </Typography>
+                    <Typography style={{color: 'white', paddingTop: 4}} component="p">
+                      {props.cumOil[props.cumOil.length -1] + " bbl"}
+                    </Typography>
+            </Paper>
+
           <LiquidGauge
             val={oilVolumePercentage}
             key={oilVolume}
@@ -168,8 +197,6 @@ function MainGraph(props) {
           />
         </Col>
       </Row>
-
-
     </Grid>
   );
 }

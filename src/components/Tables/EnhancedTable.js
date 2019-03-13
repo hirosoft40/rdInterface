@@ -12,12 +12,9 @@ import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
-// import Checkbox from "@material-ui/core/Checkbox";
-// import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
-// import DeleteIcon from "@material-ui/icons/Delete";
-// import FilterListIcon from "@material-ui/icons/FilterList";
 import { lighten } from "@material-ui/core/styles/colorManipulator";
+import MainBar from '../MainBar/MainBar'
 import { DownloadCSV } from "./DownloadCSV";
 import moment from "moment";
 import { url, urlArg2, reqTableData } from '../../EnvConfig'
@@ -25,29 +22,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 let counter = 0;
-function createdt(ele) {
-  return createData(
-    ele.time,
-    ele.vals[0],
-    ele.vals[1],
-    ele.vals[2],
-    ele.vals[3],
-    ele.vals[4],
-    ele.vals[5],
-    ele.vals[6],
-    ele.vals[7],
-    ele.vals[8],
-    ele.vals[9],
-    ele.vals[10],
-    ele.vals[11],
-    ele.vals[12],
-    ele.vals[13],
-    ele.vals[14],
-    ele.vals[15],
-    ele.vals[16],
-    ele.vals[17]
-  );
-}
 
 function createData(
   time,
@@ -156,23 +130,14 @@ class EnhancedTableHead extends React.Component {
   };
 
   render() {
-    const {
-      onSelectAllClick,
-      order,
-      orderBy,
-      numSelected,
-      rowCount
-    } = this.props;
+    const { onSelectAllClick, order, orderBy, numSelected, rowCount } = this.props;
 
     return (
+
       <TableHead>
         <TableRow>
           <TableCell padding="checkbox">
-            {/* <Checkbox
-              indeterminate={numSelected > 0 && numSelected < rowCount}
-              checked={numSelected === rowCount}
-              onChange={onSelectAllClick}
-            /> */}
+
           </TableCell>
           {rows.map(
             row => (
@@ -343,7 +308,6 @@ class EnhancedTable extends React.Component {
           finalData: this.state.finalData.concat(results.records.data),
           status: true
         });
-        // console.log("finaldata:", this.state.finalData);
       } else {
         //seting header info
         this.setState({
@@ -359,7 +323,6 @@ class EnhancedTable extends React.Component {
   actualData(tabdata) {
     // var dt=[];
     var dt = tabdata.map(ele => {
-      //console.log(ele.time)
       return createData(
         moment(ele.time).format("L_LTS"),
         ele.vals[0],
@@ -381,10 +344,7 @@ class EnhancedTable extends React.Component {
         ele.vals[16],
         ele.vals[17]
       );
-      //  dt.push(createdt(ele))
     });
-    // console.log("after push");
-    // console.log(dt[0]);
     return dt;
   } // end of function
 
@@ -392,8 +352,7 @@ class EnhancedTable extends React.Component {
   createCSVData() {
     let cdata = [];
 
-    const csvd = this.state.data.map(item => {
-      // console.log(time)
+    this.state.data.forEach(item => {
       let time = moment(item.time).format("L_LTS");
       cdata.push([time, ...item.vals]);
     });
@@ -459,7 +418,6 @@ class EnhancedTable extends React.Component {
 
 
   render() {
-    // console.log(this.state.finaldata);
     const { classes } = this.props;
     const fdata = this.actualData(this.state.finalData);
     const {
@@ -477,6 +435,7 @@ class EnhancedTable extends React.Component {
 
 
     return (
+
       <Paper className={classes.root}>
         {/* === csvData is for csvData, status is to display Loading === */}
         <EnhancedTableToolbar
@@ -499,7 +458,6 @@ class EnhancedTable extends React.Component {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(n => {
                   const isSelected = this.isSelected(n.id);
-                  // const time = moment(n.time).format("L_LTS");
                   return (
                     <TableRow
                       hover
@@ -511,7 +469,6 @@ class EnhancedTable extends React.Component {
                       selected={isSelected}
                     >
                       <TableCell padding="checkbox">
-                        {/* <Checkbox checked={isSelected} /> */}
                       </TableCell>
                       <TableCell component="th" scope="row" padding="none">
                         {n.time}
@@ -536,11 +493,6 @@ class EnhancedTable extends React.Component {
                     </TableRow>
                   );
                 })}
-              {/* {emptyRows > 0 && (
-                <TableRow style={{ height: 49 * emptyRows }}>
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )} */}
             </TableBody>
           </Table>
         </div>
