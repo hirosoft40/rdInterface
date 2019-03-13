@@ -44,16 +44,16 @@ function MainBar(props) {
                     
                     <Tooltip title='Chart'>
                         <Link to ='/'>
-                            <IconButton style={{color: '#f4cd00', fontSize: 28}}>
-                                <InsertChart />
+                            <IconButton>
+                                <InsertChart style={{color: '#f4cd00', fontSize: 28}} />
                             </IconButton>
                         </Link>
                     </Tooltip>
                     
                     <Tooltip title="Table">
                         <Link to ='/table'>
-                            <IconButton style={{color: '#f4cd00', fontSize: 28}}>
-                                <TableChart />
+                            <IconButton>
+                                <TableChart style={{color: '#f4cd00', fontSize: 28}}/>
                             </IconButton>
                         </Link>
                     </Tooltip>

@@ -149,7 +149,7 @@ function MainGraph(props) {
             />
 
             <Paper className="cards" elevation={4}>
-                    <Typography className="cardTitle" variant="h5" component="h3">
+                    <Typography className="cardTitle" variant="h6" >
                       Cumulative Water
                     </Typography>
                     <Typography component="p">
@@ -177,7 +177,7 @@ function MainGraph(props) {
           />
 
           <Paper className= "cards" elevation={3}>
-                    <Typography className="cardTitle" variant="h5" component="h3">
+                    <Typography className="cardTitle" variant="h6">
                       Cumulative Oil
                     </Typography>
                     <Typography component="p">

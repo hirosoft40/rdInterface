@@ -36,6 +36,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  align-items: center;
 }
 
 .plotTitle{
@@ -51,7 +52,8 @@
   height: 110px;
   width: 130px;
   text-align: center;
- 
+  align-content: center;
+  align-items: center;
 }
 
 .cardTitle{
