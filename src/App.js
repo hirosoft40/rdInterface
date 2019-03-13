@@ -85,7 +85,6 @@ class App extends Component {
         });
         return;
       }
-      // console.log("results", results);
       if (results.message === "RequestRecords") {
         // setting data information
         this.setState({
@@ -99,9 +98,6 @@ class App extends Component {
       }
       this.createArray();
     });
-
-
-
 
 
   }
@@ -174,7 +170,7 @@ class App extends Component {
         
           {/* MAIN NAV BAR */}
           <MainBar
-            oilWellName = 'Server: 9664_FBM_(A)' // OIL WELL SERVER NAME PASSED DOWN TP MAINBAR
+            oilWellName = 'Server: 9664_FBM_(A)' // OIL WELL SERVER NAME PASSED DOWN TO MAINBAR
             dtime ={this.state.dtime}
             chokeSize = {this.state.choke}
             oilGravity = {this.state.oilGravity}

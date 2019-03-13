@@ -94,6 +94,7 @@ export default class Assumptions extends React.Component {
           </IconButton>
         </Tooltip>
 
+        {/* Modal Form */}
         <form onSubmit = {this.handleSubmit}> 
           <Dialog
               open={this.state.open}
@@ -107,6 +108,7 @@ export default class Assumptions extends React.Component {
               Update the assumptions and information below to populate the graphs
               </DialogContentText>
 
+              {/* Choke Size */}
               <TextField
                   autoFocus
                   margin="dense"
@@ -117,6 +119,8 @@ export default class Assumptions extends React.Component {
                   onChange={this.handleChange("chokeSize")}
                   fullWidth
               />
+
+              {/* Oil Gravity */}
               <TextField
                   autoFocus
                   margin="dense"
@@ -127,6 +131,8 @@ export default class Assumptions extends React.Component {
                   onChange={this.handleChange("oilGravity")}
                   fullWidth
               />
+
+              {/* Oil Shrinkage */}
               <TextField
                   autoFocus
                   margin="dense"
@@ -137,6 +143,8 @@ export default class Assumptions extends React.Component {
                   onChange={this.handleChange("oilShrinkage")}
                   fullWidth
               />
+
+              {/* Water Chlorides */}
               <TextField
                   autoFocus
                   margin="dense"
@@ -147,6 +155,8 @@ export default class Assumptions extends React.Component {
                   onChange={this.handleChange("waterChlorides")}
                   fullWidth
               />
+
+              {/* Plate Size */}
               <TextField
                   autoFocus
                   margin="dense"
@@ -157,6 +167,8 @@ export default class Assumptions extends React.Component {
                   onChange={this.handleChange("plateSize")}
                   fullWidth
               />
+
+              {/* Water K-Factor Adjustment */}
               <TextField
                   autoFocus
                   margin="dense"
@@ -167,6 +179,8 @@ export default class Assumptions extends React.Component {
                   onChange={this.handleChange("waterKFactorAdj")}
                   fullWidth
               />
+
+              {/* Oil K-Factor Adjustment */}
               <TextField
                   autoFocus
                   margin="dense"

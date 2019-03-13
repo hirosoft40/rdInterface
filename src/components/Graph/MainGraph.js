@@ -11,6 +11,7 @@ import PlotCore from "../Plot/Plot";
 
 function MainGraph(props) {
   
+  // Latest value to be displayed on gauges
   const waterLevel = props.waterLevel[props.waterLevel.length - 1];
   const waterVolume = props.waterVolume[props.waterVolume.length - 1];
   const oilLevel = props.oilLevel[props.oilLevel.length - 1];
