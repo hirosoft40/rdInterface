@@ -1,3 +1,9 @@
+// ==== REACT COMPONENT TO NAV BAR ====
+// Library used: material-ui (https://material-ui.com/), react-router-dom)
+// Data IN: props value of chokeSize, oilGravity, oilShrinkage, waterChlorides
+// NOTE: DISPLAY ONLY
+//==============
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -8,7 +14,6 @@ import InsertChart from '@material-ui/icons/InsertChart';
 import IconButton from '@material-ui/core/IconButton';
 import TableChart from '@material-ui/icons/TableChart';
 import Tooltip from '@material-ui/core/Tooltip';
-
 import Assumptions from '../Modal/Assumptions';
 import { Link } from 'react-router-dom'
 
@@ -53,7 +58,6 @@ function MainBar(props) {
                         </Link>
                     </Tooltip>
 
-
                     {/* THIS IS WHERE VALUES ARE TO BE INPUT. LOCATED IN src/components/modals/Assumptions */}
                         <Assumptions 
                             chokeSize = {props.chokeSize}
@@ -61,7 +65,6 @@ function MainBar(props) {
                             oilShrinkage = {props.oilShrinkage}
                             waterChlorides = {props.waterChlorides}
                         />
-                
                 </Toolbar>
             </AppBar>
         </div>

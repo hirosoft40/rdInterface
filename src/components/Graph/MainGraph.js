@@ -1,6 +1,10 @@
+// ==== REACT COMPONENT TO DISPLAY CHARTS AND GAUGES ====
+// Library used: material-ui (https://material-ui.com/), react-flexbox-grid (https://github.com/roylee0704/react-flexbox-grid_)
+// Data IN: props value of API call 
+// NOTE: DISPLAY ONLY
+//==============
+
 import React from "react";
-import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -12,23 +16,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
 
-
-// const styles = theme => ({
-//   root: {
-//     ...theme.mixins.gutters(),
-//     paddingTop: theme.spacing.unit * 1,
-//     paddingBottom: theme.spacing.unit * 1,
-//     backgroundColor: 'gray',
-//     height: '50',
-//     width: '50'
-
-//   },
-// });
-
 function MainGraph(props) {
-  const { classes } = props;
-
-  
   // Latest value to be displayed on gauges
   const waterLevel = props.waterLevel[props.waterLevel.length - 1];
   const waterLevelPercentage = (waterLevel / 104) * 100;
@@ -148,7 +136,6 @@ function MainGraph(props) {
         </Col >
       </Row>
 
-
       {/* ROW OF GAUGES */}
       <Row>
         <Col xs={12} sm={12} md={6} lg={6} className='gaugeColumn'>
@@ -206,8 +193,6 @@ function MainGraph(props) {
           />
         </Col>
       </Row>
-
-
     </Grid>
   );
 }

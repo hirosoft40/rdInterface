@@ -41,7 +41,8 @@ export const DownloadCSV = props => {
 
   // creating array to export
   let data = [];
-  const d = props.csvData.map(item => {
+
+  props.csvData.forEach(item => {
     data.push(item);
   });
 

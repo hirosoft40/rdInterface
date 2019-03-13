@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./App.css";
 import MainBar from './components/MainBar/MainBar'
 import MainGraph from "./components/Graph/MainGraph";
-import Assumptions from './components/Modal/Assumptions'
 
 // Initializing variables (with definition and index)
 let dtime = [], // time (x coordinates)

@@ -1,3 +1,10 @@
+// ==== REACT COMPONENT FOR MODAL OF ASSUMPTIONS/ USER INPUT ====
+// Library used: material-ui (https://material-ui.com/)
+// Data IN: props value of chokeSize, oilGravity, oilShrinkage, 
+//          waterChlorides, plateSize, waterKFactorAdj, oilKFactorAdj
+// NOTE: DISPLAY IN NAV BAR
+//==============
+
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
@@ -9,7 +16,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Tooltip from '@material-ui/core/Tooltip';
-
 import "./Assumptions.css"
 
 export default class Assumptions extends React.Component {

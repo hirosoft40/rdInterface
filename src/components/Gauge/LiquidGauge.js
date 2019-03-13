@@ -32,7 +32,6 @@ class LiquidGauge extends Component {
 
   render() {
     const maxValue = this.state.unit === "in" ? 104 : 500;
-    const percentValue = (this.state.value / maxValue) * 100;
     const radius = 68;
     const interpolate = interpolateRgb(this.startColor, this.endColor);
     const fillColor = interpolate(this.state.value / maxValue);
