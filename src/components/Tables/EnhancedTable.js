@@ -17,7 +17,7 @@ import { lighten } from "@material-ui/core/styles/colorManipulator";
 import MainBar from '../MainBar/MainBar'
 import { DownloadCSV } from "./DownloadCSV";
 import moment from "moment";
-import { url, urlArg2, reqTableData } from '../../EnvConfig'
+import { url, urlArg2, reqTableData } from '../../E-nvConfig'
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 
