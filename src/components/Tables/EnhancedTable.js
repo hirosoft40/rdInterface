@@ -20,6 +20,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import { lighten } from "@material-ui/core/styles/colorManipulator";
 import { DownloadCSV } from "./DownloadCSV";
 import moment from "moment";
+import { url, urlArg2, reqTableData } from '../../config/EnvConfig'
 
 let counter = 0;
 function createdt(ele) {
@@ -258,20 +259,12 @@ let EnhancedTableToolbar = props => {
       </div>
       <div className={classes.spacer} />
       <div className={classes.actions}>
+
+        {/* ==== connecting to DownloadCSV ==== */}
         <DownloadCSV csvData={csvData} />
-        {/* {numSelected > 0 ? (
-          <Tooltip title="Delete">
-            <IconButton aria-label="Delete">
-              <DeleteIcon />
-            </IconButton>
-          </Tooltip>
-        ) : (
-          <Tooltip title="Filter list">
-            <IconButton aria-label="Filter list">
-              <FilterListIcon />
-            </IconButton>
-          </Tooltip>
-        )} */}
+        {/* ==== END ==== */}
+
+
       </div>
     </Toolbar>
   );
@@ -321,15 +314,13 @@ class EnhancedTable extends React.Component {
 
   //========= API CALL FOR TABLE ==========
   connectToTableApi() {
-    var exampleSocket = new WebSocket("ws://rdsfastrack.com/backend/", [
-      "com.campbellsci.webdata"
+    var exampleSocket = new WebSocket(url, [
+      urlArg2
     ]);
 
     exampleSocket.addEventListener("open", event => {
       console.log("Hello Server!");
-      exampleSocket.send(
-        '{"message":"AddRequests","requests":[{"uri":"LNDB:8782_Hour_Table","mode":"since-record","p1":"1","transaction":1,"order":"collected"}]}'
-      );
+      exampleSocket.send(reqTableData);
     });
 
     // ***SIMPLE CALL***
@@ -387,7 +378,7 @@ class EnhancedTable extends React.Component {
     return dt;
   } // end of function
 
-  // ====== CREATE Array DATA SET FOR TABLE AND CSV ========
+  // ====== CREATE Array DATA SET FOR CSV ========
   createCSVData() {
     let cdata = [];
 
@@ -477,7 +468,12 @@ class EnhancedTable extends React.Component {
 
     return (
       <Paper className={classes.root}>
-        <EnhancedTableToolbar numSelected={selected.length} csvData={csvData} status={this.state.status} />
+        {/* === csvData is for csvData, status is to display Loading === */}
+        <EnhancedTableToolbar
+          numSelected={selected.length}
+          csvData={csvData}
+          status={this.state.status}
+        />
         <div className={classes.tableWrapper}>
           <Table className={classes.table} aria-labelledby="tableTitle">
             <EnhancedTableHead

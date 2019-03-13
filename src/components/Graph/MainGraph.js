@@ -11,7 +11,7 @@ import PlotCore from "../Plot/Plot";
 
 function MainGraph(props) {
   
-  // Latest value to be displayed on gauges
+  // === set up data for LiquidGauge.js 
   const waterLevel = props.waterLevel[props.waterLevel.length - 1];
   const waterLevelPercentage = (waterLevel / 104) * 100;
 
@@ -131,7 +131,7 @@ function MainGraph(props) {
       </Row>
 
 
-      {/* ROW OF GAUGES */}
+      {/* ROW OF LIQUIDGAUGES (LiquidGauge.js) */}
       <Row>
         <Col xs={12} sm={12} md={6} lg={6} className='gaugeColumn'>
             {/* <h3>Water Tank</h3> */}
@@ -152,7 +152,6 @@ function MainGraph(props) {
         </Col>
 
         <Col xs={12} sm={12} md={6} lg={6} className='gaugeColumn'>
-          {/* <h3>Oil Tank</h3> */}
           <LiquidGauge
             val={oilLevelPercentage}
             key={oilLevel}

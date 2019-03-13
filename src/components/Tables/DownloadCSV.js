@@ -1,7 +1,9 @@
 // ==== REACT COMPONENT to download CSV file ====
-// Libracy used: Material-ui, React-csv
-// Data IN: props header and finalData from  (Array of Array)
+// Libracy used: 
+//      Material-ui, React-csv(https://github.com/react-csv/react-csv)
+// Data IN: From EnchancedTable.js:and finalData from  (Array of Array)
 // Data OUT: CSV file(file name: flowback_YYYYMMDD_HH:MM:SS AM/PM)
+// 
 //==============
 
 import React from "react";
