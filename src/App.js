@@ -1,7 +1,9 @@
 // ==== REACT COMPONENT  ====
 // Purpose: API CALL
 // Re-using this component for 4 liquid gauges on MainGraph.js
-// Libracy used: react-liquid-gauge(https://github.com/trendmicro-frontend/react-liquid-gauge)
+// Libracy used: 
+//      react-liquid-gauge(https://github.com/trendmicro-frontend/react-liquid-gauge)
+//      moment.js
 // Data IN: API 
 // Data OUT: API data to MainBar and MainGraph
 // Note: Display only. Liquid gauge change color % for 104inch and 500bbl
@@ -12,7 +14,8 @@ import React, { Component } from "react";
 import "./App.css";
 import MainBar from './components/MainBar/MainBar'
 import MainGraph from "./components/Graph/MainGraph";
-import { url, urlArg2, reqChartData, serverName } from './config/EnvConfig'
+import { url, urlArg2, reqChartData, serverName } from './EnvConfig'
+import moment from 'moment';
 
 // Initializing variables (with definition and index)
 let dtime = [], // time (x coordinates)
@@ -180,7 +183,7 @@ class App extends Component {
       <div>
         {/* MAIN NAV BAR */}
         <MainBar
-          oilWellName= {serverName} // OIL WELL SERVER NAME PASSED DOWN TO MAINBAR
+          oilWellName={serverName} // OIL WELL SERVER NAME PASSED DOWN TO MAINBAR
           dtime={this.state.dtime}
           chokeSize={this.state.choke}
           oilGravity={this.state.oilGravity}
@@ -189,7 +192,7 @@ class App extends Component {
         />
 
         {/*  */}
-        <h3>Time at Location: {this.state.dtime[this.state.dtime.length - 1]}</h3>
+        <h3>Time at Location: {moment(this.state.dtime[this.state.dtime.length - 1]).format("L_LTS")}</h3>
 
         <h1>{this.state.errorMessage}</h1>
 

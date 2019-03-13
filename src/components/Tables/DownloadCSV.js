@@ -1,6 +1,8 @@
 // ==== REACT COMPONENT to download CSV file ====
 // Libracy used: 
-//      Material-ui, React-csv(https://github.com/react-csv/react-csv)
+//      Material-ui, 
+//      React-csv(https://github.com/react-csv/react-csv)
+//      moment.js (https://momentjs.com/)
 // Data IN: From EnchancedTable.js:and finalData from  (Array of Array)
 // Data OUT: CSV file(file name: flowback_YYYYMMDD_HH:MM:SS AM/PM)
 // 
@@ -38,7 +40,7 @@ export const DownloadCSV = props => {
 
   // creating array to export
   let data = [];
-  const d = props.csvData.map(item => {
+  props.csvData.forEach(item => {
     data.push(item);
   });
 

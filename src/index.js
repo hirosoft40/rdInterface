@@ -6,8 +6,6 @@
 //    Setup route
 //==============
 
-
-
 import React from "react";
 import App from "./App";
 import BaseLayout from "./BaseLayout";

@@ -20,7 +20,9 @@ import Tooltip from "@material-ui/core/Tooltip";
 import { lighten } from "@material-ui/core/styles/colorManipulator";
 import { DownloadCSV } from "./DownloadCSV";
 import moment from "moment";
-import { url, urlArg2, reqTableData } from '../../config/EnvConfig'
+import { url, urlArg2, reqTableData } from '../../EnvConfig'
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 
 let counter = 0;
 function createdt(ele) {
@@ -234,6 +236,9 @@ const toolbarStyles = theme => ({
   },
   title: {
     flex: "0 0 auto"
+  },
+  progress: {
+    margin: theme.spacing.unit * 2,
   }
 });
 
@@ -253,7 +258,12 @@ let EnhancedTableToolbar = props => {
         ) : (
             <Typography variant="h6" id="tableTitle">
               Covenant Flowback Hourly Table
-              {!status ? <span style={{ color: "red", marginLeft: "20px", fontSize: "20px" }}>Loading Data...</span> : null}
+              {!status ?
+                <span style={{ color: "red", marginLeft: "20px", fontSize: "20px" }}>
+                  Loading Data...
+                <CircularProgress className={classes.progress} />
+                </span>
+                : null}
             </Typography>
           )}
       </div>
