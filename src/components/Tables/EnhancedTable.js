@@ -1,23 +1,21 @@
-import React from 'react';
-import classNames from 'classnames';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
-import Checkbox from '@material-ui/core/Checkbox';
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
-import DeleteIcon from '@material-ui/icons/Delete';
-import FilterListIcon from '@material-ui/icons/FilterList';
-import { lighten } from '@material-ui/core/styles/colorManipulator';
+import React from "react";
+import classNames from "classnames";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TablePagination from "@material-ui/core/TablePagination";
+import TableRow from "@material-ui/core/TableRow";
+import TableSortLabel from "@material-ui/core/TableSortLabel";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import Paper from "@material-ui/core/Paper";
+import Tooltip from "@material-ui/core/Tooltip";
+import { lighten } from "@material-ui/core/styles/colorManipulator";
+import { DownloadCSV } from "./DownloadCSV";
+import moment from "moment";
 
 let counter = 0;
 function createdt(ele)
@@ -52,7 +50,9 @@ function stableSort(array, cmp) {
 }
 
 function getSorting(order, orderBy) {
-  return order === 'desc' ? (a, b) => desc(a, b, orderBy) : (a, b) => -desc(a, b, orderBy);
+  return order === "desc"
+    ? (a, b) => desc(a, b, orderBy)
+    : (a, b) => -desc(a, b, orderBy);
 }
 
 const rows = [
@@ -82,29 +82,25 @@ class EnhancedTableHead extends React.Component {
   };
 
   render() {
-    const { onSelectAllClick, order, orderBy, numSelected, rowCount } = this.props;
+    const {onSelectAllClick, order, orderBy, numSelected, rowCount} = this.props;
 
     return (
       <TableHead>
         <TableRow>
           <TableCell padding="checkbox">
-            <Checkbox
-              indeterminate={numSelected > 0 && numSelected < rowCount}
-              checked={numSelected === rowCount}
-              onChange={onSelectAllClick}
-            />
+
           </TableCell>
           {rows.map(
             row => (
               <TableCell
                 key={row.id}
-                align={row.numeric ? 'right' : 'left'}
-                padding={row.disablePadding ? 'none' : 'default'}
+                align={row.numeric ? "right" : "left"}
+                padding={row.disablePadding ? "none" : "default"}
                 sortDirection={orderBy === row.id ? order : false}
               >
                 <Tooltip
                   title="Sort"
-                  placement={row.numeric ? 'bottom-end' : 'bottom-start'}
+                  placement={row.numeric ? "bottom-end" : "bottom-start"}
                   enterDelay={300}
                 >
                   <TableSortLabel
@@ -117,7 +113,7 @@ class EnhancedTableHead extends React.Component {
                 </Tooltip>
               </TableCell>
             ),
-            this,
+            this
           )}
         </TableRow>
       </TableHead>
@@ -131,41 +127,40 @@ EnhancedTableHead.propTypes = {
   onSelectAllClick: PropTypes.func.isRequired,
   order: PropTypes.string.isRequired,
   orderBy: PropTypes.string.isRequired,
-  rowCount: PropTypes.number.isRequired,
+  rowCount: PropTypes.number.isRequired
 };
 
 const toolbarStyles = theme => ({
   root: {
-    paddingRight: theme.spacing.unit,
+    paddingRight: theme.spacing.unit
   },
   highlight:
-    theme.palette.type === 'light'
+    theme.palette.type === "light"
       ? {
-          color: theme.palette.secondary.main,
-          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
-        }
+        color: theme.palette.secondary.main,
+        backgroundColor: lighten(theme.palette.secondary.light, 0.85)
+      }
       : {
-          color: theme.palette.text.primary,
-          backgroundColor: theme.palette.secondary.dark,
-        },
+        color: theme.palette.text.primary,
+        backgroundColor: theme.palette.secondary.dark
+      },
   spacer: {
-    flex: '1 1 100%',
+    flex: "1 1 100%"
   },
   actions: {
-    color: theme.palette.text.secondary,
+    color: theme.palette.text.secondary
   },
   title: {
-    flex: '0 0 auto',
-  },
+    flex: "0 0 auto"
+  }
 });
 
 let EnhancedTableToolbar = props => {
-  const { numSelected, classes } = props;
-
+  const { numSelected, classes, csvData, status } = props;
   return (
     <Toolbar
       className={classNames(classes.root, {
-        [classes.highlight]: numSelected > 0,
+        [classes.highlight]: numSelected > 0
       })}
     >
       <div className={classes.title}>
@@ -174,26 +169,15 @@ let EnhancedTableToolbar = props => {
             {numSelected} selected
           </Typography>
         ) : (
-          <Typography variant="h6" id="tableTitle">
-            Covenant Flowback Hourly Table
-          </Typography>
-        )}
+            <Typography variant="h6" id="tableTitle">
+            "nt Flowback Hourly Table
+              {!status ? <span style={{ color: "red", marginLeft: "20px", fontSize: "20px" }}>Loading Data...</span> : null}
+            </Typography>
+          )}
       </div>
       <div className={classes.spacer} />
       <div className={classes.actions}>
-        {numSelected > 0 ? (
-          <Tooltip title="Delete">
-            <IconButton aria-label="Delete">
-              <DeleteIcon />
-            </IconButton>
-          </Tooltip>
-        ) : (
-          <Tooltip title="Filter list">
-            <IconButton aria-label="Filter list">
-              <FilterListIcon />
-            </IconButton>
-          </Tooltip>
-        )}
+        <DownloadCSV csvData={csvData} />
       </div>
     </Toolbar>
   );
@@ -201,54 +185,124 @@ let EnhancedTableToolbar = props => {
 
 EnhancedTableToolbar.propTypes = {
   classes: PropTypes.object.isRequired,
-  numSelected: PropTypes.number.isRequired,
+  numSelected: PropTypes.number.isRequired
 };
 
 EnhancedTableToolbar = withStyles(toolbarStyles)(EnhancedTableToolbar);
 
 const styles = theme => ({
   root: {
-    width: '100%',
-    marginTop: theme.spacing.unit * 3,
+    width: "100%",
+    marginTop: theme.spacing.unit * 3
   },
   table: {
-    minWidth: 1020,
+    minWidth: 1020
   },
   tableWrapper: {
-    overflowX: 'auto',
-  },
+    overflowX: "auto"
+  }
 });
 
 class EnhancedTable extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      order: "asc",
+      orderBy: "time",
+      selected: [],
+      header: [],
+      data: [],
+      finalData: [],
+      status: false,
+      page: 0,
+      rowsPerPage: 5,
+      csvData: [] // for csv file
+    };
+    this.connectToTableApi = this.connectToTableApi.bind(this);
+  }
 
-  
-  state = {
-    order: 'asc',
-    orderBy: 'calories',
-    selected: [],
-     data:this.actualData(this.props.finalData),
-    //this.props.finalData.map((ele)=>{
-    //   return createData(ele.time,ele.vals[0],ele.vals[1],ele.vals[2],ele.vals[3],ele.vals[4],ele.vals[5],ele.vals[6],ele.vals[7],ele.vals[8],ele.vals[9],ele.vals[10],ele.vals[11],ele.vals[12],ele.vals[13],ele.vals[14],ele.vals[15],ele.vals[16],ele.vals[17])
+  componentDidMount() {
+    this.connectToTableApi();
+  }
 
-    // }),
-    // [
-    //   createData('11/14/2018 1:00:00 PM', 305, 3.7, 67, 4.3),
-    //   createData('11/14/2018 1:00:00 PM', 452, 25.0, 51, 4.9),
-    //   createData('11/14/2018 1:00:00 PM', 262, 16.0, 24, 6.0),
-    //   createData('11/14/2018 1:00:00 PM', 159, 6.0, 24, 4.0),
-    //   createData('11/14/2018 1:00:00 PM', 356, 16.0, 49, 3.9),
-    //   createData('11/15/2018 1:00:00 PM', 408, 3.2, 87, 6.5),
-    //   createData('11/15/2018 1:00:00 PM', 237, 9.0, 37, 4.3),
-    //   createData('11/15/2018 1:00:00 PM', 375, 0.0, 94, 0.0),
-    //   createData('11/15/2018 1:00:00 PM', 518, 26.0, 100, 7.0),
-    //   createData('11/15/2018 1:00:00 PM', 392, 0.2, 98, 0.0),
-    //   createData('11/27/2018 1:00:00 PM', 318, 0, 81, 2.0),
-    //   createData('11/27/2018 1:00:00 PM', 360, 19.0, 9, 37.0),
-    //   createData('11/27/2018 1:00:00 PM', 437, 18.0, 63, 4.0),
-    // ],
-    page: 0,
-    rowsPerPage: 5,
-  };
+  //========= API CALL FOR TABLE ==========
+  connectToTableApi() {
+    var exampleSocket = new WebSocket("ws://rdsfastrack.com/backend/", [
+      "com.campbellsci.webdata"
+    ]);
+
+    exampleSocket.addEventListener("open", event => {
+      console.log("Hello Server!");
+      exampleSocket.send(
+        '{"message":"AddRequests","requests":[{"uri":"LNDB:8782_Hour_Table","mode":"since-record","p1":"1","transaction":1,"order":"collected"}]}'
+      );
+    });
+
+    // ***SIMPLE CALL***
+    exampleSocket.addEventListener("message", async mEvent => {
+      const results = await JSON.parse(mEvent.data);
+      if (results.message === "RequestRecords") {
+        this.setState({
+          data: results.records.data,
+          time: results.time,
+          finalData: this.state.finalData.concat(results.records.data),
+          status: true
+        });
+      } else {
+        //seting header info
+        this.setState({
+          header: results.head.fields
+        });
+      }
+      this.createCSVData();
+      this.actualData(this.state.finalData);
+    });
+  }
+  //===== API CALL END=====
+
+  actualData(tabdata) {
+    // var dt=[];
+    var dt = tabdata.map(ele => {
+      return createData(
+        moment(ele.time).format("L_LTS"),
+        ele.vals[0],
+        ele.vals[1],
+        ele.vals[2],
+        ele.vals[3],
+        ele.vals[4],
+        ele.vals[5],
+        ele.vals[6],
+        ele.vals[7],
+        ele.vals[8],
+        ele.vals[9],
+        ele.vals[10],
+        ele.vals[11],
+        ele.vals[12],
+        ele.vals[13],
+        ele.vals[14],
+        ele.vals[15],
+        ele.vals[16],
+        ele.vals[17]
+      );
+    });
+    return dt;
+  } // end of function
+
+  // ====== CREATE Array DATA SET FOR TABLE AND CSV ========
+  createCSVData() {
+    let cdata = [];
+
+    const csvd = this.state.data.map(item => {
+      let time = moment(item.time).format("L_LTS");
+       return cdata.push([time, ...item.vals]);
+    });
+    this.setState(
+      {
+        csvData: cdata
+      }
+    );
+  }
+  //===============
 
   actualData(tabdata)
   {
@@ -266,10 +320,10 @@ class EnhancedTable extends React.Component {
 //con end
   handleRequestSort = (event, property) => {
     const orderBy = property;
-    let order = 'desc';
+    let order = "desc";
 
-    if (this.state.orderBy === property && this.state.order === 'desc') {
-      order = 'asc';
+    if (this.state.orderBy === property && this.state.order === "desc") {
+      order = "asc";
     }
 
     this.setState({ order, orderBy });
@@ -297,7 +351,7 @@ class EnhancedTable extends React.Component {
     } else if (selectedIndex > 0) {
       newSelected = newSelected.concat(
         selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1),
+        selected.slice(selectedIndex + 1)
       );
     }
   
@@ -313,23 +367,26 @@ class EnhancedTable extends React.Component {
   };
 
   isSelected = id => this.state.selected.indexOf(id) !== -1;
-  
   render() {
-  
-    console.log(this.state.data)
-    console.log(this.props.finalData)
-
-    const fdata=this.actualData(this.props.finalData)
-    console.log(fdata)
-    
-    
     const { classes } = this.props;
-    const { data, order, orderBy, selected, rowsPerPage, page } = this.state;
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
+    const fdata = this.actualData(this.state.finalData);
+    const {
+      data,
+      order,
+      orderBy,
+      selected,
+      rowsPerPage,
+      page,
+      csvData
+    } = this.state;
+    const emptyRows =
+      rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
+
+
 
     return (
       <Paper className={classes.root}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+        <EnhancedTableToolbar numSelected={selected.length} csvData={csvData} status={this.state.status} />
         <div className={classes.tableWrapper}>
           <Table className={classes.table} aria-labelledby="tableTitle">
             <EnhancedTableHead
@@ -356,7 +413,6 @@ class EnhancedTable extends React.Component {
                       selected={isSelected}
                     >
                       <TableCell padding="checkbox">
-                        <Checkbox checked={isSelected} />
                       </TableCell>
                       <TableCell component="th" scope="row" padding="none">
                         {n.time}
@@ -381,25 +437,20 @@ class EnhancedTable extends React.Component {
                     </TableRow>
                   );
                 })}
-              {emptyRows > 0 && (
-                <TableRow style={{ height: 49 * emptyRows }}>
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
             </TableBody>
           </Table>
         </div>
         <TablePagination
           rowsPerPageOptions={[5, 100, 200]}
           component="div"
-          count={fdata.length}// changed fdata length
+          count={fdata.length} // changed fdata length
           rowsPerPage={rowsPerPage}
           page={page}
           backIconButtonProps={{
-            'aria-label': 'Previous Page',
+            "aria-label": "Previous Page"
           }}
           nextIconButtonProps={{
-            'aria-label': 'Next Page',
+            "aria-label": "Next Page"
           }}
           onChangePage={this.handleChangePage}
           onChangeRowsPerPage={this.handleChangeRowsPerPage}
@@ -410,7 +461,7 @@ class EnhancedTable extends React.Component {
 }
 
 EnhancedTable.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(EnhancedTable)
+export default withStyles(styles)(EnhancedTable);

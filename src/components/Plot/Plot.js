@@ -1,3 +1,10 @@
+// ==== REACT COMPONENT TO CREATE PLOTLY GRAPHS ====
+// Library used: plotly (https://plot.ly/javascript/)
+// Data IN: props value from MainGraph component
+// NOTE: CREATING PLOTLY GRAPHS
+//==============
+
+
 import React from 'react';
 import Plot from 'react-plotly.js';
 
@@ -57,6 +64,11 @@ class PlotCore extends React.Component {
 
                     //Margins Titles
                     xaxis: {title: '', //This holds the time label which we don't need
+                            titlefont: {
+                                family: 'Arial, sans-serif',
+                                size: 15,
+                                color: 'white'
+                            },
                             autorange: true,
                             showgrid: true,
                             gridcolor: '#555555',
@@ -67,6 +79,7 @@ class PlotCore extends React.Component {
                             // Read https://plot.ly/javascript/reference/#layout-xaxis-tick0
 
                     yaxis: {title: this.props.yaxis1,
+                            rangemode: 'tozero',
                             titlefont: {
                                 family: 'Arial, sans-serif',
                                 size: 15,
@@ -91,6 +104,7 @@ class PlotCore extends React.Component {
                             },
 
                     yaxis2: {title: this.props.yaxis2,
+                        rangemode: 'tozero',
                             titlefont: {
                                 family: 'Arial, sans-serif',
                                 size: 15,
@@ -130,14 +144,14 @@ class PlotCore extends React.Component {
                         traceorder: 'normal',
                         font: {
                             family: 'Arial, sans-serif',
-                            size: 15,
+                            size: 12.5,
                             color: '#fff'},
                         bgcolor: 'rgba(0,0,0,0)',
                         bordercolor: 'rgba(0,0,0,0)',
                         borderwidth: 2,
                         orientation: 'h',
-                        x: 0.1,
-                        y: -0.1,
+                        x: 0.0,
+                        y: -0.2 ,
                             }
                         } 
                 }

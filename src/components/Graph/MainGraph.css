@@ -7,13 +7,14 @@
 
 .colCard {
   display: flex;
-  justify-content: flex-start;
+  flex-wrap: wrap;
+  justify-content: center;
   align-content: center;
   margin: 10px !important;
 }
 
 .grid{
-  max-width: 1335px;
+  max-width: 1450px;
   margin: 0 auto;
 }
 
@@ -24,10 +25,37 @@
 }
 
 .mainCard {
-  /* background-color: var(--main-color) !important; */
   background-color: #212121c1 !important; /* Jean */
-  margin: 10px !important;
-  height: 480px;
-  /* width: 500px; */
-  
+  margin: 10px;
+  margin-bottom: 30px;
+  height: 490px;
+}
+
+.gaugeColumn {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.plotTitle{
+  color: white;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: lighter;
+  font-size: 14px;
+}
+
+.cards{
+  background-color: gray;
+  height: 110px;
+  width: 130px;
+  text-align: center;
+ 
+}
+
+.cardTitle{
+  font-family: Arial, Helvetica, sans-serif;
+  color: #f4cd00;
+  font-weight: normal;
 }
