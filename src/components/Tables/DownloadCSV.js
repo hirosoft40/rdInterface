@@ -12,6 +12,12 @@ import IconButton from "@material-ui/core/IconButton";
 import { CloudDownload } from "@material-ui/icons";
 import { CSVLink } from "react-csv";
 import moment from "moment";
+import Tooltip from "@material-ui/core/Tooltip";
+import { Link } from 'react-router-dom';
+import InsertChart from '@material-ui/icons/InsertChart';
+
+
+
 
 export const DownloadCSV = props => {
   const header = [
@@ -56,11 +62,20 @@ export const DownloadCSV = props => {
   return (
     <div>
       <h1>{error}</h1>
-      <CSVLink data={finalData} filename={`flowback_${fileTimeStamp}.csv`}>
-        <IconButton disabled={!data || data.length < 1 ? true : false}>
-          <CloudDownload />
-        </IconButton>
-      </CSVLink>
+      <Tooltip title='Chart'>
+        <Link to ='/'>
+            <IconButton>
+                <InsertChart style={{color: '#212121', fontSize: 28}} />
+            </IconButton>
+        </Link>
+      </Tooltip>
+      <Tooltip title='Download CSV'>             
+        <CSVLink data={finalData} filename={`flowback_${fileTimeStamp}.csv`}>
+          <IconButton disabled={!data || data.length < 1 ? true : false}>
+            <CloudDownload />
+          </IconButton>
+        </CSVLink>
+      </Tooltip>
     </div>
   );
 };

@@ -216,7 +216,7 @@ let EnhancedTableToolbar = props => {
           </Typography>
         ) : (
             <Typography variant="h6" id="tableTitle">
-            "nt Flowback Hourly Table
+            Covenant Flowback Hourly Table
               {!status ? <span style={{ color: "red", marginLeft: "20px", fontSize: "20px" }}>Loading Data...</span> : null}
             </Typography>
           )}
