@@ -150,10 +150,10 @@ function MainGraph(props) {
             
             {/* DISPLAYS CUMULATIVE WATER */}
             <Paper className="cards" style={{backgroundColor: '#212121'}} elevation={3}>
-                    <Typography className="cardTitle" style={{color: '#f4cd00', marginTop: 3}} variant="h6" >
+                    <Typography className="cardTitle" style={{color: '#f4cd00', marginTop: 6}} variant="h6" >
                       Cumulative Water
                     </Typography>
-                    <Typography style={{color: 'white', paddingTop: 8}} component="p">
+                    <Typography style={{color: 'white', paddingTop: 4}} component="p">
                       {props.cumWater[props.cumWater.length -1] + " bbl"}
                     </Typography>
             </Paper>
@@ -179,10 +179,10 @@ function MainGraph(props) {
 
           {/* DISPLAYS CUMULATIVE OIL */}
           <Paper className= "cards" style={{backgroundColor: '#212121'}} elevation={3}>
-                    <Typography className="cardTitle" style={{color: '#f4cd00', marginTop: 3}} variant="h6">
+                    <Typography className="cardTitle" style={{color: '#f4cd00', marginTop: 6}} variant="h6">
                       Cumulative Oil
                     </Typography>
-                    <Typography style={{color: 'white', paddingTop: 8}} component="p">
+                    <Typography style={{color: 'white', paddingTop: 4}} component="p">
                       {props.cumOil[props.cumOil.length -1] + " bbl"}
                     </Typography>
             </Paper>
