@@ -265,9 +265,9 @@ class EnhancedTable extends React.Component {
       header: [],
       data: [],
       finalData: [],
-      status: false,
       page: 0,
       rowsPerPage: 5,
+      status: false,
       csvData: [] // for csv file
     };
     this.connectToTableApi = this.connectToTableApi.bind(this);
@@ -295,8 +295,8 @@ class EnhancedTable extends React.Component {
         this.setState({
           data: results.records.data,
           time: results.time,
+          status: true,
           finalData: this.state.finalData.concat(results.records.data),
-          status: true
         });
       } else {
         //seting header info
@@ -406,7 +406,6 @@ class EnhancedTable extends React.Component {
 
 
 
-
   render() {
     const { classes } = this.props;
     const fdata = this.actualData(this.state.finalData);
@@ -417,7 +416,8 @@ class EnhancedTable extends React.Component {
       selected,
       rowsPerPage,
       page,
-      csvData
+      csvData,
+      status
     } = this.state;
     const emptyRows =
       rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
@@ -430,8 +430,7 @@ class EnhancedTable extends React.Component {
         {/* === csvData is for csvData, status is to display Loading === */}
         <EnhancedTableToolbar
           numSelected={selected.length}
-          csvData={csvData}
-          status={this.state.status}
+          csvData={csvData} status={status}
         />
         <div className={classes.tableWrapper}>
           <Table className={classes.table} aria-labelledby="tableTitle">
