@@ -9,6 +9,9 @@
 We have previous experience with REST APIs and Socket.IO, so initially we were not expecting to face a challenge here. However, we found that we received 2 separate responses in 1 request.
 We tried to store response into 2 state or 2 variables which was not successful. After hours of trial and errors,we were able to store data successfully by changing syntax to an arrow function, and then we handled storing the data depending on the type of response data and how we needed to utilize it.
 
+### `Product `
+<iframe width="560" height="315" src="https://www.youtube.com/embed/VJLrilUfeyc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ### `Screens`
 Main Dashboard
 <img src="screenshots/main.png">
