@@ -16,7 +16,7 @@ import moment from "moment";
 import Tooltip from "@material-ui/core/Tooltip";
 import { Link } from 'react-router-dom';
 import InsertChart from '@material-ui/icons/InsertChart';
-
+import {csvFileName} from '../../EnvConfig'
 
 
 
@@ -67,7 +67,7 @@ export const DownloadCSV = props => {
         </Link>
       </Tooltip>
       <Tooltip title='Download CSV'>             
-        <CSVLink data={finalData} filename={`flowback_${fileTimeStamp}.csv`}>
+        <CSVLink data={finalData} filename={`${csvFileName}_${fileTimeStamp}.csv`}>
           <IconButton disabled={!data || data.length < 1 ? true : false}>
             <CloudDownload />
           </IconButton>
