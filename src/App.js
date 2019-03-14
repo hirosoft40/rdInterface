@@ -70,7 +70,7 @@ class App extends Component {
       gasGravity: [],
       oilGravity: [],
       shrinkage: [],
-      chlorides: [],
+      chlorides: []
     };
     this.connectToApi = this.connectToApi.bind(this);
     this.createArray = this.createArray.bind(this);

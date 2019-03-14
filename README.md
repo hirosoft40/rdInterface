@@ -1,8 +1,11 @@
-## Real Time Data Dashboard (For Oil Company Client)
+## Real Time Data Dashboard (Client - Oil Company)
+
+### `Summary`
+- Internet of things (IoT) has a large impact across many industries. For this particular case, an oil client utilized physical hardware at a well to measure certain metrics, and our team of 4 was assigned to develop a real-time dashboard to display the collected data in various ways such as graphs, gauges, and a table.
 
 ### `Challenges`
 
-(1) WebSocket API
+(1) WebSocket API<br/>
 We have previous experience with REST APIs and Socket.IO, so initially we were not expecting to face a challenge here. However, we found that we received 2 separate responses in 1 request.
 We tried to store response into 2 state or 2 variables which was not successful. After hours of trial and errors,we were able to store data successfully by changing syntax to an arrow function, and then we handled storing the data depending on the type of response data and how we needed to utilize it.
 
