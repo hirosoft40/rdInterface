@@ -12,7 +12,7 @@ We tried to store response into 2 state or 2 variables which was not successful.
 ### `Product Video Demo`
 
 
-<div>https://www.youtube.com/embed/VJLrilUfeyc</div>
+<div>https://youtu.be/J1uXoKcbfvE</div>
 
 <video>
 
