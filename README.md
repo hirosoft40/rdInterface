@@ -1,7 +1,7 @@
 ## Real Time Data Dashboard (For Oil Company Client)
 
 ### `Summary`
-- Internet of things (IoT) has a large impact across many industries. For this particular case, an oil client utilized physical hardware at a well to measure certain metrics, and our team of 4 was assigned to develop a real-time dashboard to display the collected data in various displays such as graphs, gauges, and a table.
+- Internet of things (IoT) has a large impact across many industries. For this particular case, an oil client utilized physical hardware at a well to measure certain metrics, and our team of 4 was assigned to develop a real-time dashboard to display the collected data in various ways such as graphs, gauges, and a table.
 
 ### `Challenges`
 
