@@ -1,5 +1,5 @@
 import React from "react";
-import classNames from "classnames";
+// import classNames from "classnames";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -14,57 +14,23 @@ import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import Tooltip from "@material-ui/core/Tooltip";
 import { lighten } from "@material-ui/core/styles/colorManipulator";
-import MainBar from '../MainBar/MainBar'
+// import MainBar from '../MainBar/MainBar'
 import { DownloadCSV } from "./DownloadCSV";
 import moment from "moment";
 import { url, urlArg2, reqTableData } from '../../EnvConfig'
 import CircularProgress from '@material-ui/core/CircularProgress';
-
+import { tableName } from '../../EnvConfig'
 
 let counter = 0;
+// function createdt(ele)
+// {
+//  return createData(ele.time,ele.vals[0],ele.vals[1],ele.vals[2],ele.vals[3],ele.vals[4],ele.vals[5],ele.vals[6],ele.vals[7],ele.vals[8],ele.vals[9],ele.vals[10],ele.vals[11],ele.vals[12],ele.vals[13],ele.vals[14],ele.vals[15],ele.vals[16],ele.vals[17])
+//  } ;
 
-function createData(
-  time,
-  Choke,
-  P_WH,
-  P_Ann,
-  Qg_mcfh,
-  Qg_mcfd,
-  Qo_bph,
-  Qo_bpd,
-  Qw_bph,
-  Qw_bpd,
-  Chlorides,
-  Shrinkage,
-  Plate_Size,
-  Gas_Gravity,
-  P_Sep,
-  P_Diff,
-  T_g,
-  P_DS
-) {
+
+function createData(time, Choke, P_WH, P_Ann, Qg_mcfh,Qg_mcfd,Qo_bph,Qo_bpd,Qw_bph,Qw_bpd,Chlorides,Shrinkage,Plate_Size,Gas_Gravity,P_Sep,P_Diff,T_g,P_DS) {
   counter += 1;
-  return {
-    id: counter,
-    time,
-    Choke,
-    P_WH,
-    P_Ann,
-    Qg_mcfh,
-    Qg_mcfd,
-    Qo_bph,
-    Qo_bpd,
-    Qw_bph,
-    Qw_bpd,
-    Chlorides,
-    Shrinkage,
-    Plate_Size,
-    Gas_Gravity,
-    P_Sep,
-    P_Diff,
-    T_g,
-    P_DS
-  };
+  return { id: counter, time, Choke, P_WH, P_Ann, Qg_mcfh,Qg_mcfd,Qo_bph,Qo_bpd,Qw_bph,Qw_bpd,Chlorides,Shrinkage,Plate_Size,Gas_Gravity,P_Sep,P_Diff,T_g,P_DS };
 }
 
 function desc(a, b, orderBy) {
@@ -86,13 +52,14 @@ function stableSort(array, cmp) {
   });
   return stabilizedThis.map(el => el[0]);
 }
-
+// sorting functionality
 function getSorting(order, orderBy) {
   return order === "desc"
     ? (a, b) => desc(a, b, orderBy)
     : (a, b) => -desc(a, b, orderBy);
 }
 
+// labelling Columns
 const rows = [
   { id: "time", numeric: false, disablePadding: true, label: "Timestamp" },
   { id: "Choke", numeric: true, disablePadding: false, label: "Choke" },
@@ -106,18 +73,8 @@ const rows = [
   { id: "Qw_bpd", numeric: true, disablePadding: false, label: "bwpd" },
   { id: "Chlorides", numeric: true, disablePadding: false, label: "Chlorides" },
   { id: "Shrinkage", numeric: true, disablePadding: false, label: "Shrinkage" },
-  {
-    id: "Plate_Size",
-    numeric: true,
-    disablePadding: false,
-    label: "Plate-Size"
-  },
-  {
-    id: "Gas_Gravity",
-    numeric: true,
-    disablePadding: false,
-    label: "Gas-Gravity"
-  },
+  { id: "Plate_Size", numeric: true, disablePadding: false, label: "Plate-Size"},
+  { id: "Gas_Gravity", numeric: true, disablePadding: false, label: "Gas-Gravity"},
   { id: "P_Sep", numeric: true, disablePadding: false, label: "Static-Press" },
   { id: "P_Diff", numeric: true, disablePadding: false, label: "Diff-Press" },
   { id: "T_g", numeric: true, disablePadding: false, label: "Temp" },
@@ -130,7 +87,12 @@ class EnhancedTableHead extends React.Component {
   };
 
   render() {
-    const { onSelectAllClick, order, orderBy, numSelected, rowCount } = this.props;
+    const { 
+      // onSelectAllClick, 
+      order, 
+      orderBy, 
+      // numSelected, 
+      rowCount } = this.props;
 
     return (
 
@@ -171,9 +133,9 @@ class EnhancedTableHead extends React.Component {
 }
 
 EnhancedTableHead.propTypes = {
-  numSelected: PropTypes.number.isRequired,
+  // numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
-  onSelectAllClick: PropTypes.func.isRequired,
+  // onSelectAllClick: PropTypes.func.isRequired,
   order: PropTypes.string.isRequired,
   orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired
@@ -208,21 +170,24 @@ const toolbarStyles = theme => ({
 });
 
 let EnhancedTableToolbar = props => {
-  const { numSelected, classes, csvData, status } = props;
+  const { 
+    // numSelected, 
+    classes, 
+    csvData, status } = props;
   return (
     <Toolbar
-      className={classNames(classes.root, {
-        [classes.highlight]: numSelected > 0
-      })}
+      // className={classNames(classes.root, {
+      //   [classes.highlight]: numSelected > 0
+      // })}
     >
       <div className={classes.title}>
-        {numSelected > 0 ? (
+        {/* {numSelected > 0 ? (
           <Typography color="inherit" variant="subtitle1">
             {numSelected} selected
           </Typography>
-        ) : (
+        ) : ( */}
             <Typography variant="h6" id="tableTitle">
-              Covenant Flowback Hourly Table
+              {tableName}
               {!status ?
                 <span style={{ color: "red", marginLeft: "20px", fontSize: "20px" }}>
                   Loading Data...
@@ -230,7 +195,7 @@ let EnhancedTableToolbar = props => {
                 </span>
                 : null}
             </Typography>
-          )}
+          {/* )} */}
       </div>
       <div className={classes.spacer} />
       <div className={classes.actions}>
@@ -247,7 +212,7 @@ let EnhancedTableToolbar = props => {
 
 EnhancedTableToolbar.propTypes = {
   classes: PropTypes.object.isRequired,
-  numSelected: PropTypes.number.isRequired
+  // numSelected: PropTypes.number.isRequired
 };
 
 EnhancedTableToolbar = withStyles(toolbarStyles)(EnhancedTableToolbar);
@@ -271,7 +236,7 @@ class EnhancedTable extends React.Component {
     this.state = {
       order: "asc",
       orderBy: "time",
-      selected: [],
+      // selected: [],
       header: [],
       data: [],
       finalData: [],
@@ -319,9 +284,9 @@ class EnhancedTable extends React.Component {
     });
   }
   //===== API CALL END=====
-
+// Getting required data from result API
   actualData(tabdata) {
-    // var dt=[];
+  
     var dt = tabdata.map(ele => {
       return createData(
         moment(ele.time).format("L_LTS"),
@@ -362,8 +327,7 @@ class EnhancedTable extends React.Component {
       }
     );
   }
-  //===============
-
+  
   handleRequestSort = (event, property) => {
     const orderBy = property;
     let order = "desc";
@@ -375,34 +339,34 @@ class EnhancedTable extends React.Component {
     this.setState({ order, orderBy });
   };
 
-  handleSelectAllClick = event => {
-    if (event.target.checked) {
-      this.setState(state => ({ selected: state.data.map(n => n.id) }));
-      return;
-    }
-    this.setState({ selected: [] });
-  };
+  // handleSelectAllClick = event => {
+  //   if (event.target.checked) {
+  //     this.setState(state => ({ selected: state.data.map(n => n.id) }));
+  //     return;
+  //   }
+  //   this.setState({ selected: [] });
+  // };
 
-  handleClick = (event, id) => {
-    const { selected } = this.state;
-    const selectedIndex = selected.indexOf(id);
-    let newSelected = [];
+  // handleClick = (event, id) => {
+  //   const { selected } = this.state;
+  //   const selectedIndex = selected.indexOf(id);
+  //   let newSelected = [];
 
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, id);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
-      );
-    }
+  //   if (selectedIndex === -1) {
+  //     newSelected = newSelected.concat(selected, id);
+  //   } else if (selectedIndex === 0) {
+  //     newSelected = newSelected.concat(selected.slice(1));
+  //   } else if (selectedIndex === selected.length - 1) {
+  //     newSelected = newSelected.concat(selected.slice(0, -1));
+  //   } else if (selectedIndex > 0) {
+  //     newSelected = newSelected.concat(
+  //       selected.slice(0, selectedIndex),
+  //       selected.slice(selectedIndex + 1)
+  //     );
+  //   }
 
-    this.setState({ selected: newSelected });
-  };
+  //   this.setState({ selected: newSelected });
+  // };
 
   handleChangePage = (event, page) => {
     this.setState({ page });
@@ -412,7 +376,9 @@ class EnhancedTable extends React.Component {
     this.setState({ rowsPerPage: event.target.value });
   };
 
-  isSelected = id => this.state.selected.indexOf(id) !== -1;
+  // isSelected = id => this.state.selected.indexOf(id) !== -1;
+
+
 
   render() {
     const { classes } = this.props;
@@ -421,7 +387,7 @@ class EnhancedTable extends React.Component {
       data,
       order,
       orderBy,
-      selected,
+      // selected,
       rowsPerPage,
       page,
       csvData,
@@ -437,16 +403,17 @@ class EnhancedTable extends React.Component {
       <Paper className={classes.root}>
         {/* === csvData is for csvData, status is to display Loading === */}
         <EnhancedTableToolbar
-          numSelected={selected.length}
-          csvData={csvData} status={status}
+          // numSelected={selected.length}
+          csvData={csvData}
+          status={this.state.status}
         />
         <div className={classes.tableWrapper}>
           <Table className={classes.table} aria-labelledby="tableTitle">
             <EnhancedTableHead
-              numSelected={selected.length}
+              // numSelected={selected.length}
               order={order}
               orderBy={orderBy}
-              onSelectAllClick={this.handleSelectAllClick}
+              // onSelectAllClick={this.handleSelectAllClick}
               onRequestSort={this.handleRequestSort}
               rowCount={data.length}
             />
@@ -454,16 +421,16 @@ class EnhancedTable extends React.Component {
               {stableSort(fdata, getSorting(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(n => {
-                  const isSelected = this.isSelected(n.id);
+                  // const isSelected = this.isSelected(n.id);
                   return (
                     <TableRow
                       hover
-                      onClick={event => this.handleClick(event, n.id)}
+                      // onClick={event => this.handleClick(event, n.id)}
                       role="checkbox"
-                      aria-checked={isSelected}
+                      // aria-checked={isSelected}
                       tabIndex={-1}
                       key={n.id}
-                      selected={isSelected}
+                      // selected={isSelected}
                     >
                       <TableCell padding="checkbox">
                       </TableCell>

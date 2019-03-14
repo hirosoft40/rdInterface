@@ -75,6 +75,7 @@ class App extends Component {
     this.connectToApi = this.connectToApi.bind(this);
     this.createArray = this.createArray.bind(this);
   }
+  
 
   //=== API CALL =====
   connectToApi() {
@@ -82,7 +83,16 @@ class App extends Component {
       urlArg2
     ]);
 
-    exampleSocket.addEventListener('open', function (event) {
+    // exampleSocket.addEventListener("open", event => {
+    //   console.log("Hello Server!");
+    //   exampleSocket.send(
+    //     '{"message":"AddRequests","requests":[{"uri":"LNDB:8782_Flowback","mode":"most-recent","p1":"1000","transaction":1,"order":"collected"}]}'
+    //   );
+    // });
+
+    
+    // Real-time Data
+    exampleSocket.addEventListener('open', (event)=> {
       console.log('Hello Server!')
       exampleSocket.send(reqChartData)
     })
