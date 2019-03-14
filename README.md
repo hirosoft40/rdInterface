@@ -49,7 +49,7 @@ Initial Planning
 </li>
 <li><a href="https://github.com/jeanjosephgeorge">Jean George </a>: Grid system and overall design of MainGraph, Plot, LiquidGauge
 </li>
-<li><a href="https://github.com/acecoder93">Anuj Saheba</a>: MainGraph, Adjusters, Websocket API call
+<li><a href="https://github.com/acecoder93">Anuj Saheba</a>: MainGraph, Assumptions Modal, Websocket API call
 </li>
 <li><a href="https://github.com/hirosoft40">Hiroko Ross</a>: LiquidGauge, Websocket API call, Export data table to CSV
 </li>
