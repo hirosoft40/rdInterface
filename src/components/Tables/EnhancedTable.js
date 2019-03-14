@@ -1,5 +1,5 @@
 import React from "react";
-import classNames from "classnames";
+// import classNames from "classnames";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -14,7 +14,7 @@ import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import Tooltip from "@material-ui/core/Tooltip";
 import { lighten } from "@material-ui/core/styles/colorManipulator";
-import MainBar from '../MainBar/MainBar'
+// import MainBar from '../MainBar/MainBar'
 import { DownloadCSV } from "./DownloadCSV";
 import moment from "moment";
 import { url, urlArg2, reqTableData } from '../../EnvConfig'
@@ -22,10 +22,10 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { tableName } from '../../EnvConfig'
 
 let counter = 0;
-function createdt(ele)
-{
- return createData(ele.time,ele.vals[0],ele.vals[1],ele.vals[2],ele.vals[3],ele.vals[4],ele.vals[5],ele.vals[6],ele.vals[7],ele.vals[8],ele.vals[9],ele.vals[10],ele.vals[11],ele.vals[12],ele.vals[13],ele.vals[14],ele.vals[15],ele.vals[16],ele.vals[17])
- } ;
+// function createdt(ele)
+// {
+//  return createData(ele.time,ele.vals[0],ele.vals[1],ele.vals[2],ele.vals[3],ele.vals[4],ele.vals[5],ele.vals[6],ele.vals[7],ele.vals[8],ele.vals[9],ele.vals[10],ele.vals[11],ele.vals[12],ele.vals[13],ele.vals[14],ele.vals[15],ele.vals[16],ele.vals[17])
+//  } ;
 
 
 function createData(time, Choke, P_WH, P_Ann, Qg_mcfh,Qg_mcfd,Qo_bph,Qo_bpd,Qw_bph,Qw_bpd,Chlorides,Shrinkage,Plate_Size,Gas_Gravity,P_Sep,P_Diff,T_g,P_DS) {
