@@ -17,6 +17,9 @@ import { lighten } from "@material-ui/core/styles/colorManipulator";
 import MainBar from '../MainBar/MainBar'
 import { DownloadCSV } from "./DownloadCSV";
 import moment from "moment";
+import { url, urlArg2, reqTableData } from '../../EnvConfig'
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 
 let counter = 0;
 
@@ -127,7 +130,7 @@ class EnhancedTableHead extends React.Component {
   };
 
   render() {
-    const {onSelectAllClick, order, orderBy, numSelected, rowCount} = this.props;
+    const { onSelectAllClick, order, orderBy, numSelected, rowCount } = this.props;
 
     return (
 
@@ -198,6 +201,9 @@ const toolbarStyles = theme => ({
   },
   title: {
     flex: "0 0 auto"
+  },
+  progress: {
+    margin: theme.spacing.unit * 2,
   }
 });
 
@@ -216,14 +222,24 @@ let EnhancedTableToolbar = props => {
           </Typography>
         ) : (
             <Typography variant="h6" id="tableTitle">
-            "nt Flowback Hourly Table
-              {!status ? <span style={{ color: "red", marginLeft: "20px", fontSize: "20px" }}>Loading Data...</span> : null}
+              Covenant Flowback Hourly Table
+              {!status ?
+                <span style={{ color: "red", marginLeft: "20px", fontSize: "20px" }}>
+                  Loading Data...
+                <CircularProgress className={classes.progress} />
+                </span>
+                : null}
             </Typography>
           )}
       </div>
       <div className={classes.spacer} />
       <div className={classes.actions}>
+
+        {/* ==== connecting to DownloadCSV ==== */}
         <DownloadCSV csvData={csvData} />
+        {/* ==== END ==== */}
+
+
       </div>
     </Toolbar>
   );
@@ -259,9 +275,9 @@ class EnhancedTable extends React.Component {
       header: [],
       data: [],
       finalData: [],
-      status: false,
       page: 0,
       rowsPerPage: 5,
+      status: false,
       csvData: [] // for csv file
     };
     this.connectToTableApi = this.connectToTableApi.bind(this);
@@ -273,15 +289,13 @@ class EnhancedTable extends React.Component {
 
   //========= API CALL FOR TABLE ==========
   connectToTableApi() {
-    var exampleSocket = new WebSocket("ws://rdsfastrack.com/backend/", [
-      "com.campbellsci.webdata"
+    var exampleSocket = new WebSocket(url, [
+      urlArg2
     ]);
 
     exampleSocket.addEventListener("open", event => {
       console.log("Hello Server!");
-      exampleSocket.send(
-        '{"message":"AddRequests","requests":[{"uri":"LNDB:8782_Hour_Table","mode":"since-record","p1":"1","transaction":1,"order":"collected"}]}'
-      );
+      exampleSocket.send(reqTableData);
     });
 
     // ***SIMPLE CALL***
@@ -291,8 +305,8 @@ class EnhancedTable extends React.Component {
         this.setState({
           data: results.records.data,
           time: results.time,
+          status: true,
           finalData: this.state.finalData.concat(results.records.data),
-          status: true
         });
       } else {
         //seting header info
@@ -334,13 +348,13 @@ class EnhancedTable extends React.Component {
     return dt;
   } // end of function
 
-  // ====== CREATE Array DATA SET FOR TABLE AND CSV ========
+  // ====== CREATE Array DATA SET FOR CSV ========
   createCSVData() {
     let cdata = [];
 
-    const csvd = this.state.data.map(item => {
+    this.state.data.forEach(item => {
       let time = moment(item.time).format("L_LTS");
-       return cdata.push([time, ...item.vals]);
+      cdata.push([time, ...item.vals]);
     });
     this.setState(
       {
@@ -400,9 +414,6 @@ class EnhancedTable extends React.Component {
 
   isSelected = id => this.state.selected.indexOf(id) !== -1;
 
-
-
-
   render() {
     const { classes } = this.props;
     const fdata = this.actualData(this.state.finalData);
@@ -413,7 +424,8 @@ class EnhancedTable extends React.Component {
       selected,
       rowsPerPage,
       page,
-      csvData
+      csvData,
+      status
     } = this.state;
     const emptyRows =
       rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
@@ -421,9 +433,13 @@ class EnhancedTable extends React.Component {
 
 
     return (
-      
+
       <Paper className={classes.root}>
-        <EnhancedTableToolbar numSelected={selected.length} csvData={csvData} status={this.state.status} />
+        {/* === csvData is for csvData, status is to display Loading === */}
+        <EnhancedTableToolbar
+          numSelected={selected.length}
+          csvData={csvData} status={status}
+        />
         <div className={classes.tableWrapper}>
           <Table className={classes.table} aria-labelledby="tableTitle">
             <EnhancedTableHead
