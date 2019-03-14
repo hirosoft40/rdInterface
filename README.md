@@ -9,9 +9,10 @@
 We have previous experience with REST APIs and Socket.IO, so initially we were not expecting to face a challenge here. However, we found that we received 2 separate responses in 1 request.
 We tried to store response into 2 state or 2 variables which was not successful. After hours of trial and errors,we were able to store data successfully by changing syntax to an arrow function, and then we handled storing the data depending on the type of response data and how we needed to utilize it.
 
+(2) Material-UI <br/>
+Material-UI is a useful and great library to use to develop an aesthetic interface; however, when we implemented it and attempted to modify it, we faced issues. We were able to overcome these issues by collaborating with one another and by doing paired programming to resolve the issues. This allowed us to understand and learn from one another.
+
 ### `Product Video Demo`
-
-
 <div>https://youtu.be/J1uXoKcbfvE</div>
 
 <video>
