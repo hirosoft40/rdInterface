@@ -106,18 +106,8 @@ const rows = [
   { id: "Qw_bpd", numeric: true, disablePadding: false, label: "bwpd" },
   { id: "Chlorides", numeric: true, disablePadding: false, label: "Chlorides" },
   { id: "Shrinkage", numeric: true, disablePadding: false, label: "Shrinkage" },
-  {
-    id: "Plate_Size",
-    numeric: true,
-    disablePadding: false,
-    label: "Plate-Size"
-  },
-  {
-    id: "Gas_Gravity",
-    numeric: true,
-    disablePadding: false,
-    label: "Gas-Gravity"
-  },
+  { id: "Plate_Size", numeric: true, disablePadding: false, label: "Plate-Size"},
+  { id: "Gas_Gravity", numeric: true, disablePadding: false, label: "Gas-Gravity"},
   { id: "P_Sep", numeric: true, disablePadding: false, label: "Static-Press" },
   { id: "P_Diff", numeric: true, disablePadding: false, label: "Diff-Press" },
   { id: "T_g", numeric: true, disablePadding: false, label: "Temp" },

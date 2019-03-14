@@ -56,7 +56,6 @@ export default class Assumptions extends React.Component {
     // insert call to submit data to backend
     // POST Method here**
     
-
     this.clearData()
     this.handleClose()
   }
@@ -65,6 +64,15 @@ export default class Assumptions extends React.Component {
   // Clear form fields upon clicking "update"
   clearData=() =>{
 
+    this.setState({
+      chokeSize: null,
+      oilGravity: null,
+      oilShrinkage: null,
+      waterChlorides: null,
+      plateSize: null,
+      waterKFactorAdj: null,
+      oilKFactorAdj: null
+    })
   }
 
   // Displays text as typing
@@ -100,7 +108,7 @@ export default class Assumptions extends React.Component {
         </Tooltip>
 
         {/* Modal Form */}
-        <form onSubmit = {this.handleSubmit}> 
+        <form onSubmit = {this.handleSubmit} ref ="form"> 
           <Dialog
               open={this.state.open}
               onClose={this.handleClose}
