@@ -127,7 +127,7 @@ export default class Assumptions extends React.Component {
                   margin="dense"
                   id="chokeSize"
                   label={"Current Choke Size: " + this.props.chokeSize[this.props.chokeSize.length -1]}
-                  type="string"
+                  type="number"
                   value = {this.state.chokeSize}
                   onChange={this.handleChange("chokeSize")}
                   fullWidth
@@ -139,7 +139,7 @@ export default class Assumptions extends React.Component {
                   margin="dense"
                   id="oilGravity"
                   label={"Currrent Oil Gravity: " + this.props.oilGravity[this.props.oilGravity.length -1]}
-                  type="string"
+                  type="number"
                   value = {this.state.oilGravity}
                   onChange={this.handleChange("oilGravity")}
                   fullWidth
@@ -151,7 +151,7 @@ export default class Assumptions extends React.Component {
                   margin="dense"
                   id="oilShrinkage"
                   label={"Current Oil Shrinkage: " + this.props.oilShrinkage[this.props.oilShrinkage.length -1]}
-                  type="string"
+                  type="number"
                   value = {this.state.oilShrinkage}
                   onChange={this.handleChange("oilShrinkage")}
                   fullWidth
@@ -163,7 +163,7 @@ export default class Assumptions extends React.Component {
                   margin="dense"
                   id="waterChlorides"
                   label={"Current Water Chlorides: " + this.props.waterChlorides[this.props.waterChlorides.length -1]}
-                  type="string"
+                  type="number"
                   value = {this.state.waterChlorides}
                   onChange={this.handleChange("waterChlorides")}
                   fullWidth
@@ -175,7 +175,7 @@ export default class Assumptions extends React.Component {
                   margin="dense"
                   id="plateSize"
                   label="Plate Size"
-                  type="string"
+                  type="number"
                   value = {this.state.plateSize}
                   onChange={this.handleChange("plateSize")}
                   fullWidth
@@ -187,7 +187,7 @@ export default class Assumptions extends React.Component {
                   margin="dense"
                   id="waterKFactorAdj"
                   label="Water K-Factor Adjustment"
-                  type="string"
+                  type="number"
                   value= {this.state.waterKFactorAdj}
                   onChange={this.handleChange("waterKFactorAdj")}
                   fullWidth
@@ -199,7 +199,7 @@ export default class Assumptions extends React.Component {
                   margin="dense"
                   id="oilKFactorAdj"
                   label="Oil K-Factor Adjustment"
-                  type="string"
+                  type="number"
                   value={this.state.oilKFactorAdj}
                   onChange={this.handleChange("oilKFactorAdj")}
                   fullWidth
